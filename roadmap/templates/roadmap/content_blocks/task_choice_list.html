@@ -1,0 +1,9 @@
+
+<h3>{{ value.question }}</h3>
+
+<form>
+    {% for choice in value.choices %}
+        {{ choice }}
+    {% endfor %}
+    <button class="btn btn-roadmap">Submit</button>
+</form>

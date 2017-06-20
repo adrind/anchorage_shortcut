@@ -1,0 +1,27 @@
+html { font-size: 62.5%; }
+
+#header {
+    height: 10rem;
+    line-height: 10rem;
+    background-color: #4FB2F0;
+    color: #fff;
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+#footer {
+    margin-top: 2rem;
+    background-color: #666;
+    color: #fff;
+    padding: .75rem 1.5rem;
+    line-height: 1.5rem;
+}
+
+.btn-roadmap {
+    background-color: #4FB2F0;
+    border-color: #4FB2F0;
+    box-shadow: 3px 3px 4px 2px #ccc;
+    color: #fff;
+}

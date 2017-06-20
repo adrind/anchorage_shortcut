@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+<div class="row">
+    {% include_block page.choice_list %}
+</div>
+{% endblock %}
