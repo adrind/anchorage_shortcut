@@ -1,5 +1,7 @@
 html { font-size: 62.5%; }
 
+/* BASE.HTML */
+
 #header {
     height: 10rem;
     line-height: 10rem;
@@ -24,4 +26,42 @@ html { font-size: 62.5%; }
     border-color: #4FB2F0;
     box-shadow: 3px 3px 4px 2px #ccc;
     color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.btn-roadmap:hover {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.container {
+    font-size: 1.6rem;
+}
+
+.container h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.container h3 {
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* TASK LIST */
+
+.task-list .outline {
+    border: 1px solid #ccc;
+    padding: 3rem;
+}
+
+.task-list .walk-through {
+    margin-right: 1rem;
+}
+
+.task-list .btn-roadmap,
+.task-list .btn-roadmap:hover {
+    font-size: 2.2rem;
 }
