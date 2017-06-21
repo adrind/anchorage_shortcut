@@ -52,9 +52,14 @@ html { font-size: 62.5%; }
 
 /* TASK LIST */
 
+.task-list h1 {
+    font-size: 3.2rem;
+}
+
 .task-list .outline {
     border: 1px solid #ccc;
     padding: 3rem;
+    font-size: 2rem;
 }
 
 .task-list .walk-through {
@@ -63,5 +68,5 @@ html { font-size: 62.5%; }
 
 .task-list .btn-roadmap,
 .task-list .btn-roadmap:hover {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
 }
