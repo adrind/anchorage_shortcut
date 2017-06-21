@@ -4,16 +4,17 @@ from __future__ import unicode_literals
 from modelcluster.fields import ParentalKey
 
 from django.db import models
-from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.http.response import Http404
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, StreamFieldPanel, InlinePanel
 from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
 from wagtail.wagtailcore.url_routing import RouteResult
+from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 class TaskChoicesBlock(blocks.StructBlock):
     question = blocks.CharBlock()
@@ -52,11 +53,7 @@ class TaskList(Page):
             # tell Wagtail to call self.serve() with an additional 'path_components' kwarg
             return RouteResult(self, kwargs={'template': 'roadmap/task_list_walk_through.html'})
         else:
-            if self.live:
-                # tell Wagtail to call self.serve() with no further args
-                return RouteResult(self)
-            else:
-                raise Http404
+            return super(TaskList, self).route(request, path_components)
 
     def serve(self, request, template=''):
         if template == '':
@@ -65,12 +62,35 @@ class TaskList(Page):
             'page': self
         })
 
+class RelatedLink(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField("External link")
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldRowPanel([
+            FieldPanel('title', classname='title'),
+            FieldPanel('url'),
+        ]),
+        ImageChooserPanel('image'),
+    ]
+
+    class Meta:
+        abstract = True
+
+class StepPageRelatedLinks(Orderable, RelatedLink):
+    page = ParentalKey('StepPage', related_name='related_links')
 
 class StepPage(Page):
-    header = models.CharField(max_length=250)
     body = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('header', classname='title'),
         FieldPanel('body', classname='full'),
+        InlinePanel('related_links', label="Related steps"),
     ]
