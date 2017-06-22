@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="row">
+        <p>Based on your choices we suggest following these steps:</p>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <tbody>
+                {% for page in pages %}
+                    <tr>
+                        <td>{{ page.title }}</td>
+                        <td>
+                            <a href="{{ page.url }}">
+                                {% if forloop.counter == 1 %}
+                                    Start Here
+                                {% else %}
+                                    Continue
+                                {% endif %}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
