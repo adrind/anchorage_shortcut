@@ -50,8 +50,10 @@ class TaskList(Page):
 
     def route(self, request, path_components):
         if 'walk-through' in path_components:
-            # tell Wagtail to call self.serve() with an additional 'path_components' kwarg
+            # tell Wagtail to call self.serve() with appropriate template
             return RouteResult(self, kwargs={'template': 'roadmap/task_list_walk_through.html'})
+        if 'self-service' in path_components:
+            return RouteResult(self, kwargs={'template': 'roadmap/task_list_self_service.html'})
         else:
             return super(TaskList, self).route(request, path_components)
 
