@@ -3,9 +3,12 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-<div class="row">
-    {% for step in page.steps.all %}
-        <a class="btn btn-roadmap" href="{{ step.url }}">{{ step.title }}</a>
-    {% endfor %}
-</div>
+    <div class="row">
+        <p>Here are all the possible ways you can complete {{ page.title }} </p>
+    </div>
+    <div class="row">
+        {% for step in page.steps.all %}
+            <a class="btn btn-selfservice" href="{{ step.url }}">{{ step.title }}</a>
+        {% endfor %}
+    </div>
 {% endblock %}

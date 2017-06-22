@@ -36,6 +36,17 @@ html { font-size: 62.5%; }
     font-weight: bold;
 }
 
+.btn-selfservice,
+.btn-selfservice:hover {
+    background-color: #69579C;
+    border-color: #69579C;
+    box-shadow: 3px 3px 4px 2px #ccc;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
 .container {
     font-size: 1.6rem;
 }

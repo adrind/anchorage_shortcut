@@ -99,8 +99,6 @@ class ChoiceRulesBlock(blocks.FieldBlock):
     def to_python(self, value):
         return super(ChoiceRulesBlock, self).to_python(value)
 
-
-
 class TaskChoicesBlock(blocks.StructBlock):
     question = blocks.CharBlock()
     choices = blocks.ListBlock(blocks.StructBlock([
