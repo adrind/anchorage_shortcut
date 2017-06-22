@@ -201,3 +201,17 @@ class StepPage(Page):
         FieldPanel('body', classname='full'),
         InlinePanel('related_links', label="Related steps"),
     ]
+
+class Roadmap(Page):
+    body = RichTextField(blank=True)
+    sections = StreamField([
+        ('section', blocks.StructBlock([
+            ('title', blocks.CharBlock()),
+            ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
+        ])),
+    ])
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname='full'),
+        StreamFieldPanel('sections'),
+    ]
