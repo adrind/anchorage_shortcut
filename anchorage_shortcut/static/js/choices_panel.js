@@ -34,7 +34,11 @@ function choiceSelectedCallback(evt) {
     var val = $(evt.target).data('id');
     var inputId = '#'+$container.attr('name');
     var inputVal = $(inputId).val();
-    $(inputId).val(inputVal+','+val);
+    if(inputVal) {
+        $(inputId).val(inputVal+','+val);
+    } else {
+        $(inputId).val(val);
+    }
 
     $('button[data-id="'+val+'"]').remove();
     var $newBtn = addButtonHtml('.selected-choice-container', val, currentOptions[val], 'cross');

@@ -88,7 +88,10 @@ class ChoiceRulesBlock(blocks.CharBlock):
             ''')
 
     def value_from_form(self, value):
-        return super(ChoiceRulesBlock, self).value_from_form(value)
+        arr = value.split(',')
+        arr.sort()
+        val = ','.join(arr)
+        return super(ChoiceRulesBlock, self).value_from_form(val)
 
 class TaskChoicesBlock(blocks.StructBlock):
     question = blocks.CharBlock()
@@ -142,7 +145,9 @@ class TaskList(Page):
         if template == '':
             template = self.template
         if request.method == 'POST':
-            options = ','.join(map(lambda x: x.split('=')[1].replace('+', ' '), request.POST.urlencode().split('&')[1:]))
+            arr = filter(None, (map(lambda x: x.split('=')[1].replace('+', ' ') if x.split('=')[0] != 'csrfmiddlewaretoken' else '', request.POST.urlencode().split('&'))))
+            arr.sort()
+            options = ','.join(arr)
             pages = []
             for rule in self.choice_rules:
                 if rule.value['name'] == options:
