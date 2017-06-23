@@ -27,20 +27,22 @@
         {{ page.body|richtext }}
     </div>
 
-    <div class="row"><h3>Related Steps</h3></div>
-    <div class="row">
-        {% for link in page.related_links.all %}
-            <div class="card">
-                {% if link.image %}
-                    {% image link.image width-200 class="card-img-top" %}
-                {% endif %}
-                <div class="card-block">
-                    <div class="card-text">
-                        <a href="{{ link.url }}">{{ link.title }}</a>
+    {% if page.related_links.all %}
+        <div class="row"><h3>Related Steps</h3></div>
+        <div class="row">
+            {% for link in page.related_links.all %}
+                <div class="card">
+                    {% if link.image %}
+                        {% image link.image width-200 class="card-img-top" %}
+                    {% endif %}
+                    <div class="card-block">
+                        <div class="card-text">
+                            <a href="{{ link.url }}">{{ link.title }}</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
 {% endblock %}

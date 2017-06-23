@@ -22,38 +22,9 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
-class ChoicesPanel(BaseFieldPanel):
-    def __init__(self, field_name, classname="", choices=None):
-        self.field_name = field_name
-        self.classname = classname
-        self.choices = choices
-
-    def bind_to_model(self, model):
-        field = model._meta.get_field(self.field_name)
-
-        widget = type(str('_ChoicesField'), (ChoicesField,), {
-            'choices': self.choices,
-            'id_prefix': 'id_',
-        })
-
-        base = {
-            'model': model,
-            'field_name': self.field_name,
-            'classname': self.classname,
-            'widget': widget,
-        }
-
-        out = type(str('_ChoicesPanel'), (BaseFieldPanel,), base)
-        return out
-
 class ChoicesField(HiddenInput):
-    rule_field = ''
-
     def __init__(self, *args, **kwargs):
-        self.rule_field = kwargs.pop('rule_field', self.rule_field)
-
         super(ChoicesField, self).__init__(*args, **kwargs)
-
 
     def render(self, name, value, attrs=None):
         out = super(ChoicesField, self).render(name, value, attrs)
@@ -75,18 +46,14 @@ class ChoicesField(HiddenInput):
             'js/choices_panel.js',
         )
 
-class ChoiceRulesBlock(blocks.FieldBlock):
-    def __init__(self, rule_field='', required=False, help_text=None,
+class ChoiceRulesBlock(blocks.CharBlock):
+    def __init__(self, required=True, help_text=None, max_length=None, min_length=None,
                  **kwargs):
-        self.field_options = {}
-        self.rule_field = rule_field
+        self.field_options = {'widget': ChoicesField()}
         super(ChoiceRulesBlock, self).__init__(**kwargs)
 
-    @cached_property
     def field(self):
-        field_kwargs = {'widget': ChoicesField(
-            rule_field=self.rule_field,
-        )}
+        field_kwargs = {'widget': ChoicesField()}
         field_kwargs.update(self.field_options)
         return forms.CharField(**field_kwargs)
 
@@ -94,10 +61,34 @@ class ChoiceRulesBlock(blocks.FieldBlock):
         return super(ChoiceRulesBlock, self).clean(value)
 
     def render_form(self, value, prefix='', errors=None):
-        return super(ChoiceRulesBlock, self).render_form(value, prefix, errors)
+        out = '<div id="button-group"></div>'
+        if value:
+            out += '<p>When someone selects:</p> <div class="selected-choice-container">'
+            choices = value.split(',')
+            for choice in choices:
+                out = out + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'">One choice</button>'
+            out += '</div><p>Direct them to these pages:</p>'
+        else:
+            value = 'NEW'
 
-    def to_python(self, value):
-        return super(ChoiceRulesBlock, self).to_python(value)
+        out = '<div class="sequence-container sequence-type-list choice-list-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="choice_rules-num-value-name" value="'+value +'" placeholder="Name" id="choice_rules-num-value-name">' + out + '</div></div>'
+
+        return mark_safe(out + '''            
+             <script>
+            (function(){
+                if (document.readyState === 'complete') {
+                    return initializeChoices();
+                }
+                $(window).load(function() {
+                    initializeChoices();
+                });
+            })();
+            </script>
+            <script src="/static/js/choices_panel.js"></script>
+            ''')
+
+    def value_from_form(self, value):
+        return super(ChoiceRulesBlock, self).value_from_form(value)
 
 class TaskChoicesBlock(blocks.StructBlock):
     question = blocks.CharBlock()
@@ -120,7 +111,7 @@ class TaskList(Page):
     )])
     choice_rules = StreamField([
         ('rules', blocks.StructBlock([
-            ('name', blocks.CharBlock()),
+            ('name', ChoiceRulesBlock()),
             ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
         ])),
     ])
