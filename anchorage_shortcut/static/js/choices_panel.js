@@ -1,29 +1,35 @@
-var currentOptions = {};
-
 var INPUT_NAME = 'choice_rules-NUM-value-name';
+
+var availableChoices = {};
+var selectedChoices = {};
 
 function removeButtonHtml(dataId, val) {
     return '<button class="selected-choice button bicolor icon icon-cross" data-id="'+dataId+'">'+val+'</span>'
 };
 
-function addButtonHtml(parentId, dataId, val, icon) {
+function addButtonHtml($parent, dataId, val, icon) {
     var html = '<button class="button bicolor choice-btn icon icon-'+icon+'" data-id="'+ dataId +'">'+ val +'</button>';
-    $(parentId).append(html);
+    $parent.append(html);
     return $('button[data-id="'+dataId+'"]');
 };
 
 function choiceRemovedCallback(evt) {
-    var $container = $(evt.target).closest('.choice-list-container');
-    var val = $(evt.target).data('id');
-    var inputId = '#'+$container.attr('name');
-    var inputVal = $(inputId).val();
-    var selectedChoices = inputVal.split(',');
-    var index = selectedChoices.indexOf(String(val));
-    selectedChoices.splice(index, 1);
+    var $el = $(evt.target),
+        $container = $el.closest('.choice-list-container'),
+        prefixId = $container.attr('id'),
+        $newChoiceButtons = $container('.new-choice-button-group'),
+        val = $el.data('id'),
+        inputId = '#'+$container.attr('name'),
+        inputVal = $(inputId).val(),
+        selectedChoicesStr = inputVal.split(','),
+        index = selectedChoicesStr.indexOf(String(val));
 
-    $(inputId).val(selectedChoices.join(','));
-    $('button[data-id="'+val+'"]').remove();
-    var $newBtn = addButtonHtml('#button-group', val, currentOptions[val], 'plus');
+    selectedChoicesStr.splice(index, 1);
+    var name = $(evt.target).text();
+
+    $(inputId).val(selectedChoicesStr.join(','));
+    $container.find('button[data-id="'+val+'"]').remove();
+    var $newBtn = addButtonHtml($newChoiceButtons, val, name, 'plus');
 
     $newBtn.click(choiceSelectedCallback);
     return false;
@@ -31,54 +37,54 @@ function choiceRemovedCallback(evt) {
 
 function choiceSelectedCallback(evt) {
     var $container = $(evt.target).closest('.choice-list-container');
+    var $selectedChoices = $container.find('.selected-choice-container');
     var val = $(evt.target).data('id');
+    var name = $(evt.target).text();
     var inputId = '#'+$container.attr('name');
-    var inputVal = $(inputId).val();
-    if(inputVal) {
-        $(inputId).val(inputVal+','+val);
-    } else {
-        $(inputId).val(val);
-    }
+    var inputVal = $(inputId).val() === 'NEW' ? val : inputVal+','+ val;
+    $(inputId).val(inputVal);
 
-    $('button[data-id="'+val+'"]').remove();
-    var $newBtn = addButtonHtml('.selected-choice-container', val, currentOptions[val], 'cross');
+    $container.find('button[data-id="'+val+'"]').remove();
+    var $newBtn = addButtonHtml($selectedChoices, val, name, 'cross');
     $newBtn.click(choiceRemovedCallback);
     return false;
 };
 
-function initializeChoices() {
+function initializeChoices(prefix) {
     var count = 0;
-    var $selectedChoiceBtns = $('.selected-choice-container').find('button');
-    var selectedChoices = [];
+    var prefixId = '#' + prefix + '-container';
+    var $selectedChoiceBtns = $(prefixId + ' .selected-choice-container').find('button');
+    var selectedChoicesForPrefix = [];
 
     $selectedChoiceBtns.each(function (i, choice) {
-        selectedChoices.push($(choice).data('id'));
+        selectedChoicesForPrefix.push($(choice).data('id'));
     });
 
     $('#choice_list-list').find('input').each(function (i, input) {
        var $input = $(input);
        if($input.attr('id').match(/value-label/)) {
-           currentOptions[count] = $input.val();
-           if(selectedChoices.indexOf(count) == -1) {
-               addButtonHtml('#button-group', count, $input.val(), 'plus');
+           availableChoices[count] = $input.val();
+           if(selectedChoicesForPrefix.indexOf(count) == -1) {
+               var $container = $(prefixId + ' .new-choice-button-group');
+               addButtonHtml($container, count, $input.val(), 'plus');
            }
            count++;
        }
     });
 
-    $('.choice-btn').each(function (i, btn) {
+    $(prefixId + ' .choice-btn').each(function (i, btn) {
        $(btn).click(choiceSelectedCallback);
     });
 
-    $('.selected-choice').each(function (i, btn) {
+    $(prefixId + ' .selected-choice').each(function (i, btn) {
        var $btn = $(btn);
        var id = $btn.data('id');
-       $btn.text(currentOptions[id]);
+       $btn.text(availableChoices[id]);
 
        $btn.click(choiceRemovedCallback)
     });
 
-    $('.selected-choice-input').each(function (i, input) {
+    $(prefixId + ' .selected-choice-input').each(function (i, input) {
       var $input = $(input);
       var $container = $input.closest('.choice-list-container');
       var label = $container.siblings('label').attr('for');
@@ -87,6 +93,5 @@ function initializeChoices() {
       $input.attr('name', inputName);
       $input.attr('id', inputName);
       $container.attr('name', inputName);
-    })
-
+    });
 }

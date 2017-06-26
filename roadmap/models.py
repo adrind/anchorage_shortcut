@@ -6,11 +6,7 @@ from modelcluster.fields import ParentalKey
 from django import forms
 from django.db import models
 from django.shortcuts import render
-from django.http.response import Http404
-from django.forms import HiddenInput
-from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.utils.functional import cached_property
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
@@ -22,38 +18,13 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
-class ChoicesField(HiddenInput):
-    def __init__(self, *args, **kwargs):
-        super(ChoicesField, self).__init__(*args, **kwargs)
-
-    def render(self, name, value, attrs=None):
-        out = super(ChoicesField, self).render(name, value, attrs)
-        return mark_safe('<div id="button-group">Hi</p>' + '''            
-             <script>
-            (function(){
-                if (document.readyState === 'complete') {
-                    return initializeChoices();
-                }
-                $(window).load(function() {
-                    initializeChoices();
-                });
-            })();
-            </script>
-            ''')
-
-    class Media:
-        js = (
-            'js/choices_panel.js',
-        )
-
 class ChoiceRulesBlock(blocks.CharBlock):
     def __init__(self, required=True, help_text=None, max_length=None, min_length=None,
                  **kwargs):
-        self.field_options = {'widget': ChoicesField()}
         super(ChoiceRulesBlock, self).__init__(**kwargs)
 
     def field(self):
-        field_kwargs = {'widget': ChoicesField()}
+        field_kwargs = {}
         field_kwargs.update(self.field_options)
         return forms.CharField(**field_kwargs)
 
@@ -61,31 +32,20 @@ class ChoiceRulesBlock(blocks.CharBlock):
         return super(ChoiceRulesBlock, self).clean(value)
 
     def render_form(self, value, prefix='', errors=None):
-        out = '<div id="button-group"></div>'
+        out = ''
         if value:
-            out += '<p>When someone selects:</p> <div class="selected-choice-container">'
             choices = value.split(',')
+            choicesHtml = ''
             for choice in choices:
-                out = out + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'">One choice</button>'
-            out += '</div><p>Direct them to these pages:</p>'
+                choicesHtml = choicesHtml + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'">One choice</button>'
+            out = """<div class="new-choice-button-group"></div><h4><strong>When someone selects:</strong></h4> <div class="selected-choice-container">{}</div><h4><strong>Direct them to these pages:</strong></h4>""".format(choicesHtml)
         else:
             value = 'NEW'
+            out = """<div class="new-choice-button-group"></div><h4><strong>When someone selects:</strong></h4> <div class="selected-choice-container">{}</div><h4><strong>Direct them to these pages:</strong></h4>""".format('')
 
-        out = '<div class="sequence-container sequence-type-list choice-list-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="choice_rules-num-value-name" value="'+value +'" placeholder="Name" id="choice_rules-num-value-name">' + out + '</div></div>'
+        out = '<div class="sequence-container sequence-type-list choice-list-container" id="'+ prefix +'-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="choice_rules-num-value-name" value="'+value +'" placeholder="Name" id="choice_rules-num-value-name">' + out + '</div></div>'
 
-        return mark_safe(out + '''            
-             <script>
-            (function(){
-                if (document.readyState === 'complete') {
-                    return initializeChoices();
-                }
-                $(window).load(function() {
-                    initializeChoices();
-                });
-            })();
-            </script>
-            <script src="/static/js/choices_panel.js"></script>
-            ''')
+        return mark_safe(out + '<script>(function(){if (document.readyState === "complete") {return initializeChoices("'+prefix+'");}$(window).load(function() {initializeChoices("'+prefix+'");});})();</script><script src="/static/js/choices_panel.js"></script>')
 
     def value_from_form(self, value):
         arr = value.split(',')
