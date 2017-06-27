@@ -7,10 +7,16 @@ html { font-size: 62.5%; }
     line-height: 10rem;
     background-color: #4FB2F0;
     color: #fff;
-    font-size: 2.8rem;
-    font-weight: bold;
+    font-size: 3.6rem;
     text-align: center;
+    margin: 0;
+    padding-left: 2rem;
     margin-bottom: 2rem;
+}
+
+#header .bold-title {
+    font-weight: bold;
+    margin-left: 1rem;
 }
 
 #footer {
@@ -51,6 +57,7 @@ html { font-size: 62.5%; }
     font-size: 1.6rem;
 }
 
+/*
 .container h3 {
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
@@ -59,6 +66,61 @@ html { font-size: 62.5%; }
 .container h3 {
     font-size: 3.2rem;
     margin-bottom: 1.5rem;
+}*/
+
+.faq-title {
+    margin-top: 2rem;
+}
+.related-resource {
+    margin-top: 1rem;
+}
+
+.related-resource a {
+    font-size: 16px;
+    color: #000;
+    font-weight: normal;
+}
+
+.related-resource i {
+    margin-right: .5rem;
+}
+
+.card-block {
+    border: 1px solid #666;
+}
+
+/* ROAD MAP */
+.roadmap-checklist-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+}
+
+.roadmap-btn {
+    width: 4rem;
+    height: 2.5rem;
+    border: 1px solid #52baff;
+    padding: 0;
+    line-height: 2.5rem;
+    background-color: white;
+}
+
+.roadmap-task {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1.5rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-bottom: 1.5rem;
+    display: block;
+}
+
+.roadmap-section-title {
+    padding-left: 1rem;
+}
+
+.task-list h3 {
+    font-weight: bold;
+    margin-bottom: 2rem;
 }
 
 /* TASK LIST */

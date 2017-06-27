@@ -17,6 +17,35 @@ from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+class RelatedResource(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField("External link")
+    description = RichTextField(blank=True)
+
+    panels = [
+        FieldRowPanel([
+            FieldPanel('title'),
+            FieldPanel('url'),
+        ]),
+        FieldPanel('description'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class FrequentlyAskedQuestion(models.Model):
+    question = models.CharField(max_length=255)
+    answer = RichTextField()
+
+    panels = [
+        FieldPanel('question'),
+        FieldPanel('answer'),
+    ]
+
+    class Meta:
+        abstract = True
+
 
 class ChoiceRulesBlock(blocks.CharBlock):
     def __init__(self, required=True, help_text=None, max_length=None, min_length=None,
@@ -65,7 +94,12 @@ class TaskChoicesBlock(blocks.StructBlock):
         label='Add choices to guide a client to services'
         template='roadmap/content_blocks/task_choice_list.html'
 
+class TaskListFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
+    page = ParentalKey('TaskList', related_name='faqs')
+
 class TaskList(Page):
+    header = models.CharField(max_length=255)
+    isTemplateA = models.BooleanField(default=True)
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
     mrelief_link = models.URLField('Link to external Mrelief form', blank=True)
@@ -80,11 +114,14 @@ class TaskList(Page):
     ])
 
     content_panels = Page.content_panels + [
+        FieldPanel('header'),
+        FieldPanel('isTemplateA'),
         FieldPanel('walk_through_description', classname='full'),
         FieldPanel('self_service_description', classname='full'),
         FieldPanel('mrelief_link'),
         StreamFieldPanel('choice_list'),
         StreamFieldPanel('choice_rules'),
+        InlinePanel('faqs', label="Frequently Asked Questions")
     ]
 
     def steps(self):
@@ -150,13 +187,21 @@ class StepPageRelatedLinks(Orderable, RelatedLink):
     page = ParentalKey('StepPage', related_name='related_links')
 
 class StepPage(Page):
+    short_description = RichTextField(blank=True)
     body = RichTextField(blank=True)
     next_step = models.URLField(blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('short_description', classname='full'),
         FieldPanel('body', classname='full'),
         InlinePanel('related_links', label="Related steps"),
     ]
+
+class RoadmapFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
+    page = ParentalKey('Roadmap', related_name='faqs')
+
+class RoadmapRelatedResources(Orderable, RelatedResource):
+    page = ParentalKey('Roadmap', related_name='related_resources')
 
 class Roadmap(Page):
     body = RichTextField(blank=True)
@@ -170,4 +215,6 @@ class Roadmap(Page):
     content_panels = Page.content_panels + [
         FieldPanel('body', classname='full'),
         StreamFieldPanel('sections'),
+        InlinePanel('related_resources', label='Extra resources'),
+        InlinePanel('faqs', label='Frequently asked questions'),
     ]
