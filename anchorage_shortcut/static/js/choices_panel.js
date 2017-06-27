@@ -1,18 +1,23 @@
-var INPUT_NAME = 'choice_rules-NUM-value-name';
+var INPUT_NAME = 'choice_rules-NUM-value-name',
+    CHOICE_LIST_NAME = '#choice_list-list';
 
-var availableChoices = {};
-var selectedChoices = {};
-
-function removeButtonHtml(dataId, val) {
-    return '<button class="selected-choice button bicolor icon icon-cross" data-id="'+dataId+'">'+val+'</span>'
-};
-
+/*
+ *  Adds HTML for a select/remove choice button.
+ *  @param {jQuery selector} $parent - the element to append the HTML to
+ *  @param {string} dataId - the id of the choice
+ *  @param {string} val - the human readable text of the choice
+ *  @param {string} icon - plus | cross
+ */
 function addButtonHtml($parent, dataId, val, icon) {
     var html = '<button class="button bicolor choice-btn icon icon-'+icon+'" data-id="'+ dataId +'">'+ val +'</button>';
     $parent.append(html);
     return $('button[data-id="'+dataId+'"]');
 };
 
+/*
+ * The method called after a 'remove choice' button is selected.
+ * @param {Event} evt - jQuery event object
+ */
 function choiceRemovedCallback(evt) {
     var $el = $(evt.target),
         $container = $el.closest('.choice-list-container'),
@@ -35,6 +40,10 @@ function choiceRemovedCallback(evt) {
     return false;
 };
 
+/*
+ * The method called after an 'add choice' button is selected.
+ * @param {Event} evt - jQuery event object
+ */
 function choiceSelectedCallback(evt) {
     var $container = $(evt.target).closest('.choice-list-container');
     var $selectedChoices = $container.find('.selected-choice-container');
@@ -50,33 +59,40 @@ function choiceSelectedCallback(evt) {
     return false;
 };
 
+/*
+ * The method that gets called each time an admin panel is created.
+ * @param {string} prefix - the id of the admin panel
+ */
 function initializeChoices(prefix) {
+    var PREFIX_ID = '#' + prefix + '-container';
     var count = 0;
-    var prefixId = '#' + prefix + '-container';
-    var $selectedChoiceBtns = $(prefixId + ' .selected-choice-container').find('button');
-    var selectedChoicesForPrefix = [];
+    var $selectedChoiceBtns = $(PREFIX_ID + ' .selected-choice-container').find('button');
+    var selectedChoices = [];
+    var availableChoices = {};
 
     $selectedChoiceBtns.each(function (i, choice) {
-        selectedChoicesForPrefix.push($(choice).data('id'));
+        selectedChoices.push($(choice).data('id'));
     });
 
-    $('#choice_list-list').find('input').each(function (i, input) {
-       var $input = $(input);
-       if($input.attr('id').match(/value-label/)) {
-           availableChoices[count] = $input.val();
-           if(selectedChoicesForPrefix.indexOf(count) == -1) {
-               var $container = $(prefixId + ' .new-choice-button-group');
-               addButtonHtml($container, count, $input.val(), 'plus');
+    //Create a button for each choice from the list of available choices
+    //If that choice has been selected, don't add it as an option to select
+    $(CHOICE_LIST_NAME).find('input').each(function (i, choiceInput) {
+       var $choiceInput = $(choiceInput);
+       if($choiceInput.attr('id').match(/value-label/)) {
+           availableChoices[count] = $choiceInput.val();
+           if(selectedChoices.indexOf(count) == -1) {
+               var $container = $(PREFIX_ID + ' .new-choice-button-group');
+               addButtonHtml($container, count, $choiceInput.val(), 'plus');
            }
            count++;
        }
     });
 
-    $(prefixId + ' .choice-btn').each(function (i, btn) {
+    $(PREFIX_ID + ' .choice-btn').each(function (i, btn) {
        $(btn).click(choiceSelectedCallback);
     });
 
-    $(prefixId + ' .selected-choice').each(function (i, btn) {
+    $(PREFIX_ID + ' .selected-choice').each(function (i, btn) {
        var $btn = $(btn);
        var id = $btn.data('id');
        $btn.text(availableChoices[id]);
@@ -84,7 +100,7 @@ function initializeChoices(prefix) {
        $btn.click(choiceRemovedCallback)
     });
 
-    $(prefixId + ' .selected-choice-input').each(function (i, input) {
+    $(PREFIX_ID + ' .selected-choice-input').each(function (i, input) {
       var $input = $(input);
       var $container = $input.closest('.choice-list-container');
       var label = $container.siblings('label').attr('for');
