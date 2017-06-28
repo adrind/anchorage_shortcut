@@ -3,8 +3,10 @@
 <div class="row">
     <h1>{{ page.header }}</h1>
 </div>
+<div class="row">
+    {{ page.self_service_description|richtext }}
+</div>
 <div class="row mt-3">
-    <p>{{ page.self_service_description|richtext }}</p>
     {% for step in page.steps.all %}
         <div class="col">
             <div class="card btn-selfservice-B">

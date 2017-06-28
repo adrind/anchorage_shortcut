@@ -103,6 +103,7 @@ class TaskListRelatedResources(Orderable, RelatedResource):
 class TaskList(Page):
     header = models.CharField(max_length=255)
     isTemplateA = models.BooleanField(default=True)
+    body = RichTextField(blank=True)
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
     mrelief_link = models.URLField('Link to external Mrelief form', blank=True)
@@ -119,6 +120,7 @@ class TaskList(Page):
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         FieldPanel('isTemplateA'),
+        FieldPanel('body', classname='full'),
         FieldPanel('walk_through_description', classname='full'),
         FieldPanel('self_service_description', classname='full'),
         FieldPanel('mrelief_link'),

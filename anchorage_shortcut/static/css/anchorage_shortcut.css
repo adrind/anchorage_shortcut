@@ -76,7 +76,7 @@ html { font-size: 62.5%; }
 }
 
 .card-block {
-    border: 1px solid #666;
+    border: none;
 }
 
 /* ROAD MAP */
@@ -108,12 +108,44 @@ html { font-size: 62.5%; }
     padding-left: 1rem;
 }
 
+
+/* TASK LIST */
+
+.task-list-section {
+    background-color: #52baff;
+    color: white;
+    margin-right: 1rem;
+    -webkit-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
+    -moz-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
+    box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
+}
+
+.task-list-section h3 {
+    text-align: center;
+}
+
+.task-list-section .task-list-btn {
+    background-color: red;
+    color: white;
+    text-align: center;
+}
+
+.task-list-section .outer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.task-list-section .inner {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
 .task-list h3 {
     font-weight: bold;
     margin-bottom: 2rem;
 }
-
-/* TASK LIST */
 
 .task-list h1 {
     font-size: 3.2rem;
@@ -125,14 +157,6 @@ html { font-size: 62.5%; }
     font-size: 2rem;
 }
 
-.task-list .walk-through {
-    margin-right: 1rem;
-}
-
-.task-list .btn-roadmap,
-.task-list .btn-roadmap:hover {
-    font-size: 1.8rem;
-}
 
 .btn-selfservice-B {
     background-color: #4FB2F0;

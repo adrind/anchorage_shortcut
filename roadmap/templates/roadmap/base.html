@@ -14,10 +14,10 @@
     </div>
 
     <div class="row task-list">
-        <div class="col">
+        <div class="col-8">
             {% block left-content %}{% endblock %}
         </div>
-        <div class="col float-right ml-5">
+        <div class="col-4">
             {% if page.related_resources.count %}
                 <h3>Related Resources</h3>
                 <div id="accordion-0" role="tablist" aria-multiselectable="true">
@@ -31,8 +31,8 @@
                           <div class="card-block">
                               {{ resource.description |richtext }}
                               {% if resource.url %}
-                                <a href="{{ resource.url }}">Link</a>
-                            {% endif %}
+                                <a href="{{ resource.url }}">Website</a>
+                              {% endif %}
                           </div>
                         </div>
                     {% endfor %}
