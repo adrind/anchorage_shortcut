@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <div class="row mb-3">
+        <nav class="breadcrumb">
+            {% for ancestor in page.get_ancestors %}
+                {% if ancestor.is_root == False %}
+                    <a class="breadcrumb-item" href="{% pageurl ancestor %}">{{ ancestor.title }}</a>
+                {% endif %}
+            {% endfor %}
+            <span class="breadcrumb-item active">{{ page.title }}</span>
+        </nav>
+    </div>
+
+    <div class="row task-list">
+        <div class="col">
+            {% block left-content %}{% endblock %}
+        </div>
+        <div class="col float-right ml-5">
+            {% if page.related_resources.count %}
+                <h3>Related Resources</h3>
+                <div id="accordion-0" role="tablist" aria-multiselectable="true">
+                    {% for resource in page.related_resources.all %}
+                        <h5 class="mb-3 mt-3 related-resource">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-{{ forloop.counter }}">
+                              <i class="fa fa-plus" aria-hidden="true"></i>{{ resource.title }}
+                            </a>
+                        </h5>
+                        <div id="dropdown-{{ forloop.counter }}" class="collapse" role="tabpanel">
+                          <div class="card-block">
+                              {{ resource.description |richtext }}
+                              {% if resource.url %}
+                                <a href="{{ resource.url }}">Link</a>
+                            {% endif %}
+                          </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if page.faqs.count %}
+                <h3 class="faq-title">Frequently Asked Questions</h3>
+                <div id="accordion-faq" role="tablist" aria-multiselectable="true">
+                    {% for faq in page.faqs.all %}
+                        <h5 class="mb-3 related-resource">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
+                              <i class="fa fa-plus" aria-hidden="true"></i>{{ faq.question }}
+                            </a>
+                        </h5>
+                        <div id="dropdown-faq-{{ forloop.counter }}" class="collapse" role="tabpanel">
+                          <div class="card-block">
+                              {{ faq.answer |richtext }}
+                          </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

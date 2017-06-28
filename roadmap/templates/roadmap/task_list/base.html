@@ -1,0 +1,12 @@
+{% extends "roadmap/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block left-content %}
+    {% if page.isTemplateA %}
+        {% include "roadmap/task_list/task_list_A.html" %}
+    {% else %}
+        {% include "roadmap/task_list/task_list_B.html" %}
+    {% endif %}
+
+{% endblock %}

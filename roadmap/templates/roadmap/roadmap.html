@@ -1,73 +1,26 @@
-{% extends "base.html" %}
-
+{% extends "roadmap/base.html" %}
 {% load wagtailcore_tags %}
 
-{% block content %}
-    <div class="row task-list">
-        <div class="col">
-            <div class="row">
-                <h1>{{ page.title }}</h1>
-            </div>
-            <div class="row">
-                {{ page.body|richtext }}
-            </div>
-            <div class="row">
-                <h2 class="roadmap-checklist-title">Checklist:</h2>
-            </div>
-
-            {% for section in page.sections %}
-                <div class="row">
-                    <h3 class="roadmap-section-title">{{ section.value.title }}</h3>
-                </div>
-                    {% for list in section.value.pages %}
-                        <div class="row roadmap-task">
-                            <span class="roadmap-title">{{ list.title }}</span>
-                            <a href="{{ list.url }}" class="btn roadmap-btn float-right">Start</a>
-                        </div>
-                    {% endfor %}
-            {% endfor %}
-        </div>
-        <div class="col float-right">
-            {% if page.related_resources %}
-                <h3>Related Resources</h3>
-                <div id="accordion-0" role="tablist" aria-multiselectable="true">
-                    {% for resource in page.related_resources.all %}
-                        <h5 class="mb-{{ forloop.counter }} related-resource">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-{{ forloop.counter }}">
-                              <i class="fa fa-plus" aria-hidden="true"></i>{{ resource.title }}
-                            </a>
-                        </h5>
-                        <div id="dropdown-{{ forloop.counter }}" class="collapse" role="tabpanel">
-                          <div class="card-block">
-                              {{ resource.description |richtext }}
-                              {% if resource.url %}
-                                <a href="{{ resource.url }}">Link</a>
-                            {% endif %}
-                          </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-            {% if page.faqs %}
-                <h3 class="faq-title">Frequently Asked Questions</h3>
-                <div id="accordion-faq" role="tablist" aria-multiselectable="true">
-                    {% for faq in page.faqs.all %}
-                        <h5 class="mb-faq-{{ forloop.counter }} related-resource">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
-                              <i class="fa fa-plus" aria-hidden="true"></i>{{ faq.question }}
-                            </a>
-                        </h5>
-                        <div id="dropdown-faq-{{ forloop.counter }}" class="collapse" role="tabpanel">
-                          <div class="card-block">
-                              {{ faq.answer |richtext }}
-                          </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-        </div>
+{% block left-content %}
+    <div class="row">
+        <h1>{{ page.header }}</h1>
+    </div>
+    <div class="row">
+        {{ page.body|richtext }}
+    </div>
+    <div class="row">
+        <h2 class="roadmap-checklist-title">Checklist:</h2>
     </div>
 
+    {% for section in page.sections %}
+        <div class="row">
+            <h3 class="roadmap-section-title">{{ section.value.title }}</h3>
+        </div>
+            {% for list in section.value.pages %}
+                <div class="row roadmap-task">
+                    <span class="roadmap-title">{{ list.title }}</span>
+                    <a href="{{ list.url }}" class="btn roadmap-btn float-right">Start</a>
+                </div>
+            {% endfor %}
+    {% endfor %}
 {% endblock %}

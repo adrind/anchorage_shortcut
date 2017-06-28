@@ -1,0 +1,28 @@
+{% load wagtailcore_tags %}
+
+<div class="row">
+    <h1>{{ page.header }}</h1>
+</div>
+<div class="row mt-3">
+    <p>{{ page.self_service_description|richtext }}</p>
+    {% for step in page.steps.all %}
+        <div class="col">
+            <div class="card btn-selfservice-B">
+              <div class="card-block">
+                  <a href="{{ step.url }}">{{ step.title }}</a>
+                  <p>{{ step.short_description }}</p>
+              </div>
+            </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:3 %}
+          <div class="w-100"></div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="row mt-5">OR</div>
+<div class="row mt-5">
+    <a href="{{ page.url }}walk-through">
+        {{ page.walk_through_description|richtext }}
+    </a>
+</div>

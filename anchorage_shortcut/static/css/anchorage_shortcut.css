@@ -57,22 +57,12 @@ html { font-size: 62.5%; }
     font-size: 1.6rem;
 }
 
-/*
-.container h3 {
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
+#container .breadcrumb {
+    background-color: white;
 }
-
-.container h3 {
-    font-size: 3.2rem;
-    margin-bottom: 1.5rem;
-}*/
 
 .faq-title {
     margin-top: 2rem;
-}
-.related-resource {
-    margin-top: 1rem;
 }
 
 .related-resource a {
@@ -142,4 +132,23 @@ html { font-size: 62.5%; }
 .task-list .btn-roadmap,
 .task-list .btn-roadmap:hover {
     font-size: 1.8rem;
+}
+
+.btn-selfservice-B {
+    background-color: #4FB2F0;
+    color: white;
+    font-size: 10px;
+}
+
+.btn-selfservice-B .card-block {
+    border: none;
+}
+
+.btn-selfservice-B a {
+    color: white;
+    font-weight: bold;
+}
+
+.w-100 {
+    margin-bottom: 1rem;
 }

@@ -1,0 +1,30 @@
+{% load wagtailcore_tags %}
+
+    <div class="row">
+        <p>
+            <a href="{{ page.get_parent.url }}">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Back to task list
+            </a>
+        </p>
+    </div>
+    <div class="row">
+        <h1>{{ page.header }}</h1>
+    </div>
+
+    <div class="row task-list">
+        <div class="col walk-through outline rounded">
+            {{ page.walk_through_description|richtext }}
+            <a class="btn btn-roadmap" href="{{ page.url }}walk-through">
+                <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                Walk me through
+            </a>
+        </div>
+        <div class="col self-service outline rounded">
+            {{ page.self_service_description|richtext }}
+            <a class="btn btn-roadmap" href="{{ page.url }}self-service">
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                Show me all the choices
+            </a>
+        </div>
+    </div>

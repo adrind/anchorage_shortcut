@@ -97,6 +97,9 @@ class TaskChoicesBlock(blocks.StructBlock):
 class TaskListFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
     page = ParentalKey('TaskList', related_name='faqs')
 
+class TaskListRelatedResources(Orderable, RelatedResource):
+    page = ParentalKey('TaskList', related_name='related_resources')
+
 class TaskList(Page):
     header = models.CharField(max_length=255)
     isTemplateA = models.BooleanField(default=True)
@@ -121,8 +124,11 @@ class TaskList(Page):
         FieldPanel('mrelief_link'),
         StreamFieldPanel('choice_list'),
         StreamFieldPanel('choice_rules'),
-        InlinePanel('faqs', label="Frequently Asked Questions")
+        InlinePanel('related_resources', label="Extra resources"),
+        InlinePanel('faqs', label="Frequently Asked Questions"),
     ]
+
+    template = 'roadmap/task_list/base.html'
 
     def steps(self):
         # Get list of live event pages that are descendants of this page
@@ -132,9 +138,9 @@ class TaskList(Page):
     def route(self, request, path_components):
         if 'walk-through' in path_components:
             # tell Wagtail to call self.serve() with appropriate template
-            return RouteResult(self, kwargs={'template': 'roadmap/task_list_walk_through.html'})
+            return RouteResult(self, kwargs={'template': 'roadmap/task_list/walk_through.html'})
         if 'self-service' in path_components:
-            return RouteResult(self, kwargs={'template': 'roadmap/task_list_self_service.html'})
+            return RouteResult(self, kwargs={'template': 'roadmap/task_list/self_service.html'})
         else:
             return super(TaskList, self).route(request, path_components)
 
@@ -183,18 +189,22 @@ class RelatedLink(models.Model):
     class Meta:
         abstract = True
 
-class StepPageRelatedLinks(Orderable, RelatedLink):
-    page = ParentalKey('StepPage', related_name='related_links')
+class StepPageFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
+    page = ParentalKey('StepPage', related_name='faqs')
+
+class StepPageRelatedResources(Orderable, RelatedResource):
+    page = ParentalKey('StepPage', related_name='related_resources')
 
 class StepPage(Page):
-    short_description = RichTextField(blank=True)
+    short_description = models.CharField(max_length=255)
     body = RichTextField(blank=True)
     next_step = models.URLField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('short_description', classname='full'),
         FieldPanel('body', classname='full'),
-        InlinePanel('related_links', label="Related steps"),
+        InlinePanel('related_resources', label='Extra resources'),
+        InlinePanel('faqs', label='Frequently asked questions'),
     ]
 
 class RoadmapFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
@@ -204,6 +214,7 @@ class RoadmapRelatedResources(Orderable, RelatedResource):
     page = ParentalKey('Roadmap', related_name='related_resources')
 
 class Roadmap(Page):
+    header = models.CharField(max_length=255)
     body = RichTextField(blank=True)
     sections = StreamField([
         ('section', blocks.StructBlock([
@@ -213,6 +224,7 @@ class Roadmap(Page):
     ])
 
     content_panels = Page.content_panels + [
+        FieldPanel('header'),
         FieldPanel('body', classname='full'),
         StreamFieldPanel('sections'),
         InlinePanel('related_resources', label='Extra resources'),
