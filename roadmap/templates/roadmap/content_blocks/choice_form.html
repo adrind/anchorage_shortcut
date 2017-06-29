@@ -1,6 +1,6 @@
 <div class="form-check">
-    <label class="form-check-label">
-        <input type="checkbox" value="{{ value.name }}" name="{{ value.label }}">
+    <label class="form-check-label choice-field">
+        <input type="checkbox" value="{{ index|add:-1 }}" name="{{ value.label }}" class="form-check-input mr-3">
         {{ value.label }}
     </label>
 </div>

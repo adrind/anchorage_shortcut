@@ -74,7 +74,7 @@ class ChoiceRulesBlock(blocks.CharBlock):
 
         out = '<div class="sequence-container sequence-type-list choice-list-container" id="'+ prefix +'-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="choice_rules-num-value-name" value="'+value +'" placeholder="Name" id="choice_rules-num-value-name">' + out + '</div></div>'
 
-        return mark_safe(out + '<script>(function(){if (document.readyState === "complete") {return initializeChoices("'+prefix+'");}$(window).load(function() {initializeChoices("'+prefix+'");});})();</script><script src="/static/js/choices_panel.js"></script>')
+        return mark_safe(out + '<script src="/static/js/choices_panel.js"></script><script>(function(){if (document.readyState === "complete") {return initializeChoices("'+prefix+'");}$(window).load(function() {initializeChoices("'+prefix+'");});})();</script>')
 
     def value_from_form(self, value):
         arr = value.split(',')
@@ -85,7 +85,6 @@ class ChoiceRulesBlock(blocks.CharBlock):
 class TaskChoicesBlock(blocks.StructBlock):
     question = blocks.CharBlock()
     choices = blocks.ListBlock(blocks.StructBlock([
-        ('name', blocks.CharBlock(required=True)),
         ('label', blocks.CharBlock(required=True)),
     ],
     template='roadmap/content_blocks/choice_form.html'))
@@ -162,7 +161,8 @@ class TaskList(Page):
                     pages = rule.value['pages']
 
             return render(request, 'roadmap/choices.html', {
-                'pages': pages
+                'pages': pages,
+                'page': self
             })
 
         return render(request, template, {

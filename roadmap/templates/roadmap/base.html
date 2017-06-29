@@ -19,8 +19,8 @@
         </div>
         <div class="col-4">
             {% if page.related_resources.count %}
-                <h3>Related Resources</h3>
-                <div id="accordion-0" role="tablist" aria-multiselectable="true">
+                <h3 class="related-resources-title mt-4 mb-4 pb-2">Related Resources</h3>
+                <div id="accordion-0" role="tablist" aria-multiselectable="true" class="mb-5">
                     {% for resource in page.related_resources.all %}
                         <h5 class="mb-3 mt-3 related-resource">
                             <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-{{ forloop.counter }}">
@@ -40,7 +40,7 @@
             {% endif %}
 
             {% if page.faqs.count %}
-                <h3 class="faq-title">Frequently Asked Questions</h3>
+                <h3 class="faq-title mt-4 mb-4 pb-2">Frequently Asked Questions</h3>
                 <div id="accordion-faq" role="tablist" aria-multiselectable="true">
                     {% for faq in page.faqs.all %}
                         <h5 class="mb-3 related-resource">

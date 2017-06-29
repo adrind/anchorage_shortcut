@@ -1,9 +1,9 @@
-{% extends "base.html" %}
+{% extends "roadmap/base.html" %}
 
 {% load wagtailcore_tags %}
 
-{% block content %}
+{% block left-content %}
 <div class="row">
-    {% include_block page.choice_list %}
+    {% include_block page.choice_list with parent_url=page.url %}
 </div>
 {% endblock %}

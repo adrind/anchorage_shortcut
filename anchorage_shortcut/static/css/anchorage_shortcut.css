@@ -57,12 +57,21 @@ html { font-size: 62.5%; }
     font-size: 1.6rem;
 }
 
-#container .breadcrumb {
+.container .breadcrumb {
     background-color: white;
 }
 
-.faq-title {
-    margin-top: 2rem;
+.container .breadcrumb-item.active {
+    color: #333;
+}
+
+.container .breadcrumb-item {
+    color: #636c72;
+}
+
+.faq-title,
+.related-resources-title {
+    border-bottom: 2px solid #52baff;
 }
 
 .related-resource a {
@@ -79,6 +88,12 @@ html { font-size: 62.5%; }
     border: none;
 }
 
+.back-link {
+    font-style: italic;
+    text-decoration: underline;
+    color: #52baff;
+}
+
 /* ROAD MAP */
 .roadmap-checklist-title {
     font-size: 1.8rem;
@@ -87,20 +102,17 @@ html { font-size: 62.5%; }
 }
 
 .roadmap-btn {
-    width: 4rem;
-    height: 2.5rem;
+    width: 8rem;
+    height: 3rem;
     border: 1px solid #52baff;
     padding: 0;
-    line-height: 2.5rem;
+    line-height: 3rem;
     background-color: white;
+    color: #333;
 }
 
 .roadmap-task {
     border-bottom: 1px solid #ccc;
-    margin-bottom: 1.5rem;
-    padding-right: 2rem;
-    padding-left: 2rem;
-    padding-bottom: 1.5rem;
     display: block;
 }
 
@@ -167,4 +179,28 @@ html { font-size: 62.5%; }
 
 .w-100 {
     margin-bottom: 1rem;
+}
+
+/* WALK THROUGH */
+.h3-heading {
+    font-weight: bold;
+    color: #52baff;
+    font-size: 2.2rem;
+}
+
+.choice-field {
+    font-weight: bold;
+}
+
+.choice-result {
+    border-bottom: 1px solid #ccc;
+}
+
+.table td {
+    border-top: none;
+}
+
+.choice-td a {
+    color: black;
+    text-decoration: underline;
 }

@@ -1,10 +1,15 @@
+{% load wagtailcore_tags %}
 
-<h3>{{ value.question }}</h3>
+<h3 class="h3-heading mb-4">{{ value.question }}</h3>
 
 <form method="POST">
     {% csrf_token %}
     {% for choice in value.choices %}
-        {{ choice }}
+        {% include_block choice with index=forloop.counter%}
     {% endfor %}
-    <button class="btn btn-roadmap">Submit</button>
+    <button class="btn btn-roadmap mr-4 mt-2 mb-2">
+        Next
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </button>
+    <a href="{{ parent_url }}" class="back-link">Go back</a>
 </form>
