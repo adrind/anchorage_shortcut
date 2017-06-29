@@ -95,11 +95,11 @@ class TaskChoicesBlock(blocks.StructBlock):
     choices = blocks.ListBlock(blocks.StructBlock([
         ('label', blocks.CharBlock(required=True)),
     ],
-    template='roadmap/content_blocks/choice_form.html'))
+    template='roadmap/content_blocks/_choice_checkbox.html'))
 
     class Meta:
         label='Add choices to guide a client to services'
-        template='roadmap/content_blocks/task_choice_list.html'
+        template='roadmap/content_blocks/_choice_form.html'
 
 class TaskListFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
     page = ParentalKey('TaskList', related_name='faqs')

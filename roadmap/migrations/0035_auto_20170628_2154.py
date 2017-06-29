@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='tasklist',
             name='choice_list',
-            field=wagtail.wagtailcore.fields.StreamField([('choices', wagtail.wagtailcore.blocks.StructBlock([(b'question', wagtail.wagtailcore.blocks.CharBlock()), (b'choices', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock([('label', wagtail.wagtailcore.blocks.CharBlock(required=True))], template='roadmap/content_blocks/choice_form.html')))]))]),
+            field=wagtail.wagtailcore.fields.StreamField([('choices', wagtail.wagtailcore.blocks.StructBlock([(b'question', wagtail.wagtailcore.blocks.CharBlock()), (b'choices', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock([('label', wagtail.wagtailcore.blocks.CharBlock(required=True))], template='roadmap/content_blocks/_choice_checkbox.html')))]))]),
         ),
     ]

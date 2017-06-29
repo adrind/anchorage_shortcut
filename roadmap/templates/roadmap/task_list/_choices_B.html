@@ -1,0 +1,20 @@
+{% load wagtailcore_tags %}
+
+<div class="row">
+    <h3 class="h3-heading mb-4">Based on your answers we recommend... </h3>
+    {{ page.self_service_description | richtext }}
+</div>
+<div class="row card-deck">
+    {% for step in steps %}
+        {% include "roadmap/content_blocks/_step_btn.html" with step=step.steppage %}
+    {% empty %}
+        {% for step in page.steps %}
+            {% include "roadmap/content_blocks/_step_btn.html" with step=step %}
+        {% endfor %}
+    {% endfor %}
+</div>
+<div class="row mt-4">
+    <div class="col-md-2 offset-md-10">
+        <a href="{{ page.get_parent.url }}" class="back-link">Go back</a>
+    </div>
+</div>

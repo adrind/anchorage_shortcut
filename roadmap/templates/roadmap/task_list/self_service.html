@@ -1,14 +1,30 @@
-{% extends "base.html" %}
+{% extends "roadmap/base.html" %}
 
 {% load wagtailcore_tags %}
 
-{% block content %}
-    <div class="row">
-        <p>Here are all the possible ways you can complete {{ page.title }} </p>
+{% block left-content %}
+    <div class="row mb-4">
+        <h1 class="h1-heading">
+            {{ page.title }}
+        </h1>
+    </div>
+    <div class="row mb-4">
+        {{ page.body | richtext }}
     </div>
     <div class="row">
+        <h3 class="h3-heading mb-4">See anything you like?</h3>
+    </div>
+    <div class="card-group">
         {% for step in page.steps.all %}
-            <a class="btn btn-selfservice" href="{{ step.url }}">{{ step.title }}</a>
+            {% include "roadmap/content_blocks/_step_btn.html" with step=step %}
         {% endfor %}
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <a href="{{ page.url }}walk-through" class="back-link">I need more help with {{ page.title }}</a>
+        </div>
+        <div class="col-md-2 offset-md-6">
+            <a href="{{ page.get_parent.url }}" class="back-link">Go back</a>
+        </div>
     </div>
 {% endblock %}

@@ -4,8 +4,8 @@
 
 {% block left-content %}
     {% if page.isTemplateA %}
-        {% include "roadmap/task_list/choices_A.html" %}
+        {% include "roadmap/task_list/_choices_A.html" %}
     {% else %}
-        {% include "roadmap/task_list/choices_B.html" %}
+        {% include "roadmap/task_list/_choices_B.html" %}
     {% endif %}
 {% endblock %}
