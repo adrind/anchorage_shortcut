@@ -26,6 +26,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    'wagtailgeowidget',
+
     'home',
     'search',
     'roadmap',
@@ -141,3 +143,8 @@ WAGTAIL_SITE_NAME = "anchorage_shortcut"
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
+
+#Used for wagtail-geo-widget
+GOOGLE_MAPS_V3_APIKEY = 'AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I'
+GEO_WIDGET_DEFAULT_LOCATION = {'lat': 61.2181, 'lng': -149.9003}
+GEO_WIDGET_ZOOM = 13

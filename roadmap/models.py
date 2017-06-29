@@ -7,16 +7,22 @@ from django import forms
 from django.db import models
 from django.shortcuts import render
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, StreamFieldPanel, InlinePanel, BaseFieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
 from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+from wagtailgeowidget.edit_handlers import GeoPanel
+from django.utils.functional import cached_property
+from wagtailgeowidget.helpers import geosgeometry_str_to_struct
+
+#A related website that provides additional assistance
+# Used in the roadmap, track, and step templates
 class RelatedResource(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField("External link")
@@ -33,7 +39,8 @@ class RelatedResource(models.Model):
     class Meta:
         abstract = True
 
-
+# A frequently asked question
+# Used in the roadmap, track, and step templates
 class FrequentlyAskedQuestion(models.Model):
     question = models.CharField(max_length=255)
     answer = RichTextField()
@@ -46,7 +53,8 @@ class FrequentlyAskedQuestion(models.Model):
     class Meta:
         abstract = True
 
-
+# Allows admins to create logic that directs users to specific steps
+# Used in the track templates
 class ChoiceRulesBlock(blocks.CharBlock):
     def __init__(self, required=True, help_text=None, max_length=None, min_length=None,
                  **kwargs):
@@ -99,6 +107,7 @@ class TaskListFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
 class TaskListRelatedResources(Orderable, RelatedResource):
     page = ParentalKey('TaskList', related_name='related_resources')
 
+# A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
     header = models.CharField(max_length=255)
     isTemplateA = models.BooleanField(default=True)
@@ -132,10 +141,12 @@ class TaskList(Page):
     template = 'roadmap/task_list/base.html'
 
     def steps(self):
-        # Get list of live event pages that are descendants of this page
+        # Get list of all step pages that are descendants of this page
         events = StepPage.objects.live().descendant_of(self)
         return events
 
+    # Directs people to the walk through or self service routes
+    # Walk through path uses the choices model to filter steps to take
     def route(self, request, path_components):
         if 'walk-through' in path_components:
             # tell Wagtail to call self.serve() with appropriate template
@@ -180,12 +191,31 @@ class StepPage(Page):
     body = RichTextField(blank=True)
     next_step = models.URLField(blank=True)
 
+    address = models.CharField(max_length=250, blank=True, null=True)
+    location = models.CharField(max_length=250, blank=True, null=True)
+
     content_panels = Page.content_panels + [
         FieldPanel('short_description', classname='full'),
         FieldPanel('body', classname='full'),
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently asked questions'),
+        MultiFieldPanel([
+            FieldPanel('address'),
+            GeoPanel('location', address_field='address'),
+        ], _('Geo details')),
     ]
+
+    @cached_property
+    def point(self):
+        return geosgeometry_str_to_struct(self.location)
+
+    @property
+    def lat(self):
+        return self.point['y']
+
+    @property
+    def lng(self):
+        return self.point['x']
 
 class RoadmapFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
     page = ParentalKey('Roadmap', related_name='faqs')

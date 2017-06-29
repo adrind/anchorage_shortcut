@@ -22,22 +22,49 @@
         {{ page.body|richtext }}
     </div>
 
-    {% if page.related_links.all %}
-        <div class="row"><h3>Related Steps</h3></div>
+    {% if page.address %}
+        <div class="row"><h3>Location</h3></div>
         <div class="row">
-            {% for link in page.related_links.all %}
-                <div class="card">
-                    {% if link.image %}
-                        {% image link.image width-200 class="card-img-top" %}
-                    {% endif %}
-                    <div class="card-block">
-                        <div class="card-text">
-                            <a href="{{ link.url }}">{{ link.title }}</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+            <div id="map" data-lat="{{page.lat}}" data-lng="{{page.lng}}" data-address="{{page.address}}" style="width:500px;height:500px;"></div>
         </div>
     {% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+      function initMap() {
+        var mapDiv = document.getElementById('map');
+
+        var myLatLng = {lat: Number(mapDiv.dataset.lat), lng: Number(mapDiv.dataset.lng)};
+
+        var map = new google.maps.Map(mapDiv, {
+          zoom: 13,
+          center: myLatLng
+        });
+
+        var contentString = '<div id="content">'+
+            '<h3 id="firstHeading" class="firstHeading">Location</h3>'+
+            '<div id="bodyContent"> <a href="http://maps.google.com/?q='+mapDiv.dataset.address+'">Go here</a>'
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
+        });
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I&callback=initMap"></script>
 
 {% endblock %}
