@@ -209,3 +209,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: black;
     text-decoration: underline;
 }
+
+
+.print-page {
+    font-size: 2.4rem;
+}
+
+.print-page a {
+    color: #4FB2F0;
+}

@@ -63,5 +63,13 @@
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I&callback=initMap"></script>
     {% endif %}
+{% endblock %}
 
+{% block extra-right-content %}
+    <div class="row print-page">
+        <a href="javascript:window.print()">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            Print Page
+        </a>
+    </div>
 {% endblock %}

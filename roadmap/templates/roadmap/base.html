@@ -18,6 +18,8 @@
             {% block left-content %}{% endblock %}
         </div>
         <div class="col-4">
+            {% block extra-right-content %}{% endblock %}
+
             {% if page.related_resources.count %}
                 <h3 class="related-resources-title mt-4 mb-4 pb-2">Related Resources</h3>
                 <div id="accordion-0" role="tablist" aria-multiselectable="true" class="mb-5">
