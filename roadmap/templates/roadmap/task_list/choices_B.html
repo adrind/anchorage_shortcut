@@ -1,0 +1,27 @@
+{% load wagtailcore_tags %}
+
+<div class="row">
+    <h3 class="h3-heading mb-4">Based on your answers we recommend... </h3>
+    {{ page.self_service_description | richtext }}
+</div>
+<div class="row">
+    {% for step in steps %}
+        <div class="col">
+            <div class="card btn-selfservice-B">
+              <div class="card-block">
+                  <a href="{{ step.url }}">{{ step.title }}</a>
+                  <p>{{ step.steppage.short_description }}</p>
+              </div>
+            </div>
+        </div>
+
+        {% if forloop.counter|divisibleby:3 %}
+          <div class="w-100"></div>
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="row mt-4">
+    <div class="col-md-2 offset-md-10">
+        <a href="{{ page.get_parent.url }}" class="back-link">Go back</a>
+    </div>
+</div>

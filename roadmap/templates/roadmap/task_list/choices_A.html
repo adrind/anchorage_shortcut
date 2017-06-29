@@ -1,0 +1,21 @@
+{% load wagtailcore_tags %}
+
+<div class="row">
+    <h3 class="h3-heading mb-4">Follow these simple steps! </h3>
+</div>
+<div class="row">
+    <table class="table">
+        <tbody>
+            {% for step in steps %}
+                <tr class="choice-result">
+                    <td class="choice-td"><a href="{{ step.url }}">{{ forloop.counter }}. {{ step.title }}</a></td>
+                    <td>
+                        <a href="{{ step.url }}" class="btn roadmap-btn">
+                            Start
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

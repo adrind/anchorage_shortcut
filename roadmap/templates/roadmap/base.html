@@ -24,7 +24,7 @@
                     {% for resource in page.related_resources.all %}
                         <h5 class="mb-3 mt-3 related-resource">
                             <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-{{ forloop.counter }}">
-                              <i class="fa fa-plus" aria-hidden="true"></i>{{ resource.title }}
+                              <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ resource.title }}
                             </a>
                         </h5>
                         <div id="dropdown-{{ forloop.counter }}" class="collapse" role="tabpanel">
@@ -45,7 +45,7 @@
                     {% for faq in page.faqs.all %}
                         <h5 class="mb-3 related-resource">
                             <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
-                              <i class="fa fa-plus" aria-hidden="true"></i>{{ faq.question }}
+                              <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ faq.question }}
                             </a>
                         </h5>
                         <div id="dropdown-faq-{{ forloop.counter }}" class="collapse" role="tabpanel">

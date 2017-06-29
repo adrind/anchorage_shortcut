@@ -160,36 +160,14 @@ class TaskList(Page):
                             rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
                     pages = rule.value['pages']
 
-            return render(request, 'roadmap/choices.html', {
-                'pages': pages,
+            return render(request, 'roadmap/task_list/choices.html', {
+                'steps': pages,
                 'page': self
             })
 
         return render(request, template, {
             'page': self
         })
-
-class RelatedLink(models.Model):
-    title = models.CharField(max_length=255)
-    url = models.URLField("External link")
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
-    panels = [
-        FieldRowPanel([
-            FieldPanel('title', classname='title'),
-            FieldPanel('url'),
-        ]),
-        ImageChooserPanel('image'),
-    ]
-
-    class Meta:
-        abstract = True
 
 class StepPageFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
     page = ParentalKey('StepPage', related_name='faqs')

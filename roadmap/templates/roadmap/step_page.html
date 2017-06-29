@@ -6,11 +6,6 @@
 {% block left-content %}
 
     <div class="row">
-        <a href="{{ page.get_parent.url }}">
-            <i class="fa fa-arrow-left" aria-hidden="true"></i>
-            Go Back
-        </a>
-
         {% if page.next_step %}
             <a href="{{ page.get_parent.url }}">
                 <i class="fa fa-arrow-right" aria-hidden="true"></i>
