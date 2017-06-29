@@ -15,6 +15,7 @@ npm-debug.log*
 /*.egg/
 db.sqlite3
 media/
+.env
 
 ### JetBrains
 .idea/
