@@ -221,3 +221,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .print-page a {
     color: #4FB2F0;
 }
+
+@media (min-width: 1200px) {
+    .container {
+        padding-left: 5rem;
+    }
+}
