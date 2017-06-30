@@ -175,10 +175,13 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     background-color: #4FB2F0;
     color: white;
     font-size: 1.4rem;
+    margin-left: 0;
+    margin-top: 1rem;
 }
 
 .step-btn .card-block {
     border: none;
+    width: 200px;
 }
 
 .step-btn a {
