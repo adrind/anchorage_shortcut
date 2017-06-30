@@ -75,6 +75,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .container {
     font-size: 1.6rem;
+    margin-left: 1.5rem;
 }
 
 .container .breadcrumb {
@@ -224,6 +225,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 @media (min-width: 1200px) {
     .container {
-        padding-left: 5rem;
+        padding-left: 3.5rem;
     }
 }
