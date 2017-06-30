@@ -22,7 +22,7 @@ function choiceRemovedCallback(evt) {
     var $el = $(evt.target),
         $container = $el.closest('.choice-list-container'),
         prefixId = $container.attr('id'),
-        $newChoiceButtons = $container('.new-choice-button-group'),
+        $newChoiceButtons = $container.find('.new-choice-button-group'),
         val = $el.data('id'),
         inputId = '#'+$container.attr('name'),
         inputVal = $(inputId).val(),
