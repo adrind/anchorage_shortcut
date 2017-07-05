@@ -7,7 +7,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 #header {
     height: 10rem;
     line-height: 10rem;
-    background-color: #4FB2F0;
+    background-color: #399fd3;
     color: #fff;
     font-size: 3.6rem;
     text-align: center;
@@ -34,7 +34,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .h1-heading {
-    font-size: 2.8rem;
+    font-size: 3.6rem;
 }
 
 .h2-heading {
@@ -45,6 +45,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-weight: bold;
     color: #52baff;
     font-size: 2.2rem;
+}
+
+.rich-text h4 {
+    font-size: 2.0rem;
+    margin-bottom: 2.0rem;
+    margin-top: -1.5rem;
 }
 
 .btn-roadmap {
@@ -75,7 +81,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .container {
     font-size: 1.6rem;
-    margin-left: 1.5rem;
 }
 
 .container .breadcrumb {
@@ -92,7 +97,8 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .faq-title,
 .related-resources-title {
-    border-bottom: 2px solid #52baff;
+    border-bottom: 2px solid #4FB2F0;
+    max-width: 200px;
 }
 
 .related-resource a {
@@ -108,7 +114,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .back-link {
     font-style: italic;
     text-decoration: underline;
-    color: #52baff;
+    color: #399fd3;
 }
 
 /* ROAD MAP */
@@ -116,7 +122,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .roadmap-btn {
     width: 8rem;
     height: 3rem;
-    border: 1px solid #52baff;
+    border: 1px solid #399fd3;
     padding: 0;
     line-height: 3rem;
     background-color: white;
@@ -134,7 +140,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 /* TASK LIST */
 
 .task-list-section {
-    background-color: #52baff;
+    background-color: #399fd3;
     color: white;
     margin-right: 1rem;
     -webkit-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
@@ -144,7 +150,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .task-list-A-header {
     font-weight: bold;
-    color: #52baff;
+    color: #399fd3;
     font-size: 2.4rem;
 }
 
@@ -154,8 +160,20 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .task-list-section .task-list-btn {
-    background-color: #CD1F42;
+    background-color: #00a175;
     color: white;
+    text-align: center;
+    font-weight: 600;
+    width: 100%;
+    font-size: 1.8rem;
+    -webkit-box-shadow: 1px 1px 2px 0px #333;
+    -moz-box-shadow: 1px 1px 2px 0px #333;
+    box-shadow: 1px 1px 2px 0px #333;
+}
+
+.task-list-section .task-list-btn:hover {
+    background-color: #fedd44;
+    color: black;
     text-align: center;
 }
 
@@ -173,7 +191,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 
 .card.step-btn {
-    background-color: #4FB2F0;
+    background-color: #399fd3;
     color: white;
     font-size: 1.4rem;
     margin-left: 0 !important;
@@ -220,7 +238,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .print-page a {
-    color: #4FB2F0;
+    color: #399fd3;
 }
 
 @media (min-width: 1200px) {
