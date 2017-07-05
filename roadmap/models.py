@@ -160,14 +160,22 @@ class TaskList(Page):
         if template == '':
             template = self.template
         if request.method == 'POST':
-            arr = filter(None, (map(lambda x: x.split('=')[1].replace('+', ' ') if x.split('=')[0] != 'csrfmiddlewaretoken' else '', request.POST.urlencode().split('&'))))
-            arr.sort()
-            options = ','.join(arr)
+            #Get selected checkbox values from form in request - need to strip out csrf token
+            selected_choices = list(filter(None, (map(lambda x: x.split('=')[1].replace('+', ' ') if x.split('=')[0] != 'csrfmiddlewaretoken' else '', request.POST.urlencode().split('&')))))
+
+            #Sort the choices so we have them in the same order as the admin defined rules
+            selected_choices.sort()
+            selected_choices = ','.join(selected_choices)
+
+            #default behavoir is to show all the step pages TODO - allow user to define default in admin
             pages = []
+
+            #loop through each admin defined rule to see if we have a defined rule for the selected choices
             for rule in self.choice_rules:
-                if rule.value['name'] == options:
+                if rule.value['name'] == selected_choices:
                     for i, page in enumerate(rule.value['pages']):
                         if i+1 < len(rule.value['pages']):
+                            #dyanmically set the next step URL for each step page
                             rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
                     pages = rule.value['pages']
 
