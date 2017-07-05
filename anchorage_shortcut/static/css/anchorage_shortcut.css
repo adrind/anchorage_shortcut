@@ -53,6 +53,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-top: -1.5rem;
 }
 
+.h5-heading {
+    font-weight: 600;
+}
+
 .btn-roadmap {
     background-color: #4FB2F0;
     border-color: #4FB2F0;
@@ -121,10 +125,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .roadmap-btn {
     width: 8rem;
-    height: 3rem;
+    height: 2.4rem;
     border: 1px solid #399fd3;
     padding: 0;
-    line-height: 3rem;
+    line-height: 2.4rem;
     background-color: white;
     color: #333;
     font-size: 1.6rem;
@@ -133,9 +137,16 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .roadmap-task {
     border-bottom: 1px solid #ccc;
     display: block;
-    line-height: 3.2rem;
+    line-height: 2.4rem;
 }
 
+.roadmap-title {
+    font-size: 1.8rem;
+}
+
+.roadmap-heading {
+    font-size: 2rem;
+}
 
 /* TASK LIST */
 
@@ -189,6 +200,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-bottom: 1.5rem;
 }
 
+.task-page-link {
+    font-size: 1.8rem;
+    color: #399fd3;
+    text-decoration: underline;
+}
+
 
 .card.step-btn {
     background-color: #399fd3;
@@ -196,11 +213,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 1.4rem;
     margin-left: 0 !important;
     margin-top: 1rem;
+    min-width: 200px;
 }
 
 .step-btn .card-block {
     border: none;
-    width: 200px;
+    width: 100%;
 }
 
 .step-btn a {

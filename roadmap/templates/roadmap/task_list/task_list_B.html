@@ -11,9 +11,15 @@
         {% include 'roadmap/content_blocks/_step_btn.html' with step=step %}
     {% endfor %}
 </div>
-<div class="row mt-5">OR</div>
 <div class="row mt-5">
-    <a href="{{ page.url }}walk-through">
-        {{ page.walk_through_description|richtext }}
-    </a>
+    <div class="col-md-7">
+        <a href="{{ page.url }}walk-through" class="task-page-link">
+            {{ page.walk_through_description|richtext }}
+        </a>
+    </div>
+    <div class="col-md-2 text-right offset-md-3">
+        <a href="{{ page.get_parent.url }}" class="task-page-link">
+            Go back
+        </a>
+    </div>
 </div>

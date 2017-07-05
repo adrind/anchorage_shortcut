@@ -111,6 +111,7 @@ class TaskListRelatedResources(Orderable, RelatedResource):
 class TaskList(Page):
     header = models.CharField(max_length=255)
     isTemplateA = models.BooleanField(default=True)
+    short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
@@ -128,6 +129,7 @@ class TaskList(Page):
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         FieldPanel('isTemplateA'),
+        FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
         FieldPanel('walk_through_description', classname='full'),
         FieldPanel('self_service_description', classname='full'),

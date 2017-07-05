@@ -13,12 +13,12 @@
     </div>
 
     {% for section in page.sections %}
-        <div class="row mb-4 mt-4">
-            <h3><strong>{{ section.value.title }}</strong></h3>
+        <div class="row mt-4">
+            <h3 class="roadmap-heading"><strong>{{ section.value.title }}</strong></h3>
         </div>
             {% for list in section.value.pages %}
                 <div class="row roadmap-task p-2">
-                    <span class="roadmap-title">{{ list.title }}</span>
+                    <span class="roadmap-title ml-4">{{ list.title }}</span>
                     <a href="{{ list.url }}" class="btn roadmap-btn float-right">Start</a>
                 </div>
             {% endfor %}
