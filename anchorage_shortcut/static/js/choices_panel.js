@@ -50,7 +50,7 @@ function choiceSelectedCallback(evt) {
     var val = $(evt.target).data('id');
     var name = $(evt.target).text();
     var inputId = '#'+$container.attr('name');
-    var inputVal = $(inputId).val() === 'NEW' ? val : inputVal+','+ val;
+    var inputVal = $(inputId).val() === 'NEW' ? val : $(inputId).val() +','+ val;
     $(inputId).val(inputVal);
 
     $container.find('button[data-id="'+val+'"]').remove();
