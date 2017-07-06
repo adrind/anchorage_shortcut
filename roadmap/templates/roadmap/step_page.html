@@ -14,8 +14,16 @@
         {% endif %}
     </div>
 
+    {% if stepIds %}
+        {% include 'roadmap/task_list/_step_nav.html' %}
+    {% endif %}
+
     <div class="row">
-        <h1 class="h1-blue-heading">{{ page.title }}</h1>
+        {% if step_number %}
+            <h3 class="h3-heading">{{ step_number }}. {{ page.title }}</h3>
+        {% else %}
+            <h1 class="h1-blue-heading">{{ page.title }}</h1>
+        {% endif %}
     </div>
 
     <div class="row">

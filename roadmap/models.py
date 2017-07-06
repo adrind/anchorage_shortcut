@@ -171,11 +171,13 @@ class TaskList(Page):
 
             #default behavoir is to show all the step pages TODO - allow user to define default in admin
             pages = []
+            ids = []
 
             #loop through each admin defined rule to see if we have a defined rule for the selected choices
             for rule in self.choice_rules:
                 if rule.value['name'] == selected_choices:
                     for i, page in enumerate(rule.value['pages']):
+                        ids.append(str(page.id))
                         if i+1 < len(rule.value['pages']):
                             #dyanmically set the next step URL for each step page
                             rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
@@ -183,7 +185,8 @@ class TaskList(Page):
 
             return render(request, 'roadmap/task_list/choices.html', {
                 'steps': pages,
-                'page': self
+                'page': self,
+                'stepIds' : ','.join(ids)
             })
 
         return render(request, template, {
@@ -226,6 +229,35 @@ class StepPage(Page):
     @property
     def lng(self):
         return self.point['x']
+
+    def serve(self, request):
+
+        ids = request.GET.get('ids')
+
+        if ids:
+            ids = ids.split(',')
+            steps = []
+            index = 0
+
+            for i, id in enumerate(ids):
+                steps.append(StepPage.objects.get(id=id))
+                if self.id == int(id):
+                    index = i + 1
+
+            start = int(len(steps)/2)
+            return render(request, self.template, {
+                'page': self,
+                'stepIds': ','.join(ids),
+                'first_half_steps': steps[:start],
+                'second_half_steps': steps[start:],
+                'step_number': index,
+                'start': start
+            })
+
+        return render(request, self.template, {
+            'page': self
+        })
+
 
 class RoadmapFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
     page = ParentalKey('Roadmap', related_name='faqs')

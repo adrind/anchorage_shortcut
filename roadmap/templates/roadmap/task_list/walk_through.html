@@ -4,10 +4,10 @@
 
 {% block left-content %}
     <div class="row">
-        <h1>{{ page.title }}</h1>
+        <h1 class="h1-heading">{{ page.title }}</h1>
     </div>
     <div class="row mb-4">
-        <h3>{{ page.short_description }}</h3>
+        <h4 class="h4-heading">{{ page.short_description }}</h4>
     </div>
     <div class="row mt-4">
         {% include_block page.choice_list with parent_url=page.url %}

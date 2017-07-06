@@ -44,13 +44,17 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .h2-heading {
-    font-size: 2.4rem;
+    font-size: 3.2rem;
 }
 
 .h3-heading {
     font-weight: bold;
     color: #52baff;
-    font-size: 2.2rem;
+    font-size: 2.8rem;
+}
+
+.h4-heading {
+    font-size: 2.0rem;
 }
 
 .rich-text h4 {
@@ -127,6 +131,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: #399fd3;
 }
 
+.step-nav {
+    border-bottom: 1px solid #ccc;
+}
+
 /* ROAD MAP */
 
 .roadmap-btn {
@@ -140,6 +148,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 1.6rem;
 }
 
+.roadmap-btn:hover {
+    border: 1px solid #399fd3;
+    background-color: #399fd3;
+    color: white;
+}
+
 .roadmap-task {
     border-bottom: 1px solid #ccc;
     display: block;
@@ -148,10 +162,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .roadmap-title {
     font-size: 1.8rem;
-}
-
-.roadmap-heading {
-    font-size: 2rem;
 }
 
 /* TASK LIST */
