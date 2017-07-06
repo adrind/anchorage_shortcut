@@ -93,19 +93,19 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-right: 1rem;
 }
 
-.container {
+.container-fluid {
     font-size: 1.6rem;
 }
 
-.container .breadcrumb {
+.container-fluid .breadcrumb {
     background-color: white;
 }
 
-.container .breadcrumb-item.active {
+.container-fluid .breadcrumb-item.active {
     color: #333;
 }
 
-.container .breadcrumb-item {
+.container-fluid .breadcrumb-item {
     color: #636c72;
 }
 
@@ -173,6 +173,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     -webkit-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
     -moz-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
     box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
+    margin-top: 1rem;
 }
 
 .task-list-A-header {
@@ -191,7 +192,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: white;
     text-align: center;
     font-weight: 600;
-    width: 100%;
+    width: 80%;
+    position: absolute;
+    bottom: 15px;
+    left: 10%;
     font-size: 1.8rem;
     -webkit-box-shadow: 1px 1px 2px 0px #333;
     -moz-box-shadow: 1px 1px 2px 0px #333;
@@ -204,16 +208,8 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     text-align: center;
 }
 
-.task-list-section .outer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
-
-.task-list-section .inner {
-    text-align: center;
-    margin-bottom: 1.5rem;
+.task-list-section .rich-text {
+    padding-bottom: 4rem;
 }
 
 .task-page-link {
@@ -276,7 +272,16 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 @media (min-width: 1200px) {
-    .container {
+    .container-fluid {
         padding-left: 3.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .container-fluid {
+        padding-left: 1.8rem;
+    }
+    .task-list-section .task-list-btn {
+        font-size: 1.2rem;
     }
 }
