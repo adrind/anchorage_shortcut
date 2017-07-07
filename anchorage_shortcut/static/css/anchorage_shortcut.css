@@ -271,7 +271,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: #399fd3;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
     .container-fluid {
         padding-left: 3.5rem;
     }
