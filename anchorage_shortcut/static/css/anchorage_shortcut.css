@@ -208,6 +208,13 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     text-align: center;
 }
 
+.task-list-section .task-list-btn:focus {
+    background-color: #fedd44;
+    color: black;
+    text-align: center;
+}
+
+
 .task-list-section .rich-text {
     padding-bottom: 4rem;
 }
