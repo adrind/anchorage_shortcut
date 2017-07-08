@@ -183,6 +183,8 @@ class TaskList(Page):
                             rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
                     pages = rule.value['pages']
 
+            if not ids:
+                ids = list(map(str, self.steps().values_list('id', flat=True)))
             return render(request, 'roadmap/task_list/choices.html', {
                 'steps': pages,
                 'page': self,
@@ -244,7 +246,7 @@ class StepPage(Page):
                 if self.id == int(id):
                     index = i + 1
 
-            start = int(len(steps)/2)
+            start = int(len(steps)/2) + 1
             return render(request, self.template, {
                 'page': self,
                 'stepIds': ','.join(ids),
