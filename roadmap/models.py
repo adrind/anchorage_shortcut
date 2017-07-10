@@ -16,10 +16,15 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, Stream
 from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
 from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailcore import hooks
 
 from wagtailgeowidget.edit_handlers import GeoPanel
 from django.utils.functional import cached_property
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
+
+from django.utils.html import format_html, format_html_join
+from django.conf import settings
+
 
 #A related website that provides additional assistance
 # Used in the roadmap, track, and step templates
@@ -82,7 +87,7 @@ class ChoiceRulesBlock(blocks.CharBlock):
 
         out = '<div class="sequence-container sequence-type-list choice-list-container" id="'+ prefix +'-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="choice_rules-num-value-name" value="'+value +'" placeholder="Name" id="choice_rules-num-value-name">' + out + '</div></div>'
 
-        return mark_safe(out + '<script src="/static/js/choices_panel.js"></script><script>(function(){if (document.readyState === "complete") {return initializeChoices("'+prefix+'");}$(window).load(function() {initializeChoices("'+prefix+'");});})();</script>')
+        return mark_safe(out + '<script>(function(){if (document.readyState === "complete") {return initializeChoices("'+prefix+'");}$(window).load(function() {initializeChoices("'+prefix+'");});})();</script>')
 
     def value_from_form(self, value):
         arr = value.split(',')
@@ -282,3 +287,14 @@ class Roadmap(Page):
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently asked questions'),
     ]
+
+@hooks.register('insert_editor_js')
+def editor_js():
+    js_files = [
+        'js/choices_panel.js',
+    ]
+    js_includes = format_html_join('\n', '<script src="{0}{1}"></script>',
+        ((settings.STATIC_URL, filename) for filename in js_files)
+    )
+    return js_includes
+
