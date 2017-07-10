@@ -115,7 +115,6 @@ class TaskList(Page):
     body = RichTextField(blank=True)
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
-    mrelief_link = models.URLField('Link to external Mrelief form', blank=True)
     choice_list = StreamField([(
         'choices', TaskChoicesBlock()
     )])
@@ -133,7 +132,6 @@ class TaskList(Page):
         FieldPanel('body', classname='full'),
         FieldPanel('walk_through_description', classname='full'),
         FieldPanel('self_service_description', classname='full'),
-        FieldPanel('mrelief_link'),
         StreamFieldPanel('choice_list'),
         StreamFieldPanel('choice_rules'),
         InlinePanel('related_resources', label="Extra resources"),
