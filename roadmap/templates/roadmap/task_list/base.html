@@ -4,14 +4,13 @@
 
 {% block left-content %}
     {% if page.choices %}
-        {% if page.isTemplateA %}
+        {% if page.self_service_oriented_layout %}
             {% include "roadmap/task_list/task_list_A.html" %}
         {% else %}
             {% include "roadmap/task_list/task_list_B.html" %}
         {% endif %}
     {% else %}
         {% include "roadmap/task_list/related_sources.html" %}
-        {% block right-content-class %}invisible{% endblock %}
     {% endif %}
 
 {% endblock %}
