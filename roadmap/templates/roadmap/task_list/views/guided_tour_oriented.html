@@ -1,0 +1,32 @@
+{% load wagtailcore_tags %}
+
+{# This view renders two panels - one that takes a user to a guided section (form) and one to self service section  #}
+
+<div class="row">
+    <h1 class="h1-heading">{{ page.header }}</h1>
+</div>
+
+<div class="row mt-4">
+    {{ page.body|richtext }}
+</div>
+
+<div class="row mb-4 mt-4">
+    <span class="task-list-A-header">Choose which type of help is best for you...</span>
+</div>
+
+<div class="row task-list">
+    <div class="col task-list-section p-4">
+        {{ page.walk_through_description|richtext }}
+        <a class="btn task-list-btn center-block" href="{{ page.url }}walk-through">
+            Show me what I need
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+    </div>
+    <div class="col task-list-section p-4">
+        {{ page.self_service_description|richtext }}
+            <a class="btn task-list-btn center-block" href="{{ page.url }}self-service">
+                Explore on my own
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+    </div>
+</div>

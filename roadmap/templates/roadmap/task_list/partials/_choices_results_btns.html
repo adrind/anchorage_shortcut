@@ -6,10 +6,10 @@
 </div>
 <div class="row card-deck">
     {% for step in steps %}
-        {% include "roadmap/content_blocks/_step_btn.html" with step=step.steppage %}
+        {% include "roadmap/step/partials/_step_btn.html" with step=step.steppage %}
     {% empty %}
         {% for step in page.steps %}
-            {% include "roadmap/content_blocks/_step_btn.html" with step=step %}
+            {% include "roadmap/step/partials/_step_btn.html" with step=step %}
         {% endfor %}
     {% endfor %}
 </div>

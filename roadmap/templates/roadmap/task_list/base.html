@@ -1,16 +1,20 @@
 {% extends "roadmap/base.html" %}
 
+{# Core page for the task list #}
+{# There are three views a user can see depending on the content provided in the admin #}
+
 {% load wagtailcore_tags %}
 
 {% block left-content %}
     {% if page.choices %}
         {% if page.self_service_oriented_layout %}
-            {% include "roadmap/task_list/task_list_A.html" %}
+            {# If a guided section is defined and the 'self service oriented layout' boolean is True #}
+            {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
         {% else %}
-            {% include "roadmap/task_list/task_list_B.html" %}
+            {% include "roadmap/task_list/views/self_service_oriented.html" %}
         {% endif %}
     {% else %}
-        {% include "roadmap/task_list/related_sources.html" %}
+        {# If no guided section is provided in the admin view #}
+        {% include "roadmap/task_list/views/related_sources.html" %}
     {% endif %}
-
 {% endblock %}

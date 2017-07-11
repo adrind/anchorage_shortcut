@@ -1,11 +1,14 @@
 {% load wagtailcore_tags %}
 
+{# The form of choices defined for the task page #}
+{# These choices can help guide users to the right step page #}
+
 <h3 class="h3-heading mb-4">{{ value.question }}</h3>
 
 <form method="POST">
     {% csrf_token %}
     {% for choice in page.choices %}
-        {% include 'roadmap/content_blocks/_choice_checkbox.html' with index=forloop.counter %}
+        {% include 'roadmap/task_list/partials/_choice_checkbox.html' with index=forloop.counter %}
     {% endfor %}
     <button class="btn btn-roadmap mr-4 mt-2 mb-2">
         Next

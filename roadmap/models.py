@@ -175,9 +175,9 @@ class TaskList(Page):
     def route(self, request, path_components):
         if 'walk-through' in path_components:
             # tell Wagtail to call self.serve() with appropriate template
-            return RouteResult(self, kwargs={'template': 'roadmap/task_list/walk_through.html'})
+            return RouteResult(self, kwargs={'template': 'roadmap/task_list/walk_through_page.html'})
         if 'self-service' in path_components:
-            return RouteResult(self, kwargs={'template': 'roadmap/task_list/self_service.html'})
+            return RouteResult(self, kwargs={'template': 'roadmap/task_list/self_service_page.html'})
         else:
             return super(TaskList, self).route(request, path_components)
 
@@ -208,7 +208,7 @@ class TaskList(Page):
 
             if not ids:
                 ids = list(map(str, self.steps().values_list('id', flat=True)))
-            return render(request, 'roadmap/task_list/choices.html', {
+            return render(request, 'roadmap/task_list/choices_form_result_page.html', {
                 'steps': pages,
                 'page': self,
                 'stepIds' : ','.join(ids)
@@ -242,6 +242,8 @@ class StepPage(Page):
             GeoPanel('location', address_field='address'),
         ], _('Geo details')),
     ]
+
+    template = 'roadmap/step/base.html'
 
     @cached_property
     def point(self):
@@ -307,6 +309,8 @@ class Roadmap(Page):
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently asked questions'),
     ]
+
+    template = 'roadmap/roadmap/base.html'
 
 @hooks.register('insert_editor_js')
 def editor_js():

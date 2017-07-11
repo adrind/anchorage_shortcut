@@ -1,0 +1,15 @@
+{% extends "roadmap/base.html" %}
+
+{# Template with results after a user selects some checkboxes in the choice form #}
+
+{% load wagtailcore_tags %}
+
+{% block left-content %}
+    {% if page.self_service_oriented_layout %}
+        {# Useful if there is no order to preserve when listing the results #}
+        {% include "roadmap/task_list/partials/_choices_results_btns.html" %}
+    {% else %}
+        {# Used if there is a distinct series of steps that need to be followed #}
+        {% include "roadmap/task_list/partials/_choices_results_links.html" %}
+    {% endif %}
+{% endblock %}

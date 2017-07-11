@@ -7,12 +7,12 @@
     <table class="table">
         <tbody>
             {% for step in steps %}
-                {% include "roadmap/content_blocks/_step_link.html" %}
+                {% include "roadmap/step/partials/_step_link.html" %}
             {% empty %}
                 <!-- Default -- show all the steps for track
                      TODO: change this to let an admin customize the default -->
                 {% for step in page.steps %}
-                    {% include "roadmap/content_blocks/_step_link.html" %}
+                    {% include "roadmap/step/partials/_step_link.html" %}
                 {% endfor %}
             {% endfor %}
         </tbody>

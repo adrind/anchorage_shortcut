@@ -1,5 +1,8 @@
 {% load wagtailcore_tags %}
 
+{# This view emphasizes the self service option by displaying all the step pages as buttons #}
+{# A link at the bottom will take the user to the form of choices #}
+
 <div class="row">
     <h1 class="h1-heading">{{ page.header }}</h1>
 </div>
@@ -7,8 +10,8 @@
     {{ page.self_service_description|richtext }}
 </div>
 <div class="row card-deck">
-    {% for step in page.related_resources.all %}
-        {% include 'roadmap/content_blocks/_step_btn.html' with step=step %}
+    {% for step in page.steps.all %}
+        {% include 'roadmap/content_blocks/../step/_step_btn.html' with step=step %}
     {% endfor %}
 </div>
 <div class="row mt-5">

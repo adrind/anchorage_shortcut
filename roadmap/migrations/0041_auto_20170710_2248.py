@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='tasklist',
-            name='guided_section',
+            name='views',
         ),
         migrations.AddField(
             model_name='tasklist',

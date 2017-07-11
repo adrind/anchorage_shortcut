@@ -15,11 +15,13 @@
 
     <div class="row task-list">
         <div class="col-7">
+            <!-- Left content -->
             {% block left-content %}{% endblock %}
         </div>
         <div class="col-4 offset-md-1">
             {% block extra-right-content %}{% endblock %}
 
+            <!-- Related resources section -->
             {% if page.related_resources.count %}
                 <h3 class="related-resources-title mt-4 mb-4 pb-2"><strong>Extra Resources</strong></h3>
                 <div id="accordion-0" role="tablist" aria-multiselectable="true" class="mb-5">
@@ -41,6 +43,7 @@
                 </div>
             {% endif %}
 
+            <!-- FAQ section -->
             {% if page.faqs.count %}
                 <h3 class="faq-title mt-4 mb-4 pb-2"><strong>Common Questions</strong></h3>
                 <div id="accordion-faq" role="tablist" aria-multiselectable="true">

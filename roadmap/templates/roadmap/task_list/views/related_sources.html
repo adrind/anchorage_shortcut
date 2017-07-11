@@ -1,5 +1,8 @@
 {% load wagtailcore_tags %}
 
+{# Page with buttons that link to external resources defined in related_resources #}
+{# This means there are NO wagtail step pages associated with this task list #}
+
 <div class="row">
     <h1 class="h1-heading">{{ page.header }}</h1>
 </div>
@@ -7,8 +10,8 @@
     {{ page.self_service_description|richtext }}
 </div>
 <div class="row card-deck">
-    {% for step in page.steps.all %}
-        {% include 'roadmap/content_blocks/_step_btn.html' with step=step %}
+    {% for step in page.related_resources.all %}
+        {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
     {% endfor %}
 </div>
 <div class="row mt-5">

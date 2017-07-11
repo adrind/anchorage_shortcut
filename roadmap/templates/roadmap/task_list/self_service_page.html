@@ -1,5 +1,7 @@
 {% extends "roadmap/base.html" %}
 
+{# Template for the page a user sees when selected the self service option #}
+
 {% load wagtailcore_tags %}
 
 {% block left-content %}
@@ -16,7 +18,7 @@
     </div>
     <div class="card-deck">
         {% for step in page.steps.all %}
-            {% include "roadmap/content_blocks/_step_btn.html" with step=step %}
+            {% include "roadmap/step/partials/_step_btn.html" with step=step %}
         {% endfor %}
     </div>
     <div class="row mt-4">

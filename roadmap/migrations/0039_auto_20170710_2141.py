@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='tasklist',
-            name='guided_section',
+            name='views',
             field=wagtail.wagtailcore.fields.StreamField((('walk_through_description', wagtail.wagtailcore.blocks.RichTextBlock(default='')), ('self_service_description', wagtail.wagtailcore.blocks.RichTextBlock(default='')), ('choice_list', wagtail.wagtailcore.blocks.StructBlock((('question', wagtail.wagtailcore.blocks.CharBlock()), ('choices', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.StructBlock((('label', wagtail.wagtailcore.blocks.CharBlock(required=True)),), template='roadmap/content_blocks/_choice_checkbox.html')))), default=None, label='The options a user can select to discover what steps they should take')), ('rules', wagtail.wagtailcore.blocks.StructBlock((('name', roadmap.models.ChoiceRulesBlock()), ('pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock()))), label='Rules to define the logic that guides a user to the right Step page'))), null=True),
         ),
     ]
