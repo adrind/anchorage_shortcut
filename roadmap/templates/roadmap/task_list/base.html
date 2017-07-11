@@ -3,10 +3,15 @@
 {% load wagtailcore_tags %}
 
 {% block left-content %}
-    {% if page.isTemplateA %}
-        {% include "roadmap/task_list/task_list_A.html" %}
+    {% if page.choices %}
+        {% if page.isTemplateA %}
+            {% include "roadmap/task_list/task_list_A.html" %}
+        {% else %}
+            {% include "roadmap/task_list/task_list_B.html" %}
+        {% endif %}
     {% else %}
-        {% include "roadmap/task_list/task_list_B.html" %}
+        {% include "roadmap/task_list/related_sources.html" %}
+        {% block right-content-class %}invisible{% endblock %}
     {% endif %}
 
 {% endblock %}

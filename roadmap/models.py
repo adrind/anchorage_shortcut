@@ -31,14 +31,14 @@ from django.conf import settings
 class RelatedResource(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField("External link")
-    description = RichTextField(blank=True)
+    short_description = RichTextField(blank=True)
 
     panels = [
         FieldRowPanel([
             FieldPanel('title'),
             FieldPanel('url'),
         ]),
-        FieldPanel('description'),
+        FieldPanel('short_description'),
     ]
 
     class Meta:
@@ -85,7 +85,7 @@ class ChoiceRulesBlock(blocks.CharBlock):
             value = 'NEW'
             out = """<div class="new-choice-button-group"></div><h4><strong>When someone selects:</strong></h4> <div class="selected-choice-container">{}</div><h4><strong>Direct them to these pages:</strong></h4>""".format('')
 
-        out = '<div class="sequence-container sequence-type-list choice-list-container" id="'+ prefix +'-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="choice_rules-num-value-name" value="'+value +'" placeholder="Name" id="choice_rules-num-value-name">' + out + '</div></div>'
+        out = '<div class="sequence-container sequence-type-list choice-list-container" id="'+ prefix +'-container"> <div class="field-content"><input type="hidden" class="selected-choice-input" name="rules-NUM-value-name" value="'+value +'" placeholder="Name" id="rules-NUM-value-name">' + out + '</div></div>'
 
         return mark_safe(out + '<script>(function(){if (document.readyState === "complete") {return initializeChoices("'+prefix+'");}$(window).load(function() {initializeChoices("'+prefix+'");});})();</script>')
 
@@ -95,7 +95,7 @@ class ChoiceRulesBlock(blocks.CharBlock):
         val = ','.join(arr)
         return super(ChoiceRulesBlock, self).value_from_form(val)
 
-class TaskChoicesBlock(blocks.StructBlock):
+class TaskChoicesBlock(blocks.StreamBlock):
     question = blocks.CharBlock()
     choices = blocks.ListBlock(blocks.StructBlock([
         ('label', blocks.CharBlock(required=True)),
@@ -105,6 +105,18 @@ class TaskChoicesBlock(blocks.StructBlock):
     class Meta:
         label='Add choices to guide a client to services'
         template='roadmap/content_blocks/_choice_form.html'
+
+class GuidedSectionBlock(blocks.StreamBlock):
+    walk_through_description = blocks.RichTextBlock(default='')
+    self_service_description = blocks.RichTextBlock(default='')
+    choice_list = TaskChoicesBlock(label='The options a user can select to discover what steps they should take')
+    rules = blocks.StructBlock([
+        ('name', ChoiceRulesBlock()),
+        ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
+    ], label='Rules to define the logic that guides a user to the right Step page')
+
+    class Meta:
+        label='Add a section to guide users'
 
 class TaskListFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
     page = ParentalKey('TaskList', related_name='faqs')
@@ -118,29 +130,37 @@ class TaskList(Page):
     isTemplateA = models.BooleanField(default=True)
     short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
+
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
-    choice_list = StreamField([(
-        'choices', TaskChoicesBlock()
-    )])
-    choice_rules = StreamField([
-        ('rules', blocks.StructBlock([
+
+    question = models.CharField(max_length=255, blank=True)
+    choices = StreamField([
+        ('label', blocks.CharBlock(required=True)),
+    ], null=True)
+
+    rules = StreamField([
+        ('rule', blocks.StructBlock([
             ('name', ChoiceRulesBlock()),
             ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
-        ])),
-    ])
+        ]))], default=[])
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         FieldPanel('isTemplateA'),
         FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
-        FieldPanel('walk_through_description', classname='full'),
-        FieldPanel('self_service_description', classname='full'),
-        StreamFieldPanel('choice_list'),
-        StreamFieldPanel('choice_rules'),
         InlinePanel('related_resources', label="Extra resources"),
         InlinePanel('faqs', label="Frequently Asked Questions"),
+        MultiFieldPanel([
+            FieldPanel('walk_through_description', classname='full'),
+            FieldPanel('self_service_description', classname='full'),
+            MultiFieldPanel([
+                FieldPanel('question'),
+                StreamFieldPanel('choices')
+            ]),
+            StreamFieldPanel('rules')
+        ], heading="Guided path for this task", classname="collapsible")
     ]
 
     template = 'roadmap/task_list/base.html'
@@ -177,7 +197,7 @@ class TaskList(Page):
             ids = []
 
             #loop through each admin defined rule to see if we have a defined rule for the selected choices
-            for rule in self.choice_rules:
+            for rule in self.rules:
                 if rule.value['name'] == selected_choices:
                     for i, page in enumerate(rule.value['pages']):
                         ids.append(str(page.id))

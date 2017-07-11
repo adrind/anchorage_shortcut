@@ -10,6 +10,6 @@
         <h4 class="h4-heading">{{ page.short_description }}</h4>
     </div>
     <div class="row mt-4">
-        {% include_block page.choice_list with parent_url=page.url %}
+        {% include 'roadmap/content_blocks/_choice_form.html' with parent_url=page.url %}
     </div>
 {% endblock %}

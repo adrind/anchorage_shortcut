@@ -4,8 +4,8 @@
 
 <form method="POST">
     {% csrf_token %}
-    {% for choice in value.choices %}
-        {% include_block choice with index=forloop.counter%}
+    {% for choice in page.choices %}
+        {% include 'roadmap/content_blocks/_choice_checkbox.html' with index=forloop.counter %}
     {% endfor %}
     <button class="btn btn-roadmap mr-4 mt-2 mb-2">
         Next

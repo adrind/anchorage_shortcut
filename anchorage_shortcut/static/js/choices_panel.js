@@ -1,5 +1,5 @@
-var INPUT_NAME = 'choice_rules-NUM-value-name',
-    CHOICE_LIST_NAME = '#choice_list-list';
+var INPUT_NAME = 'rules-NUM-value-name',
+    CHOICE_LIST_NAME = '#choices-list .sequence-member-inner';
 
 /*
  *  Adds HTML for a select/remove choice button.
@@ -78,14 +78,12 @@ function initializeChoices(prefix) {
     //If that choice has been selected, don't add it as an option to select
     $(CHOICE_LIST_NAME).find('input').each(function (i, choiceInput) {
        var $choiceInput = $(choiceInput);
-       if($choiceInput.attr('id').match(/value-label/)) {
-           availableChoices[count] = $choiceInput.val();
-           if(selectedChoices.indexOf(count) == -1) {
-               var $container = $(PREFIX_ID + ' .new-choice-button-group');
-               addButtonHtml($container, count, $choiceInput.val(), 'plus');
-           }
-           count++;
+       availableChoices[count] = $choiceInput.val();
+       if(selectedChoices.indexOf(count) == -1) {
+           var $container = $(PREFIX_ID + ' .new-choice-button-group');
+           addButtonHtml($container, count, $choiceInput.val(), 'plus');
        }
+       count++;
     });
 
     $(PREFIX_ID + ' .choice-btn').each(function (i, btn) {
