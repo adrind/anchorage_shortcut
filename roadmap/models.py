@@ -127,7 +127,7 @@ class TaskListRelatedResources(Orderable, RelatedResource):
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
     header = models.CharField(max_length=255)
-    isTemplateA = models.BooleanField(default=True)
+    self_service_oriented_layout = models.BooleanField(default=True)
     short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
 
@@ -147,7 +147,7 @@ class TaskList(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
-        FieldPanel('isTemplateA'),
+        FieldPanel('self_service_oriented_layout'),
         FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
         InlinePanel('related_resources', label="Extra resources"),
