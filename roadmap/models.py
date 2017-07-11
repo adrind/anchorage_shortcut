@@ -100,11 +100,11 @@ class TaskChoicesBlock(blocks.StreamBlock):
     choices = blocks.ListBlock(blocks.StructBlock([
         ('label', blocks.CharBlock(required=True)),
     ],
-    template='roadmap/content_blocks/_choice_checkbox.html'))
+    template='roadmap/task_list/partials/_choice_checkbox.html'))
 
     class Meta:
         label='Add choices to guide a client to services'
-        template='roadmap/content_blocks/_choice_form.html'
+        template='roadmap/task_list/partials/_choice_form.html'
 
 class GuidedSectionBlock(blocks.StreamBlock):
     walk_through_description = blocks.RichTextBlock(default='')
