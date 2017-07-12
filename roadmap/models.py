@@ -55,7 +55,7 @@ class FrequentlyAskedQuestion(models.Model):
         FieldPanel('answer'),
     ]
 
-    def page_url(self):
+    def url(self):
         return self.page.url
 
     def roadmap(self):

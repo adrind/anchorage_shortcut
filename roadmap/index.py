@@ -6,7 +6,7 @@ class StepIndex(AlgoliaIndex):
     index_name = 'step_index'
 
 class FaqIndex(AlgoliaIndex):
-    fields = ('question', 'answer', 'page_url', 'roadmap')
+    fields = ('question', 'answer', 'url', 'roadmap')
     settings = {'searchableAttributes': ['question', 'answer'], 'attributesForFaceting': ['filterOnly(roadmap)']}
 
 class StepFaqIndex(FaqIndex):

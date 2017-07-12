@@ -35,8 +35,8 @@ $(document).ready(function() {
   $inputField.typeahead(
       { hint: true },
       registerIndex(stepIndex, 'step', {url: 'url', title: 'title'}),
-      registerIndex(stepFaqIndex, 'step_faq', {url: 'page_url', title: 'question'}),
-      registerIndex(taskListFaqIndex, 'task_list_faq', {url: 'page_url', title: 'question'})
+      registerIndex(stepFaqIndex, 'step_faq', {url: 'url', title: 'question'}),
+      registerIndex(taskListFaqIndex, 'task_list_faq', {url: 'url', title: 'question'})
   );
 
   $('.twitter-typeahead').on('typeahead:selected', function(event, selection) {
