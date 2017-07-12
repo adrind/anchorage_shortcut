@@ -48,7 +48,6 @@
                 <h3 class="faq-title mt-4 mb-4 pb-2"><strong>Common Questions</strong></h3>
                 <div id="accordion-faq" role="tablist" aria-multiselectable="true">
                     {% for faq in page.faqs.all %}
-                        {{ faq.roadmap }}
                         <h5 class="mb-3 related-resource">
                             <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
                               <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ faq.question }}
