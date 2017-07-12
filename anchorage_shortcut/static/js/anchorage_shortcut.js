@@ -2,9 +2,10 @@ $(document).ready(function() {
   var $inputField = $('#q');
   var template = Hogan.compile($('#autocomplete').text());
   var client = algoliasearch('VAPPYHPR6T', '4d3aeef86379e027844484707898c797');
-  var stepIndex = client.initIndex('step_index');
-  var stepFaqIndex = client.initIndex('step_faq_index');
-  var taskListFaqIndex = client.initIndex('task_list_faq_index');
+  var prefix = window.location.origin === 'http://localhost:8000' ? '' : 'prod_';
+  var stepIndex = client.initIndex(prefix+'step_index');
+  var stepFaqIndex = client.initIndex(prefix+'step_faq_index');
+  var taskListFaqIndex = client.initIndex(prefix+'task_list_faq_index');
 
   var registerIndex = function (index, name, data) {
       return {
