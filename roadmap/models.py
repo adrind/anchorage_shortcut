@@ -325,6 +325,9 @@ class Roadmap(Page):
 
     template = 'roadmap/roadmap/base.html'
 
+    def roadmap(self):
+        return self.slug
+
 @hooks.register('insert_editor_js')
 def editor_js():
     js_files = [
