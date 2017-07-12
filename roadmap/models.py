@@ -55,6 +55,9 @@ class FrequentlyAskedQuestion(models.Model):
         FieldPanel('answer'),
     ]
 
+    def page_url(self):
+        return self.page.url
+
     class Meta:
         abstract = True
 

@@ -11,7 +11,7 @@
 </div>
 <div class="row card-deck">
     {% for step in page.steps.all %}
-        {% include 'roadmap/content_blocks/../step/_step_btn.html' with step=step %}
+        {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
     {% endfor %}
 </div>
 <div class="row mt-5">

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <input id="q" placeholder="Search" autocomplete="off" autocorrect="false" spellcheck="false" type="search" style="width: 100%;padding:8px 12px;margin:0px;height: 30px;font-size:16px;" />
+  </div>
+</div>
+
+{% block extra_js %}
+<script src="//cdn.jsdelivr.net/typeahead.js/0.10/typeahead.jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/hogan.js/3.0/hogan.min.js"></script>
+
+{% verbatim %}
+<script type="text/template" id="autocomplete">
+<p>
+  <a href="{{ url }}">{{{ title }}}</a>
+</p>
+</script>
+{% endverbatim %}
+
+{% endblock %}

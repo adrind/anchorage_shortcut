@@ -39,7 +39,14 @@
 
         {% wagtailuserbar %}
 
-        <header class="row" id="header">Your <span class="bold-title"> Fresh Start</span></header>
+        <header class="row" id="header">
+            <div class="col text-left">
+                Your <span class="bold-title"> Fresh Start</span>
+            </div>
+            <div class="col">
+                {% include 'roadmap/partials/_auto_complete.html' %}
+            </div>
+        </header>
 
         <div class="container-fluid">
             {% block content %}{% endblock %}
@@ -50,6 +57,7 @@
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/anchorage_shortcut.js' %}"></script>
+        <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 
         <script>
             if(window.location.hostname !== '127.0.0.1' &&

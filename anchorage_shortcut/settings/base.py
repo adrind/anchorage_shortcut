@@ -27,6 +27,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'wagtailgeowidget',
+    'algoliasearch_django',
 
     'home',
     'search',
@@ -148,3 +149,9 @@ BASE_URL = 'http://example.com'
 GOOGLE_MAPS_V3_APIKEY = 'AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I'
 GEO_WIDGET_DEFAULT_LOCATION = {'lat': 61.2181, 'lng': -149.9003}
 GEO_WIDGET_ZOOM = 13
+
+#Used for search
+ALGOLIA = {
+    'APPLICATION_ID': 'VAPPYHPR6T',
+    'API_KEY': '27ce19f97cbef064aef2403d1a3d5b52'
+}
