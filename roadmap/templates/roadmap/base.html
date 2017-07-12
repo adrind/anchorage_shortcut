@@ -49,6 +49,7 @@
                 <div id="accordion-faq" role="tablist" aria-multiselectable="true">
                     {% for faq in page.faqs.all %}
                         <h5 class="mb-3 related-resource">
+                            {{ faq.page_url }}
                             <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
                               <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ faq.question }}
                             </a>

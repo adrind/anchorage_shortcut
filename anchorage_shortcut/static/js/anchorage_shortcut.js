@@ -9,7 +9,17 @@ $(document).ready(function() {
 
   var registerIndex = function (index, name, data) {
       return {
-          source: index.ttAdapter(),
+          source: function (query, cb) {
+              index.search({query: query, filters: 'roadmap:fresh-start-reentry'}, function (err, content) {
+                  if (err) {
+                      cb(err);
+                      return;
+                  }
+
+                  cb(content.hits);
+              });
+
+          },
           displayKey: name,
           templates: {
               suggestion: function (hit) {

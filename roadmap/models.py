@@ -58,6 +58,9 @@ class FrequentlyAskedQuestion(models.Model):
     def page_url(self):
         return self.page.url
 
+    def roadmap(self):
+        return self.page.page_ptr.slug
+
     class Meta:
         abstract = True
 
@@ -247,6 +250,10 @@ class StepPage(Page):
     ]
 
     template = 'roadmap/step/base.html'
+
+    #used to index for search
+    def roadmap(self):
+        return self.get_parent().get_parent().slug
 
     @cached_property
     def point(self):

@@ -4,7 +4,6 @@
 {% load wagtailimages_tags %}
 
 {% block left-content %}
-
     <div class="row">
         {% if page.next_step %}
             <a href="{{ page.get_parent.url }}">
@@ -25,6 +24,8 @@
             <h1 class="h1-blue-heading">{{ page.title }}</h1>
         {% endif %}
     </div>
+
+    {{ page.roadmap }}
 
     <div class="row">
         {{ page.body|richtext }}
