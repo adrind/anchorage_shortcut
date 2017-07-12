@@ -59,7 +59,7 @@ class FrequentlyAskedQuestion(models.Model):
         return self.page.url
 
     def roadmap(self):
-        return self.page.page_ptr.slug
+        return self.page.roadmap()
 
     class Meta:
         abstract = True
@@ -170,6 +170,9 @@ class TaskList(Page):
     ]
 
     template = 'roadmap/task_list/base.html'
+
+    def roadmap(self):
+        return self.get_parent().slug
 
     def steps(self):
         # Get list of all step pages that are descendants of this page
