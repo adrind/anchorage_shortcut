@@ -26,7 +26,8 @@ COMPRESS_CSS_FILTERS = [
 ]
 COMPRESS_CSS_HASHING_METHOD = 'content'
 
-ALGOLIA['INDEX_PREFIX'] = 'prod_'
+#Creates a separate search index from local
+ALGOLIA['INDEX_PREFIX'] = 'prod'
 
 try:
     from .local import *
