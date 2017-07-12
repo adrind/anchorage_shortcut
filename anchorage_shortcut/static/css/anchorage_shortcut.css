@@ -355,9 +355,5 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .twitter-typeahead .tt-dropdown-menu .tt-suggestion.tt-cursor {
   color: #fff;
-  background-color: #999;
-}
-
-.twitter-typeahead .tt-dropdown-menu .tt-suggestion.tt-cursor a {
-  color: #fff;
+  background-color: #eee;
 }
