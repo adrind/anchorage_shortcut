@@ -6,16 +6,16 @@ $(document).ready(function() {
   var stepIndex = client.initIndex(prefix+'step_index');
   var stepFaqIndex = client.initIndex(prefix+'step_faq_index');
   var taskListFaqIndex = client.initIndex(prefix+'task_list_faq_index');
+  var roadmapType = window.location.pathname.split('/') && window.location.pathname.split('/')[1];
 
   var registerIndex = function (index, name, data) {
       return {
           source: function (query, cb) {
-              index.search({query: query, filters: 'roadmap:fresh-start-reentry'}, function (err, content) {
+              index.search({query: query, filters: 'roadmap:'+roadmapType}, function (err, content) {
                   if (err) {
                       cb(err);
                       return;
                   }
-
                   cb(content.hits);
               });
 
@@ -32,13 +32,14 @@ $(document).ready(function() {
       }
   };
 
-  $('.search-terms a').click(function(e) {
-    $inputField.val($(this).text()).change().focus();
-  });
   $inputField.typeahead(
-      { hint: false },
+      { hint: true },
       registerIndex(stepIndex, 'step', {url: 'url', title: 'title'}),
       registerIndex(stepFaqIndex, 'step_faq', {url: 'page_url', title: 'question'}),
       registerIndex(taskListFaqIndex, 'task_list_faq', {url: 'page_url', title: 'question'})
   );
+
+  $('.twitter-typeahead').on('typeahead:selected', function(event, selection) {
+        document.location.pathname = selection.url;
+  });
 });

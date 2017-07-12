@@ -351,9 +351,19 @@ body { font-family: 'Source Sans Pro', sans-serif; }
   padding: 3px 20px;
   font-size: 18px;
   line-height: 24px;
+    color: #399fd3;
 }
 
 .twitter-typeahead .tt-dropdown-menu .tt-suggestion.tt-cursor {
-  color: #fff;
-  background-color: #eee;
+    color: #399fd3;
+    background-color: #eee;
+}
+
+.twitter-typeahead .tt-dropdown-menu .tt-suggestion a {
+  color: #399fd3;
+}
+
+.twitter-typeahead .tt-dropdown-menu .tt-suggestion.tt-cursor a:hover {
+  color: #399fd3;
+    text-decoration: none;
 }

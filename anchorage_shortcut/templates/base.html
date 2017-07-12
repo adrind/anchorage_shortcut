@@ -44,7 +44,9 @@
                 Your <span class="bold-title"> Fresh Start</span>
             </div>
             <div class="col">
-                {% include 'roadmap/partials/_auto_complete.html' %}
+                {% if not page.slug == 'home' %}
+                    {% include 'roadmap/partials/_auto_complete.html' %}
+                {% endif %}
             </div>
         </header>
 
