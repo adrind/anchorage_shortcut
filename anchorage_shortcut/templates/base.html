@@ -51,7 +51,11 @@
         </header>
 
         <div class="container-fluid">
-            {% block content %}{% endblock %}
+            <div class="row">
+            <div class="col col-md-8 offset-md-2">
+                {% block content %}{% endblock %}
+            </div>
+            </div>
         </div>
 
 
