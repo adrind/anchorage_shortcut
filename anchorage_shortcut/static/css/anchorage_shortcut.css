@@ -148,7 +148,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 /* ROAD MAP */
 
 .roadmap-btn {
-    width: 8rem;
+    width: 80%;
     height: 2.4rem;
     border: 1px solid #399fd3;
     padding: 0;
@@ -166,7 +166,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .roadmap-task {
     border-bottom: 1px solid #ccc;
-    display: block;
     line-height: 2.4rem;
 }
 

@@ -18,8 +18,12 @@
         </div>
             {% for list in section.value.pages %}
                 <div class="row roadmap-task p-2">
-                    <span class="roadmap-title ml-4">{{ list.title }}</span>
-                    <a href="{{ list.url }}" class="btn roadmap-btn float-right">Start</a>
+                    <div class="col">
+                        {{ list.title }}
+                    </div>
+                    <div class="col-3">
+                        <a href="{{ list.url }}" class="btn roadmap-btn">Start</a>
+                    </div>
                 </div>
             {% endfor %}
     {% endfor %}
