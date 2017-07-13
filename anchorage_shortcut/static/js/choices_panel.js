@@ -9,7 +9,7 @@ var INPUT_NAME = 'rules-NUM-value-name',
  *  @param {string} icon - plus | cross
  */
 function addButtonHtml($parent, dataId, val, icon) {
-    var html = '<button class="button bicolor choice-btn icon icon-'+icon+'" data-id="'+ dataId +'">'+ val +'</button>';
+    var html = '<button class="button bicolor choice-btn icon icon-'+icon+'" data-id="'+ dataId +'" style="margin:0;margin-right:.5rem;margin-top:.5rem;">'+ val +'</button>';
     $parent.append(html);
     return $('button[data-id="'+dataId+'"]');
 };

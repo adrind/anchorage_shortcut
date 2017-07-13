@@ -85,7 +85,7 @@ class ChoiceRulesBlock(blocks.CharBlock):
             choices = value.split(',')
             choicesHtml = ''
             for choice in choices:
-                choicesHtml = choicesHtml + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'">One choice</button>'
+                choicesHtml = choicesHtml + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'" style="margin:0;margin-right:.5rem;margin-top:.5rem;">One choice</button>'
             out = """<div class="new-choice-button-group"></div><h4><strong>When someone selects:</strong></h4> <div class="selected-choice-container">{}</div><h4><strong>Direct them to these pages:</strong></h4>""".format(choicesHtml)
         else:
             value = 'NEW'
