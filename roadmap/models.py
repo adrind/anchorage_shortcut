@@ -174,6 +174,9 @@ class TaskList(Page):
     def roadmap(self):
         return self.get_parent().slug
 
+    def has_guided_tour(self):
+        return len(self.choices) > 0 and len(self.rules) > 0
+
     def steps(self):
         # Get list of all step pages that are descendants of this page
         events = StepPage.objects.live().descendant_of(self)
