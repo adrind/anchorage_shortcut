@@ -5,7 +5,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 /* BASE.HTML */
 
 #header {
-    height: 10rem;
     background-color: #399fd3;
     color: #fff;
     font-size: 3.6rem;
@@ -187,8 +186,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 /* TASK LIST */
 
-#container-fluid .task-list {
-    margin: 0;
+.container-fluid .task-list,
+.container-fluid .nav {
+    margin-left: 0;
 }
 
 .task-list-section {
@@ -349,8 +349,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .twitter-typeahead .tt-input, .twitter-typeahead .tt-hint {
   width: 100%;
-  margin: 0px;
-  padding: 8px 12px;
   outline: none;
 }
 

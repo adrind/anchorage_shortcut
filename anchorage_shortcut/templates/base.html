@@ -41,24 +41,20 @@
         <div class="container-fluid roadmap">
 
             <header class="row" id="header">
-                <div class="col-md-10 offset-md-1 ">
-                    <div class="row">
-                        <div class="col text-left">
-                            <a href="/" class="header-title">Your <strong> Fresh Start</strong></a>
-                        </div>
-                        <div class="col-sm-12 col-md-4 offset-md-1 auto-complete">
-                            {% if not page.slug == 'home' %}
-                                {% include 'roadmap/partials/_auto_complete.html' %}
-                            {% endif %}
-                        </div>
-                    </div>
+                <div class="col col-md-6 offset-md-1">
+                    <a href="/" class="header-title">Your <strong> Fresh Start</strong></a>
+                </div>
+                <div class="col-sm-12 col-md-4 auto-complete">
+                    {% if not page.slug == 'home' %}
+                        {% include 'roadmap/partials/_auto_complete.html' %}
+                    {% endif %}
                 </div>
             </header>
 
             <div class="row">
-            <div class="col col-md-10 offset-md-1">
+                <div class="col col-md-10 offset-md-1">
                 {% block content %}{% endblock %}
-            </div>
+                </div>
             </div>
         </div>
 

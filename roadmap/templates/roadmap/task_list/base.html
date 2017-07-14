@@ -7,23 +7,26 @@
 
 {% block left-content %}
     {% if page.has_guided_tour %}
-        <div class="col-sm-12 col-md-7 mb-4">
-            {% if page.self_service_oriented_layout %}
-                {% include "roadmap/task_list/views/self_service_oriented.html" %}
-                {# If a guided section is defined and the 'self service oriented layout' boolean is True #}
-            {% else %}
-                {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
-            {% endif %}
-        </div>
+        {% if page.self_service_oriented_layout %}
+            {% include "roadmap/task_list/views/self_service_oriented.html" %}
+            {# If a guided section is defined and the 'self service oriented layout' boolean is True #}
+        {% else %}
+            {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
+        {% endif %}
     {% else %}
-        <div class="col-12 mb-4">
-            {# If no guided section is provided in the admin view #}
-            {% include "roadmap/task_list/views/related_sources.html" %}
+
+        <div class="invisible">
+            {# SO hacky but I couldn't figure out why the classname also got rendered into the DOM #}
+            {% block col-class %}col-12 mb-4{% endblock %}
         </div>
+        {# If no guided section is provided in the admin view #}
+        {% include "roadmap/task_list/views/related_sources.html" %}
     {% endif %}
 {% endblock %}
 
 {% block right-content %}
+    {# If there's no guided tour we just render the related resources as main content #}
+    {# No need to also have the right content #}
     {% if page.has_guided_tour %}
         {{ block.super }}
     {% endif %}

@@ -2,7 +2,7 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-    <div class="row mb-3">
+    <div class="row nav mb-3">
         <nav class="breadcrumb">
             {% for ancestor in page.get_ancestors %}
                 {% if ancestor.is_root == False %}
@@ -15,7 +15,9 @@
 
     <div class="row task-list">
         <!-- Left content -->
-        {% block left-content %}{% endblock %}
+        <div class="{% block col-class %}col-sm-12 col-md-7 mb-4{% endblock %}">
+            {% block left-content %}{% endblock %}
+        </div>
 
         <div class="col-sm-12 col-md-4 offset-md-1">
             {% block right-content %}
