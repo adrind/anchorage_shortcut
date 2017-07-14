@@ -255,6 +255,15 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 1.8rem;
 }
 
+/* Required to prevent images added in the admin panel from breaking out of the col */
+.step-body .rich-text {
+    width: 100%;
+}
+
+.step-body .rich-text img {
+    width: 100%;
+}
+
 .w-100 {
     margin-bottom: 1rem;
 }
