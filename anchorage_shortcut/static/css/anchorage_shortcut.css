@@ -2,8 +2,48 @@ html { font-size: 62.5%; }
 
 body { font-family: 'Source Sans Pro', sans-serif; }
 
-/* BASE.HTML */
+/*** GLOBAL STYLES AND RESETS ***/
 
+.card-block {
+    border: none;
+}
+
+.container-fluid.roadmap {
+    font-size: 1.6rem;
+    padding: 0;
+}
+
+.container-fluid .breadcrumb {
+    background-color: white;
+}
+
+.container-fluid .breadcrumb-item.active {
+    color: #333;
+}
+
+.container-fluid .breadcrumb-item {
+    color: #636c72;
+}
+
+.container-fluid .task-list,
+.container-fluid .nav {
+    margin-left: 0;
+}
+
+/* Required to prevent images added in the admin panel from breaking out of the col */
+.step-body .rich-text {
+    width: 100%;
+}
+
+.step-body .rich-text img {
+    width: 100%;
+}
+
+.w-100 {
+    margin-bottom: 1rem;
+}
+
+/*** BASE.HTML ***/
 #header {
     background-color: #399fd3;
     color: #fff;
@@ -49,9 +89,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     line-height: 1.5rem;
 }
 
-.description {
-    font-size: 1.8rem;
-}
+/*** end of base.html styles ***/
+
+/* HEADING STYLES */
 
 .h1-heading {
     font-size: 3.6rem;
@@ -86,20 +126,28 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .h5-heading {
     font-weight: 600;
 }
+/*** end of heading styles ***/
 
-.btn-roadmap {
-    background-color: #4FB2F0;
-    border-color: #4FB2F0;
-    box-shadow: 3px 3px 4px 2px #ccc;
+/*** BUTTON STYLES ***/
+.btn-base {
+    background-color: #999;
+    border-color: #999;
+    box-shadow: 1px 1px 1px 1px #ccc;
     color: #fff;
     font-size: 1.6rem;
-    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0;
 }
 
-.btn-roadmap:hover {
+.btn-base i {
+    font-size: 1.4rem;
+}
+
+.btn-base:hover {
     color: #fff;
+    background-color: #399fd3;
+    border-color: #399fd3;
     font-size: 1.6rem;
-    font-weight: bold;
 }
 
 .btn-selfservice,
@@ -113,23 +161,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-right: 1rem;
 }
 
-.container-fluid.roadmap {
-    font-size: 1.6rem;
-    padding: 0;
-}
+/*** end of button styles ***/
 
-.container-fluid .breadcrumb {
-    background-color: white;
-}
-
-.container-fluid .breadcrumb-item.active {
-    color: #333;
-}
-
-.container-fluid .breadcrumb-item {
-    color: #636c72;
-}
-
+/*** RIGHT CONTENT ***/
 .faq-title,
 .related-resources-title {
     border-bottom: 2px solid #4FB2F0;
@@ -142,22 +176,17 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-weight: normal;
 }
 
-.card-block {
-    border: none;
-}
-
+/* Might be able to get rid of this soon */
 .back-link {
     font-style: italic;
     text-decoration: underline;
     color: #399fd3;
 }
 
-.step-nav {
-    border-bottom: 1px solid #ccc;
-}
 
-/* ROAD MAP */
+/*** ROAD MAP ***/
 
+/* Used as the start button on roadmap */
 .roadmap-btn {
     width: 80%;
     height: 2.4rem;
@@ -180,16 +209,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     line-height: 2.4rem;
 }
 
-.roadmap-title {
-    font-size: 1.8rem;
-}
-
 /* TASK LIST */
-
-.container-fluid .task-list,
-.container-fluid .nav {
-    margin-left: 0;
-}
 
 .task-list-section {
     background-color: #399fd3;
@@ -201,12 +221,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-top: 1rem;
 }
 
-.task-list-A-header {
-    font-weight: bold;
-    color: #399fd3;
-    font-size: 2.4rem;
-}
-
+/* Overrides rich text h3 style */
 .task-list-section h3 {
     text-align: center;
     font-weight: bold;
@@ -239,7 +254,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     text-align: center;
 }
 
-
 .task-list-section .rich-text {
     padding-bottom: 4rem;
 }
@@ -249,7 +263,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: #399fd3;
     text-decoration: underline;
 }
-
 
 .card.step-btn {
     background-color: #399fd3;
@@ -271,24 +284,21 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 1.8rem;
 }
 
-/* Required to prevent images added in the admin panel from breaking out of the col */
-.step-body .rich-text {
-    width: 100%;
+/*** STEP PAGE STYLES ***/
+
+.step-nav {
+    border-bottom: 1px solid #ccc;
 }
 
-.step-body .rich-text img {
-    width: 100%;
+.print-page {
+    font-size: 2.4rem;
 }
 
-.w-100 {
-    margin-bottom: 1rem;
+.print-page a {
+    color: #399fd3;
 }
 
 /* WALK THROUGH */
-
-.choice-field {
-    font-weight: bold;
-}
 
 .choice-result {
     border-bottom: 1px solid #ccc;
@@ -301,15 +311,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .choice-td a {
     color: black;
     text-decoration: underline;
-}
-
-
-.print-page {
-    font-size: 2.4rem;
-}
-
-.print-page a {
-    color: #399fd3;
 }
 
 @media (min-width: 768px) {

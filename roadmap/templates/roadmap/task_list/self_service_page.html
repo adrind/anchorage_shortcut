@@ -26,7 +26,10 @@
             <a href="{{ page.url }}walk-through" class="back-link">I need more help with {{ page.title }}</a>
         </div>
         <div class="col-md-2 offset-md-6">
-            <a href="{{ page.get_parent.url }}" class="back-link">Go back</a>
+            <a href="{{ page.get_parent.url }}" class="btn btn-base">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                Back
+            </a>
         </div>
     </div>
 {% endblock %}
