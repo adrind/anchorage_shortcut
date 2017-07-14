@@ -15,7 +15,7 @@
 
     <div class="row task-list">
         <!-- Left content -->
-        <div class="{% block col-class %}col-sm-12 col-md-7 mb-4{% endblock %}">
+        <div class="{% if page.has_guided_tour %}col-sm-12 col-md-7 mb-4{% else %}col-12 mb-4{% endif %}">
             {% block left-content %}{% endblock %}
         </div>
 

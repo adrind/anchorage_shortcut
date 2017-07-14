@@ -14,11 +14,6 @@
             {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
         {% endif %}
     {% else %}
-
-        <div class="invisible">
-            {# SO hacky but I couldn't figure out why the classname also got rendered into the DOM #}
-            {% block col-class %}col-12 mb-4{% endblock %}
-        </div>
         {# If no guided section is provided in the admin view #}
         {% include "roadmap/task_list/views/related_sources.html" %}
     {% endif %}
