@@ -7,14 +7,24 @@
 
 {% block left-content %}
     {% if page.has_guided_tour %}
-        {% if page.self_service_oriented_layout %}
-            {% include "roadmap/task_list/views/self_service_oriented.html" %}
-            {# If a guided section is defined and the 'self service oriented layout' boolean is True #}
-        {% else %}
-            {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
-        {% endif %}
+        <div class="col-sm-12 col-md-7 mb-4">
+            {% if page.self_service_oriented_layout %}
+                {% include "roadmap/task_list/views/self_service_oriented.html" %}
+                {# If a guided section is defined and the 'self service oriented layout' boolean is True #}
+            {% else %}
+                {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
+            {% endif %}
+        </div>
     {% else %}
-        {# If no guided section is provided in the admin view #}
-        {% include "roadmap/task_list/views/related_sources.html" %}
+        <div class="col-12 mb-4">
+            {# If no guided section is provided in the admin view #}
+            {% include "roadmap/task_list/views/related_sources.html" %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block right-content %}
+    {% if page.has_guided_tour %}
+        {{ block.super }}
     {% endif %}
 {% endblock %}

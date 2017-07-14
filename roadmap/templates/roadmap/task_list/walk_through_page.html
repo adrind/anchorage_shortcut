@@ -5,6 +5,7 @@
 {% load wagtailcore_tags %}
 
 {% block left-content %}
+<div class="col-sm-12 col-md-7 mb-4">
     <div class="row">
         <h1 class="h1-heading">{{ page.title }}</h1>
     </div>
@@ -14,4 +15,5 @@
     <div class="row mt-4">
         {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
     </div>
+</div>
 {% endblock %}

@@ -14,12 +14,11 @@
     </div>
 
     <div class="row task-list">
-        <div class="col-sm-12 col-md-7 mb-4">
-            <!-- Left content -->
-            {% block left-content %}{% endblock %}
-        </div>
+        <!-- Left content -->
+        {% block left-content %}{% endblock %}
+
         <div class="col-sm-12 col-md-4 offset-md-1">
-            {% block extra-right-content %}{% endblock %}
+            {% block right-content %}
 
             <!-- Related resources section -->
             <div class="row">
@@ -66,6 +65,7 @@
                     {% endif %}
                 </div>
             </div>
+            {% endblock %}
         </div>
     </div>
 {% endblock %}

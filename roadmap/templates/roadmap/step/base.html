@@ -4,6 +4,7 @@
 {% load wagtailimages_tags %}
 
 {% block left-content %}
+<div class="col-sm-12 col-md-7 mb-4">
     <div class="row">
         {% if page.next_step %}
             <a href="{{ page.get_parent.url }}">
@@ -69,13 +70,15 @@
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I&callback=initMap"></script>
     {% endif %}
+</div>
 {% endblock %}
 
-{% block extra-right-content %}
+{% block right-content %}
     <div class="print-page">
         <a href="javascript:window.print()">
             <i class="fa fa-print" aria-hidden="true"></i>
             Print Page
         </a>
     </div>
+    {{ block.super }}
 {% endblock %}

@@ -5,6 +5,7 @@
 {% load wagtailcore_tags %}
 
 {% block left-content %}
+<div class="col-sm-12 col-md-7 mb-4">
     <div class="row mb-4">
         <h1 class="h1-heading">
             {{ page.title }}
@@ -29,4 +30,5 @@
             <a href="{{ page.get_parent.url }}" class="back-link">Go back</a>
         </div>
     </div>
+</div>
 {% endblock %}
