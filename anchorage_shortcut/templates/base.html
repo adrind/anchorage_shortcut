@@ -38,19 +38,23 @@
         <script src="https://use.fontawesome.com/9079eec587.js"></script>
 
         {% wagtailuserbar %}
+        <div class="container-fluid roadmap">
 
-        <header class="row" id="header">
-            <div class="col text-left">
-                Your <span class="bold-title"> Fresh Start</span>
-            </div>
-            <div class="col">
-                {% if not page.slug == 'home' %}
-                    {% include 'roadmap/partials/_auto_complete.html' %}
-                {% endif %}
-            </div>
-        </header>
+            <header class="row" id="header">
+                <div class="col-md-10 offset-md-1 ">
+                    <div class="row">
+                        <div class="col text-left">
+                            <a href="/" class="header-title">Your <strong> Fresh Start</strong></a>
+                        </div>
+                        <div class="col-sm-12 col-md-4 offset-md-1 auto-complete">
+                            {% if not page.slug == 'home' %}
+                                {% include 'roadmap/partials/_auto_complete.html' %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </header>
 
-        <div class="container-fluid">
             <div class="row">
             <div class="col col-md-10 offset-md-1">
                 {% block content %}{% endblock %}

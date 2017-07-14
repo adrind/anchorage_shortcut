@@ -1,8 +1,12 @@
-<div class="row">
-  <div class="col-sm-8 col-sm-offset-2">
-    <input id="q" placeholder="Search" autocomplete="off" autocorrect="false" spellcheck="false" type="search" style="width: 100%;padding:8px 12px;margin:0px;height: 30px;font-size:16px;" />
-  </div>
+<div class="row no-gutters">
+    <div class="col-3 text-center">
+        <span class="search-title">Search</span>
+    </div>
+    <div class="col">
+        <input id="q" placeholder="ex: resume, driver's license" autocomplete="off" autocorrect="false" spellcheck="false" type="search" style="width: 100%;padding:8px 12px;margin:0px;height: 30px;font-size:16px;" />
+    </div>
 </div>
+
 
 {% block extra_js %}
 <script src="//cdn.jsdelivr.net/typeahead.js/0.10/typeahead.jquery.min.js"></script>
