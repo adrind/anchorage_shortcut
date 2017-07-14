@@ -26,6 +26,7 @@ from django.utils.html import format_html, format_html_join
 from django.conf import settings
 
 
+
 #A related website that provides additional assistance
 # Used in the roadmap, track, and step templates
 class RelatedResource(models.Model):
@@ -60,6 +61,9 @@ class FrequentlyAskedQuestion(models.Model):
 
     def roadmap(self):
         return self.page.roadmap()
+
+    def live(self):
+        return self.page.live
 
     class Meta:
         abstract = True
@@ -328,8 +332,11 @@ class Roadmap(Page):
 
     template = 'roadmap/roadmap/base.html'
 
+    #Used to index
     def roadmap(self):
         return self.slug
+
+
 
 @hooks.register('insert_editor_js')
 def editor_js():

@@ -17,7 +17,9 @@
         {# If no guided section is provided in the admin view #}
         {% include "roadmap/task_list/views/related_sources.html" %}
     {% endif %}
+    {{ page.is_live }}
 {% endblock %}
+
 
 {% block right-content %}
     {# If there's no guided tour we just render the related resources as main content #}
