@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'home',
     'search',
     'roadmap',
+    'storages',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -155,3 +156,8 @@ ALGOLIA = {
     'APPLICATION_ID': 'VAPPYHPR6T',
     'API_KEY': '27ce19f97cbef064aef2403d1a3d5b52'
 }
+
+
+AWS_STORAGE_BUCKET_NAME = 'anchorage-shortcut'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
