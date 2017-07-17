@@ -36,7 +36,7 @@
                                 </h5>
                                 <div id="dropdown-{{ forloop.counter }}" class="collapse" role="tabpanel">
                                   <div class="card-block">
-                                      {{ resource.description |richtext }}
+                                      {{ resource.short_description |richtext }}
                                       {% if resource.url %}
                                         <a href="{{ resource.url }}">Website</a>
                                       {% endif %}
