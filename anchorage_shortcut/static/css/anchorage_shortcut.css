@@ -150,6 +150,15 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 1.6rem;
 }
 
+.btn-base-blue {
+    background-color: #399fd3;
+    border-color: #399fd3;
+}
+.btn-base-blue:hover {
+    background-color: #999;
+    border-color: #999;
+}
+
 .btn-selfservice,
 .btn-selfservice:hover {
     background-color: #69579C;
