@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
+
 from modelcluster.fields import ParentalKey
 
 from django import forms
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
@@ -154,7 +156,8 @@ class TaskList(Page):
     rules = StreamField([
         ('rule', blocks.StructBlock([
             ('name', ChoiceRulesBlock()),
-            ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
+            ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
+            ('override', blocks.BooleanBlock(default=False, required=False))
         ]))], default=[], blank=True)
 
     default_pages = StreamField([
@@ -219,13 +222,16 @@ class TaskList(Page):
             pages = []
             ids = []
             default_pages = []
+            all_selected_choices = ','.join(selected_choices)
 
             #loop through each admin defined rule to see if we have a defined rule for the selected choices
             if self.has_strict_rules:
                 #Find the one rule that matches the selected choices and only suggest those steps
-                selected_choices = ','.join(selected_choices)
                 for rule in self.rules:
-                    if rule.value['name'] == selected_choices:
+                    if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
+                        pages = rule.value['pages']
+                        break
+                    if rule.value['name'] == all_selected_choices:
                         for i, page in enumerate(rule.value['pages']):
                             ids.append(str(page.id))
                             if i+1 < len(rule.value['pages']):
@@ -235,16 +241,24 @@ class TaskList(Page):
             else:
                 #Union all the pages that match with a rule
                 for rule in self.rules:
+                    if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
+                        pages = rule.value['pages']
+                        break
                     if rule.value['name'] in selected_choices:
                         for i, page in enumerate(rule.value['pages']):
                             ids.append(str(page.id))
                             pages.append(page)
+
+            if len(pages) == 1:
+                #If we only have one page to recommend, redirect to that page
+                return redirect(pages[0].url)
 
             for page in self.default_pages:
                 default_pages.append(Page.objects.get(id=page.value.id))
 
             if not ids:
                 ids = list(map(str, self.steps().values_list('id', flat=True)))
+
             return render(request, 'roadmap/task_list/choices_form_result_page.html', {
                 'steps': pages,
                 'page': self,
