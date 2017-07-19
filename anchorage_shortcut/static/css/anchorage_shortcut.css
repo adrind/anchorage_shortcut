@@ -295,11 +295,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .walk-through-form {
     width: 100%;
+    font-size: 2.2rem;
 }
 
 .walk-through-form .form-control {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin-right: 0;
 }
 
