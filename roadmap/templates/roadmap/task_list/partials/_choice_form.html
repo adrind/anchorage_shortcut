@@ -3,9 +3,9 @@
 {# The form of choices defined for the task page #}
 {# These choices can help guide users to the right step page #}
 
-<h3 class="h3-heading mb-4">{{ value.question }}</h3>
+<h3 class="h3-heading mb-4">{{ page.question }}</h3>
 
-<form method="POST">
+<form method="POST" class="walk-through-form">
     {% csrf_token %}
     {% for choice in page.choices %}
         {% include 'roadmap/task_list/partials/_choice_checkbox.html' with index=forloop.counter %}

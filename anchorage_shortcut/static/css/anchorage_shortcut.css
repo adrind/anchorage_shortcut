@@ -293,6 +293,16 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 1.8rem;
 }
 
+.walk-through-form {
+    width: 100%;
+}
+
+.walk-through-form .form-control {
+    width: 30px;
+    height: 30px;
+}
+
+
 /*** STEP PAGE STYLES ***/
 
 .step-nav {
