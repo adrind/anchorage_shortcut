@@ -1,10 +1,5 @@
 <div class="row no-gutters">
-    <div class="col-1">
-    <input type="checkbox" value="{{ index|add:-1 }}" name="{{ choice }}" id="option-{{ index|add:-1 }}" class="form-control">
-    </div>
-    <div class="col-11">
-    <label class="form-check-label choice-field" for="option-{{ index|add:-1 }}">
-        <strong>{{ choice }}</strong>
-    </label>
+    <div class="col-6">
+    <input type="checkbox" value="{{ index|add:-1 }}" name="{{ choice }}" id="option-{{ index|add:-1 }}" class="form-control"><strong>{{ choice }}</strong>
     </div>
 </div>
