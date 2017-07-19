@@ -298,8 +298,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .walk-through-form .form-control {
-    width: 30px;
-    height: 30px;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0;
 }
 
 
