@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='tasklist',
             name='default_pages',
-            field=wagtail.wagtailcore.fields.StreamField((('pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock(), default=[], required=False)),), blank=True),
+            field=wagtail.wagtailcore.fields.StreamField((('pages', wagtail.wagtailcore.blocks.ListBlock(wagtail.wagtailcore.blocks.PageChooserBlock(), required=False)),), blank=True),
         ),
     ]
