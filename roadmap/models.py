@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import re
+
 from modelcluster.fields import ParentalKey
 
 from django import forms
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
@@ -122,7 +124,7 @@ class GuidedSectionBlock(blocks.StreamBlock):
     choice_list = TaskChoicesBlock(label='The options a user can select to discover what steps they should take')
     rules = blocks.StructBlock([
         ('name', ChoiceRulesBlock()),
-        ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
+        ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
     ], label='Rules to define the logic that guides a user to the right Step page')
 
     class Meta:
@@ -147,13 +149,20 @@ class TaskList(Page):
     question = models.CharField(max_length=255, blank=True)
     choices = StreamField([
         ('label', blocks.CharBlock(required=True)),
-    ], null=True)
+    ], blank=True, null=True)
+
+    has_strict_rules = models.BooleanField(default=False)
 
     rules = StreamField([
         ('rule', blocks.StructBlock([
             ('name', ChoiceRulesBlock()),
-            ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
-        ]))], default=[])
+            ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
+            ('override', blocks.BooleanBlock(default=False, required=False))
+        ]))], default=[], blank=True)
+
+    default_pages = StreamField([
+        ('page', blocks.PageChooserBlock())
+    ], blank=True, default=[])
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
@@ -169,7 +178,9 @@ class TaskList(Page):
                 FieldPanel('question'),
                 StreamFieldPanel('choices')
             ]),
-            StreamFieldPanel('rules')
+            FieldPanel('has_strict_rules'),
+            StreamFieldPanel('rules'),
+            StreamFieldPanel('default_pages'),
         ], heading="Guided path for this task", classname="collapsible")
     ]
 
@@ -206,28 +217,53 @@ class TaskList(Page):
 
             #Sort the choices so we have them in the same order as the admin defined rules
             selected_choices.sort()
-            selected_choices = ','.join(selected_choices)
 
             #default behavoir is to show all the step pages TODO - allow user to define default in admin
             pages = []
             ids = []
+            default_pages = []
+            all_selected_choices = ','.join(selected_choices)
 
             #loop through each admin defined rule to see if we have a defined rule for the selected choices
-            for rule in self.rules:
-                if rule.value['name'] == selected_choices:
-                    for i, page in enumerate(rule.value['pages']):
-                        ids.append(str(page.id))
-                        if i+1 < len(rule.value['pages']):
-                            #dyanmically set the next step URL for each step page
-                            rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
-                    pages = rule.value['pages']
+            if self.has_strict_rules:
+                #Find the one rule that matches the selected choices and only suggest those steps
+                for rule in self.rules:
+                    if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
+                        pages = rule.value['pages']
+                        break
+                    if rule.value['name'] == all_selected_choices:
+                        for i, page in enumerate(rule.value['pages']):
+                            ids.append(str(page.id))
+                            if i+1 < len(rule.value['pages']):
+                                #dyanmically set the next step URL for each step page
+                                rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
+                        pages = rule.value['pages']
+            else:
+                #Union all the pages that match with a rule
+                for rule in self.rules:
+                    if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
+                        pages = rule.value['pages']
+                        break
+                    if rule.value['name'] in selected_choices:
+                        for i, page in enumerate(rule.value['pages']):
+                            ids.append(str(page.id))
+                            pages.append(page)
+
+            if len(pages) == 1:
+                #If we only have one page to recommend, redirect to that page
+                return redirect(pages[0].url)
+
+            for page in self.default_pages:
+                default_pages.append(Page.objects.get(id=page.value.id))
 
             if not ids:
                 ids = list(map(str, self.steps().values_list('id', flat=True)))
+
             return render(request, 'roadmap/task_list/choices_form_result_page.html', {
                 'steps': pages,
                 'page': self,
-                'stepIds' : ','.join(ids)
+                'stepIds' : ','.join(ids),
+                'default_pages': default_pages
             })
 
         return render(request, template, {

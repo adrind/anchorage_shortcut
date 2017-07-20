@@ -1,7 +1,11 @@
 {% load wagtailcore_tags %}
 
 <div class="row">
-    <h3 class="h3-heading mb-4">Follow these simple steps! </h3>
+    {% if steps %}
+        <h3 class="h3-heading mb-4">Follow these simple steps! </h3>
+    {% else %}
+        <h3 class="h3-heading mb-4">We couldn't find the perfect series of steps for your situation but explore all the options below! </h3>
+    {% endif %}
 </div>
 <div class="row">
     <table class="table">
@@ -9,10 +13,12 @@
             {% for step in steps %}
                 {% include "roadmap/step/partials/_step_link.html" %}
             {% empty %}
-                <!-- Default -- show all the steps for track
-                     TODO: change this to let an admin customize the default -->
-                {% for step in page.steps %}
-                    {% include "roadmap/step/partials/_step_link.html" %}
+                {% for page in default_pages %}
+                    {% include "roadmap/step/partials/_step_link.html" with step=page %}
+                {% empty %}
+                    {% for step in page.steps %}
+                        {% include "roadmap/step/partials/_step_link.html" %}
+                    {% endfor %}
                 {% endfor %}
             {% endfor %}
         </tbody>
