@@ -287,10 +287,19 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     width: 100%;
 }
 
-.step-btn a {
+.step-btn h5 {
     color: white;
     font-weight: bold;
     font-size: 1.8rem;
+}
+
+.step-btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.step-btn a:hover {
+    background-color: #636c72;
 }
 
 .walk-through-form {

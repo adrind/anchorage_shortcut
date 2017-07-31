@@ -16,16 +16,18 @@
     <div class="row">
         <h3 class="h3-heading mb-4">See anything you like?</h3>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ page.url }}walk-through" class="back-link">I need more help with {{ page.title }}</a>
+        </div>
+    </div>
     <div class="card-deck">
         {% for step in page.steps.all %}
             {% include "roadmap/step/partials/_step_btn.html" with step=step %}
         {% endfor %}
     </div>
     <div class="row mt-4">
-        <div class="col-md-4">
-            <a href="{{ page.url }}walk-through" class="back-link">I need more help with {{ page.title }}</a>
-        </div>
-        <div class="col-md-2 offset-md-6">
+        <div class="col-md-2 offset-md-10">
             <a href="{{ page.get_parent.url }}" class="btn btn-base">
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                 Back
