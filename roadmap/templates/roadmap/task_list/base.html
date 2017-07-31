@@ -24,6 +24,12 @@
 {% block right-content %}
     {# If there's no guided tour we just render the related resources as main content #}
     {# No need to also have the right content #}
+    <div class="print-page">
+        <a href="javascript:window.print()">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            Print Page
+        </a>
+    </div>
     {% if page.has_guided_tour %}
         {{ block.super }}
     {% endif %}
