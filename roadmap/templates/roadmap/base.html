@@ -13,7 +13,7 @@
         </nav>
     </div>
 
-    <div class="row task-list">
+    <div class="row content" data-name="{{ page.title }}">
         <!-- Left content -->
         <div class="col-sm-12 col-md-7 mb-4">
             {% block left-content %}{% endblock %}
@@ -52,7 +52,7 @@
                         <h3 class="faq-title mt-4 mb-4 pb-2"><strong>Common Questions</strong></h3>
                         <div id="accordion-faq" role="tablist" aria-multiselectable="true">
                             {% for faq in page.faqs.all %}
-                                <h5 class="mb-3 related-resource">
+                                <h5 class="mb-3 faq">
                                     <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
                                       <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ faq.question }}
                                     </a>
@@ -70,4 +70,26 @@
             {% endblock %}
         </div>
     </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        if(window.location.hostname !== '127.0.0.1' &&
+           window.location.hostname !== 'localhost') {
+
+            $(function () {
+                $('.related-resource a').click(function (evt) {
+                    var taskListTitle = $('.content').data('name'),
+                        titleText = $(evt.target).text().trim();
+                    ga('send', 'event', 'relatedResource', 'click', taskListTitle, titleText);
+                });
+
+                $('.faq a').click(function (evt) {
+                    var taskListTitle = $('.content').data('name'),
+                        titleText = $(evt.target).text().trim();
+                    ga('send', 'event', 'faq', 'click', taskListTitle, titleText);
+                });
+            });
+        }
+    </script>
 {% endblock %}
