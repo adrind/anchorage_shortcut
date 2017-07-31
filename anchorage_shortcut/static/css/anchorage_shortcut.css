@@ -182,7 +182,8 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     max-width: 200px;
 }
 
-.related-resource a {
+.related-resource a,
+.faq a {
     font-size: 16px;
     color: #000;
     font-weight: normal;
