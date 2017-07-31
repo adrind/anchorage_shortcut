@@ -301,7 +301,7 @@ a.step-btn-link {
     color: white;
 }
 
-.step-btn-link .step-btn {
+.step-btn {
     box-shadow: 1px 1px 1px 1px #ccc;
     -webkit-box-shadow: 1px 1px 1px 1px #ccc;
     -moz-box-shadow: 1px 1px 1px 1px #ccc;
