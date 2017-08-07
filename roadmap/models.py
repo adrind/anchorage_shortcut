@@ -230,6 +230,11 @@ class TaskList(Page):
                 for rule in self.rules:
                     if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
                         pages = rule.value['pages']
+                        for i, page in enumerate(rule.value['pages']):
+                            ids.append(str(page.id))
+                            if i+1 < len(rule.value['pages']):
+                                #dyanmically set the next step URL for each step page
+                                rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
                         break
                     if rule.value['name'] == all_selected_choices:
                         for i, page in enumerate(rule.value['pages']):
