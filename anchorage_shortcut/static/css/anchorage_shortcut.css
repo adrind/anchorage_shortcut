@@ -135,6 +135,10 @@ a.footer-link {
     margin-top: -1.5rem;
 }
 
+.rich-text .responsive-object {
+    padding-bottom: 0 !important;
+}
+
 .h5-heading {
     font-weight: 600;
 }
@@ -229,6 +233,10 @@ a.footer-link {
 .roadmap-task {
     border-bottom: 1px solid #ccc;
     line-height: 2.4rem;
+}
+
+.task-list-title {
+    font-size: 2rem;
 }
 
 /* TASK LIST */

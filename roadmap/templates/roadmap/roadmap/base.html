@@ -8,18 +8,15 @@
     <div class="row description">
         {{ page.body|richtext }}
     </div>
-    <div class="row">
-        <h2 class="h2-heading mb-4"><strong>Checklist:</strong></h2>
-    </div>
 
     {% for section in page.sections %}
         <div class="row mt-4">
-            <h4 class="h4-heading"><strong>{{ section.value.title }}</strong></h4>
+            <h3 class="h3-heading"><strong>{{ section.value.title }}</strong></h3>
         </div>
         {% for list in section.value.pages %}
             <div class="row roadmap-task p-2">
                 <div class="col">
-                    {{ list.title }}
+                    <span class="task-list-title">{{ list.title }}</span>
                 </div>
                 <div class="col-3">
                     <a href="{{ list.url }}" class="btn roadmap-btn">Start</a>
