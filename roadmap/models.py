@@ -237,22 +237,26 @@ class TaskList(Page):
                                 rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
                         break
                     if rule.value['name'] == all_selected_choices:
+                        pages = rule.value['pages']
                         for i, page in enumerate(rule.value['pages']):
                             ids.append(str(page.id))
                             if i+1 < len(rule.value['pages']):
                                 #dyanmically set the next step URL for each step page
                                 rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
-                        pages = rule.value['pages']
             else:
                 #Union all the pages that match with a rule
                 for rule in self.rules:
                     if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
                         pages = rule.value['pages']
+                        for i, page in enumerate(rule.value['pages']):
+                            ids.append(str(page.id))
                         break
                     if rule.value['name'] in selected_choices:
                         for i, page in enumerate(rule.value['pages']):
-                            ids.append(str(page.id))
-                            pages.append(page)
+                            if page not in pages:
+                                pages.append(page)
+                for i, page in enumerate(pages):
+                    ids.append(str(page.id))
 
             if len(pages) == 1:
                 #If we only have one page to recommend, redirect to that page
