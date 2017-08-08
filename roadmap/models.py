@@ -255,8 +255,8 @@ class TaskList(Page):
                         break
                     if rule.value['name'] in selected_choices:
                         for i, page in enumerate(rule.value['pages']):
-                            if page.id not in pages:
-                                pages.append(page.id)
+                            if page not in pages:
+                                pages.append(page)
                 for i, page in enumerate(pages):
                     ids.append(str(page.id))
 
