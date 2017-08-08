@@ -214,37 +214,35 @@ class TaskList(Page):
         #Kind of hacky but intercept request if it has 'submit-choice' in the slug
         #Serve the rules for the selected choices
         if len(request.GET) and "submit-choice" in request.path.split('/'):
-            #Get selected checkbox values from form in request - need to strip out csrf token
+            #Get selected checkbox values from params in request
             selected_choices = list(request.GET.values())
 
             #Sort the choices so we have them in the same order as the admin defined rules
             selected_choices.sort()
 
-            #default behavoir is to show all the step pages TODO - allow user to define default in admin
-            pages = []
-            ids = []
-            default_pages = []
+            pages = [] #list of pages that will be presented to the user
+            ids = [] #list of page ids to use in the step page nav
+            default_pages = [] #default pages if there isn't a rule defined for the choices the user selected
             all_selected_choices = ','.join(selected_choices)
+
+            def strict_rules_results(rule_pages, ids):
+                for i, page in enumerate(rule_pages):
+                    ids.append(str(page.id))
+                    if i + 1 < len(rule_pages):
+                        # dyanmically set the next step URL for each step page
+                        # TODO: remove if we arent using this
+                        rule_pages[i].next_step = rule_pages[i + 1].url
+                return rule_pages
 
             #loop through each admin defined rule to see if we have a defined rule for the selected choices
             if self.has_strict_rules:
                 #Find the one rule that matches the selected choices and only suggest those steps
                 for rule in self.rules:
                     if rule.value['override'] and re.search(rule.value['name'], all_selected_choices):
-                        pages = rule.value['pages']
-                        for i, page in enumerate(rule.value['pages']):
-                            ids.append(str(page.id))
-                            if i+1 < len(rule.value['pages']):
-                                #dyanmically set the next step URL for each step page
-                                rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
+                        pages = strict_rules_results(rule.value['pages'], ids)
                         break
                     if rule.value['name'] == all_selected_choices:
-                        pages = rule.value['pages']
-                        for i, page in enumerate(rule.value['pages']):
-                            ids.append(str(page.id))
-                            if i+1 < len(rule.value['pages']):
-                                #dyanmically set the next step URL for each step page
-                                rule.value['pages'][i].next_step = rule.value['pages'][i+1].url
+                        pages = strict_rules_results(rule.value['pages'], ids)
             else:
                 #Union all the pages that match with a rule
                 for rule in self.rules:
@@ -265,6 +263,8 @@ class TaskList(Page):
                 return redirect(pages[0].url)
 
             for page in self.default_pages:
+                #if the user defines default pages in the admin then create a list of pages
+                #otherwise the default default_pages list is all the steps in the track
                 default_pages.append(Page.objects.get(id=page.value.id))
 
             if not ids:
