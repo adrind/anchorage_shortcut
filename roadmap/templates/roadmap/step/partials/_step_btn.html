@@ -1,6 +1,6 @@
 {% load wagtailcore_tags %}
 <div class="card step-btn mr-3">
-    <a href="{{ step.url }}" class="step-btn-link">
+    <a href="{{ step.url }}?ids={{ stepIds }}" class="step-btn-link">
       <div class="card-block">
           <h5 class="text-center h5-heading">{{ step.title }}</h5>
           <p>{{ step.short_description | richtext}}</p>
