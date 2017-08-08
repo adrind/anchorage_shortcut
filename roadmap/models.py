@@ -211,9 +211,11 @@ class TaskList(Page):
     def serve(self, request, template=''):
         if template == '':
             template = self.template
-        if request.method == 'POST':
+        #Kind of hacky but intercept request if it has 'submit-choice' in the slug
+        #Serve the rules for the selected choices
+        if len(request.GET) and "submit-choice" in request.path.split('/'):
             #Get selected checkbox values from form in request - need to strip out csrf token
-            selected_choices = list(filter(None, (map(lambda x: x.split('=')[1].replace('+', ' ') if x.split('=')[0] != 'csrfmiddlewaretoken' else '', request.POST.urlencode().split('&')))))
+            selected_choices = list(request.GET.values())
 
             #Sort the choices so we have them in the same order as the admin defined rules
             selected_choices.sort()
@@ -253,8 +255,8 @@ class TaskList(Page):
                         break
                     if rule.value['name'] in selected_choices:
                         for i, page in enumerate(rule.value['pages']):
-                            if page not in pages:
-                                pages.append(page)
+                            if page.id not in pages:
+                                pages.append(page.id)
                 for i, page in enumerate(pages):
                     ids.append(str(page.id))
 
@@ -274,7 +276,7 @@ class TaskList(Page):
                 'stepIds' : ','.join(ids),
                 'default_pages': default_pages
             })
-
+        #Otherwise just render the track page with the appropriate template
         return render(request, template, {
             'page': self
         })

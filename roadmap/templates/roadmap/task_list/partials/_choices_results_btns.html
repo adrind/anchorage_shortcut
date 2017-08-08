@@ -10,7 +10,7 @@
 </div>
 <div class="row card-deck">
     {% for step in steps %}
-        {% include "roadmap/step/partials/_step_btn.html" with step=step.steppage %}
+        {% include "roadmap/step/partials/_step_btn.html" with step=step.specific %}
     {% empty %}
         {% for page in default_pages %}
             {% include "roadmap/step/partials/_step_btn.html" with step=page %}

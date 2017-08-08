@@ -5,8 +5,7 @@
 
 <h3 class="h3-heading mb-4">{{ page.question }}</h3>
 
-<form method="POST" class="walk-through-form">
-    {% csrf_token %}
+<form method="GET" action="submit-choice" class="walk-through-form">
     {% for choice in page.choices %}
         {% include 'roadmap/task_list/partials/_choice_checkbox.html' with index=forloop.counter %}
     {% endfor %}
