@@ -444,3 +444,10 @@ a.step-btn-link {
   color: #399fd3;
     text-decoration: none;
 }
+
+@media (max-width: 370px) {
+    /* Needed a small title for small mobile phones (iphone 5 etc) */
+    .header-title {
+        font-size: 28px;
+    }
+}
