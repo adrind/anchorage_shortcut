@@ -55,6 +55,7 @@ class RelatedResource(models.Model):
 @register_snippet
 class Contact(models.Model):
     name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255, blank=True)
     email = models.EmailField(max_length=255, blank=True)
     phone_number = models.CharField(max_length=16, blank=True) # validators should be a list
     image = models.ForeignKey(
@@ -67,6 +68,7 @@ class Contact(models.Model):
 
     panels = [
         FieldPanel('name'),
+        FieldPanel('location'),
         FieldPanel('email'),
         FieldPanel('phone_number'),
         ImageChooserPanel('image'),

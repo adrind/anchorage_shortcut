@@ -352,6 +352,12 @@ a.step-btn-link {
     color: #399fd3;
 }
 
+.contact-section {
+    border: 2px solid #4FB2F0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 /* WALK THROUGH */
 
 .choice-result {
