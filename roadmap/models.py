@@ -15,10 +15,13 @@ from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
 from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailcore import hooks
+from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 
 from wagtailgeowidget.edit_handlers import GeoPanel
 from django.utils.functional import cached_property
@@ -46,6 +49,32 @@ class RelatedResource(models.Model):
 
     class Meta:
         abstract = True
+
+# A contact that someone should reach out to
+# Used in the step templates
+@register_snippet
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, blank=True)
+    phone_number = models.CharField(max_length=16, blank=True) # validators should be a list
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('email'),
+        FieldPanel('phone_number'),
+        ImageChooserPanel('image'),
+    ]
+
+    def __str__(self):
+        return self.name
+
 
 # A frequently asked question
 # Used in the roadmap, track, and step templates
@@ -295,11 +324,20 @@ class StepPage(Page):
     address = models.CharField(max_length=250, blank=True, null=True)
     location = models.CharField(max_length=250, blank=True, null=True)
 
+    contact = models.ForeignKey(
+        'roadmap.Contact',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     content_panels = Page.content_panels + [
         FieldPanel('short_description', classname='full'),
         FieldPanel('body', classname='full'),
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently asked questions'),
+        SnippetChooserPanel('contact'),
         MultiFieldPanel([
             FieldPanel('address'),
             GeoPanel('location', address_field='address'),

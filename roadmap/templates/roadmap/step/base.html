@@ -79,4 +79,23 @@
         </a>
     </div>
     {{ block.super }}
+    {% if page.contact %}
+        <section>
+            <div class="row mt-4">
+                <div class="col mb-2">
+                    <strong>Have questions?</strong> Talk to someone now:
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col col-md-4">
+                    {% image page.contact.image width-100 class="img-thumbnail" %}
+                </div>
+                <div class="col">
+                    {{ page.contact.name }}
+                    <a href="mailto:{{ page.contact.email }}">{{ page.contact.email }}</a>
+                    {{ page.contact.phone_number }}
+                </div>
+            </div>
+        </section>
+    {% endif %}
 {% endblock %}
