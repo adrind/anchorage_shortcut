@@ -343,6 +343,16 @@ a.step-btn-link {
     box-shadow: 1px 1px 1px 1px #ccc;
     -webkit-box-shadow: 1px 1px 1px 1px #ccc;
     -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    text-align: center;
+}
+
+.step-btn .rich-text {
+    display: none;
+}
+
+.step-btn .icon {
+    font-size: 3.6rem;
+    display: inline-block;
 }
 
 .walk-through-form {

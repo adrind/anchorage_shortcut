@@ -339,6 +339,8 @@ class StepPage(Page):
     body = RichTextField(blank=True)
     next_step = models.URLField(blank=True)
 
+    icon = models.CharField(choices=ICON_CHOICES, blank=True, max_length=255, default='')
+
     address = models.CharField(max_length=250, blank=True, null=True)
     location = models.CharField(max_length=250, blank=True, null=True)
 
@@ -353,6 +355,7 @@ class StepPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('short_description', classname='full'),
         FieldPanel('body', classname='full'),
+        FieldPanel('icon'),
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently asked questions'),
         SnippetChooserPanel('contact'),

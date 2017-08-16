@@ -2,9 +2,24 @@
 <div class="card step-btn mr-3">
     <a href="{{ step.url }}?ids={{ stepIds }}" class="step-btn-link">
       <div class="card-block">
-          <h5 class="text-center h5-heading">{{ step.title }}</h5>
-          <p>{{ step.short_description | richtext}}</p>
+          <h5 class="text-center h5-heading mb-4">{{ step.title }}</h5>
+          {% if step.icon %}
+              <span class="{{ step.icon }} icon"></span>
+          {% endif %}
+          {{ step.short_description | richtext}}
       </div>
     </a>
 </div>
+
+<script>
+    $(function () {
+        $('.step-btn').hover(function (evt) {
+            $(evt.target).find('.rich-text').show();
+            $(evt.target).find('.icon').hide()
+        }, function (evt) {
+            $(evt.target).find('.rich-text').hide();
+            $(evt.target).find('.icon').show()
+        })
+    })
+</script>
 
