@@ -9,6 +9,7 @@
   font-style: normal;
 }
 
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
@@ -18,89 +19,156 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  font-size: 2.8rem;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-application-2:before {
+.icon-alaska:before {
   content: "\e900";
 }
-.icon-application:before {
+.icon-alcohol-free:before {
   content: "\e901";
 }
-.icon-education:before {
+.icon-application-2:before {
   content: "\e902";
 }
-.icon-email-2:before {
+.icon-application:before {
   content: "\e903";
 }
-.icon-email:before {
+.icon-bed:before {
   content: "\e904";
 }
-.icon-homeless:before {
-  content: "\e906";
-}
-.icon-house:before {
-  content: "\e907";
-}
-.icon-job-center:before {
-  content: "\e908";
-}
-.icon-mountains:before {
-  content: "\e909";
-}
-.icon-phone:before {
-  content: "\e90a";
-}
-.icon-resume:before {
-  content: "\e90b";
-}
-.icon-pencil:before {
+.icon-bike:before {
   content: "\e905";
 }
-.icon-happy:before {
-  content: "\e9df";
+.icon-books:before {
+  content: "\e907";
 }
-.icon-plus:before {
-  content: "\ea0a";
+.icon-bus:before {
+  content: "\e908";
 }
-.icon-minus:before {
-  content: "\ea0b";
+.icon-car-help:before {
+  content: "\e909";
 }
-.icon-blocked:before {
-  content: "\ea0e";
+.icon-car:before {
+  content: "\e90a";
 }
-.icon-cross:before {
-  content: "\ea0f";
+.icon-caution:before {
+  content: "\e90b";
 }
-.icon-checkmark:before {
-  content: "\ea10";
+.icon-children:before {
+  content: "\e90c";
 }
-.icon-checkmark2:before {
-  content: "\ea11";
+.icon-clothes:before {
+  content: "\e90d";
 }
-.icon-arrow-up2:before {
-  content: "\ea3a";
+.icon-computer:before {
+  content: "\e90e";
 }
-.icon-arrow-up-right2:before {
-  content: "\ea3b";
+.icon-dental-help:before {
+  content: "\e90f";
 }
-.icon-arrow-right2:before {
-  content: "\ea3c";
+.icon-drivers-license:before {
+  content: "\e910";
 }
-.icon-arrow-down-right2:before {
-  content: "\ea3d";
+.icon-drug-free:before {
+  content: "\e911";
 }
-.icon-arrow-down2:before {
-  content: "\ea3e";
+.icon-education:before {
+  content: "\e912";
 }
-.icon-arrow-down-left2:before {
-  content: "\ea3f";
+.icon-elderly-person:before {
+  content: "\e913";
 }
-.icon-arrow-left2:before {
-  content: "\ea40";
+.icon-email-2:before {
+  content: "\e914";
 }
-
+.icon-email:before {
+  content: "\e915";
+}
+.icon-family-help:before {
+  content: "\e916";
+}
+.icon-food-help:before {
+  content: "\e917";
+}
+.icon-government-building:before {
+  content: "\e918";
+}
+.icon-grocery-cart:before {
+  content: "\e919";
+}
+.icon-home-money:before {
+  content: "\e91b";
+}
+.icon-homeless:before {
+  content: "\e91d";
+}
+.icon-hospital:before {
+  content: "\e91e";
+}
+.icon-house-help:before {
+  content: "\e91f";
+}
+.icon-house:before {
+  content: "\e920";
+}
+.icon-id-card:before {
+  content: "\e921";
+}
+.icon-job-center:before {
+  content: "\e922";
+}
+.icon-library:before {
+  content: "\e923";
+}
+.icon-map:before {
+  content: "\e924";
+}
+.icon-money-help:before {
+  content: "\e925";
+}
+.icon-mountains:before {
+  content: "\e926";
+}
+.icon-parent-with-kids:before {
+  content: "\e927";
+}
+.icon-passport:before {
+  content: "\e928";
+}
+.icon-pencil:before {
+  content: "\e929";
+}
+.icon-people:before {
+  content: "\e92a";
+}
+.icon-phone:before {
+  content: "\e92b";
+}
+.icon-public-assistance:before {
+  content: "\e92c";
+}
+.icon-question:before {
+  content: "\e92d";
+}
+.icon-resume:before {
+  content: "\e92e";
+}
+.icon-shared-housing:before {
+  content: "\e92f";
+}
+.icon-test:before {
+  content: "\e930";
+}
+.icon-wheelchair:before {
+  content: "\e931";
+}
+.icon-wifi:before {
+  content: "\e932";
+}
+.icon-women:before {
+  content: "\e933";
+}

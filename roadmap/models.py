@@ -31,18 +31,24 @@ from django.utils.html import format_html_join
 from django.conf import settings
 
 ICON_CHOICES = (
-        ('icon-application', 'Application'),
-        ('icon-education', 'Education'),
-        ('icon-email', 'Email 1'),
-        ('icon-email-2', 'Email 2'),
-        ('icon-homeless', 'Homeless'),
-        ('icon-house', 'House'),
-        ('icon-job-center', 'Job Center'),
-        ('icon-phone', 'Phone'),
-        ('icon-resume', 'Resume'),
-        ('icon-pencil', 'Pencil'),
-        ('icon-happy', 'Happy face'),
-)
+    ('icon-alaska', 'alaska'), ('icon-alcohol-free', 'alcohol-free'), ('icon-application-2', 'application-2'),
+    ('icon-application', 'application'), ('icon-bed', 'bed'), ('icon-bike', 'bike'),
+    ('icon-birth-certificate', 'birth-certificate'), ('icon-books', 'books'), ('icon-bus', 'bus'),
+    ('icon-car-help', 'car-help'), ('icon-car', 'car'), ('icon-caution', 'caution'), ('icon-children', 'children'),
+    ('icon-clothes', 'clothes'), ('icon-computer', 'computer'), ('icon-dental-help', 'dental-help'),
+    ('icon-drivers-license', 'drivers-license'), ('icon-drug-free', 'drug-free'), ('icon-education', 'education'),
+    ('icon-elderly-person', 'elderly-person'), ('icon-email-2', 'email-2'), ('icon-email', 'email'),
+    ('icon-family-help', 'family-help'), ('icon-food-help', 'food-help'),
+    ('icon-government-building', 'government-building'), ('icon-grocery-cart', 'grocery-cart'),
+    ('icon-home-energy', 'home-energy'), ('icon-home-money', 'home-money'), ('icon-home-water', 'home-water'),
+    ('icon-homeless', 'homeless'), ('icon-hospital', 'hospital'), ('icon-house-help', 'house-help'),
+    ('icon-house', 'house'), ('icon-id-card', 'id-card'), ('icon-job-center', 'job-center'),
+    ('icon-library', 'library'), ('icon-map', 'map'), ('icon-money-help', 'money-help'),
+    ('icon-mountains', 'mountains'), ('icon-parent-with-kids', 'parent-with-kids'), ('icon-passport', 'passport'),
+    ('icon-pencil', 'pencil'), ('icon-people', 'people'), ('icon-phone', 'phone'),
+    ('icon-public-assistance', 'public-assistance'), ('icon-question', 'question'), ('icon-resume', 'resume'),
+    ('icon-shared-housing', 'shared-housing'), ('icon-test', 'test'), ('icon-wheelchair', 'wheelchair'),
+    ('icon-wifi', 'wifi'), ('icon-women', 'women'))
 
 
 #A related website that provides additional assistance
