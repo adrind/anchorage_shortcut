@@ -16,7 +16,7 @@
         {% for list in section.value.pages %}
             <div class="row roadmap-task p-2">
                 <div class="col">
-                    <span class="task-list-title">{{ list.title }}</span>
+                    <a class="task-list-title" href="{{ list.url }}">{{ list.title }}</a>
                 </div>
                 <div class="col-3">
                     <a href="{{ list.url }}" class="btn roadmap-btn">Start</a>

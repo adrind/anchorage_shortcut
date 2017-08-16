@@ -27,7 +27,7 @@ from wagtailgeowidget.edit_handlers import GeoPanel
 from django.utils.functional import cached_property
 from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 
-from django.utils.html import format_html, format_html_join
+from django.utils.html import format_html_join
 from django.conf import settings
 
 

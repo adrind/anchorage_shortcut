@@ -235,8 +235,10 @@ a.footer-link {
     line-height: 2.4rem;
 }
 
-.task-list-title {
+.task-list-title,
+.task-list-title:hover {
     font-size: 2rem;
+    color: #292b2c;
 }
 
 /* TASK LIST */
