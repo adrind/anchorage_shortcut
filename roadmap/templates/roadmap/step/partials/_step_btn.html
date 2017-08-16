@@ -1,5 +1,5 @@
 {% load wagtailcore_tags %}
-<div class="card step-btn mr-3">
+<div class="card step-btn mr-3{% if step.icon %} with-icon{% endif %}">
     <a href="{{ step.url }}?ids={{ stepIds }}" class="step-btn-link">
       <div class="card-block">
           <h5 class="text-center h5-heading mb-4">{{ step.title }}</h5>
@@ -13,12 +13,14 @@
 
 <script>
     $(function () {
-        $('.step-btn').hover(function (evt) {
-            $(evt.target).find('.rich-text').show();
-            $(evt.target).find('.icon').hide()
+        $('.step-btn.with-icon').hover(function (evt) {
+            $el = $(evt.target);
+            $el.find('.rich-text').show();
+            $el.find('.icon').hide()
         }, function (evt) {
-            $(evt.target).find('.rich-text').hide();
-            $(evt.target).find('.icon').show()
+            $el = $(evt.target);
+            $el.find('.rich-text').hide();
+            $el.find('.icon').show()
         })
     })
 </script>

@@ -6,6 +6,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .card-block {
     border: none;
+    min-height: 11.0rem;
 }
 
 .container-fluid.roadmap {
@@ -255,7 +256,6 @@ a.footer-link {
 .task-list-title:hover {
     font-size: 2rem;
     color: #292b2c;
-    text-decoration: none;
     cursor: pointer;
 }
 
@@ -346,7 +346,7 @@ a.step-btn-link {
     text-align: center;
 }
 
-.step-btn .rich-text {
+.step-btn.with-icon .rich-text {
     display: none;
 }
 
