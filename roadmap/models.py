@@ -193,8 +193,6 @@ class TaskList(Page):
     short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
 
-    icon = models.CharField(choices=ICON_CHOICES, blank=True, max_length=255, default='')
-
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
 
@@ -221,7 +219,6 @@ class TaskList(Page):
         FieldPanel('self_service_oriented_layout'),
         FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
-        FieldPanel('icon'),
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently Asked Questions'),
         MultiFieldPanel([
