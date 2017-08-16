@@ -30,6 +30,11 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-left: 10px;
 }
 
+/* Vertically aligns the div in the row */
+#google_translate_element {
+    padding: 5% 0;
+}
+
 /* Required to prevent images added in the admin panel from breaking out of the col */
 .step-body .rich-text {
     width: 100%;
