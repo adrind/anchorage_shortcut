@@ -1,6 +1,6 @@
 # anchorage-shortcut #
 
-A flexible Wagtail app to make it easy to build roadmaps to employment.
+A flexible [Wagtail](wagtail.io) app to make it easy to build roadmaps to employment.
 
 ## Features ##
 
