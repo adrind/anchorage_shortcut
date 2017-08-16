@@ -30,6 +30,19 @@ from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 from django.utils.html import format_html_join
 from django.conf import settings
 
+ICON_CHOICES = (
+        ('icon-application', 'Application'),
+        ('icon-education', 'Education'),
+        ('icon-email', 'Email 1'),
+        ('icon-email-2', 'Email 2'),
+        ('icon-homeless', 'Homeless'),
+        ('icon-house', 'House'),
+        ('icon-job-center', 'Job Center'),
+        ('icon-phone', 'Phone'),
+        ('icon-resume', 'Resume'),
+        ('icon-pencil', 'Pencil'),
+        ('icon-happy', 'Happy face'),
+)
 
 
 #A related website that provides additional assistance
@@ -173,13 +186,8 @@ class TaskList(Page):
     self_service_oriented_layout = models.BooleanField(default=True)
     short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
-    icon = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
+
+    icon = models.CharField(choices=ICON_CHOICES, blank=True, max_length=255, default='')
 
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
@@ -207,9 +215,9 @@ class TaskList(Page):
         FieldPanel('self_service_oriented_layout'),
         FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
-        ImageChooserPanel('icon'),
-        InlinePanel('related_resources', label="Extra resources"),
-        InlinePanel('faqs', label="Frequently Asked Questions"),
+        FieldPanel('icon'),
+        InlinePanel('related_resources', label='Extra resources'),
+        InlinePanel('faqs', label='Frequently Asked Questions'),
         MultiFieldPanel([
             FieldPanel('walk_through_description', classname='full'),
             FieldPanel('self_service_description', classname='full'),
