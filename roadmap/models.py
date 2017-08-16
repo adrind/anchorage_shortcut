@@ -221,6 +221,7 @@ class TaskList(Page):
         FieldPanel('self_service_oriented_layout'),
         FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
+        FieldPanel('icon'),
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently Asked Questions'),
         MultiFieldPanel([
