@@ -49,11 +49,14 @@
 .icon-job-center:before {
   content: "\e908";
 }
-.icon-phone:before {
+.icon-mountains:before {
   content: "\e909";
 }
-.icon-resume:before {
+.icon-phone:before {
   content: "\e90a";
+}
+.icon-resume:before {
+  content: "\e90b";
 }
 .icon-pencil:before {
   content: "\e905";
@@ -100,3 +103,4 @@
 .icon-arrow-left2:before {
   content: "\ea40";
 }
+

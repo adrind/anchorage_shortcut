@@ -106,6 +106,17 @@ a.footer-link {
     text-decoration: underline;
 }
 
+.header-title .icon-mountains {
+    font-size: 5.8rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.header-title .header-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /*** end of base.html styles ***/
 
 /* HEADING STYLES */
@@ -460,7 +471,7 @@ a.step-btn-link {
     text-decoration: none;
 }
 
-@media (max-width: 370px) {
+@media (max-width: 440px) {
     /* Needed a small title for small mobile phones (iphone 5 etc) */
     .header-title {
         font-size: 28px;
