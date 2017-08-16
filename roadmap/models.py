@@ -173,6 +173,13 @@ class TaskList(Page):
     self_service_oriented_layout = models.BooleanField(default=True)
     short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
+    icon = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     walk_through_description = RichTextField(blank=True)
     self_service_description = RichTextField(blank=True)
@@ -200,6 +207,7 @@ class TaskList(Page):
         FieldPanel('self_service_oriented_layout'),
         FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
+        ImageChooserPanel('icon'),
         InlinePanel('related_resources', label="Extra resources"),
         InlinePanel('faqs', label="Frequently Asked Questions"),
         MultiFieldPanel([
