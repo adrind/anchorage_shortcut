@@ -24,6 +24,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .container-fluid .breadcrumb-item {
     color: #636c72;
+    text-decoration: underline;
 }
 
 .container-fluid .content,
@@ -261,6 +262,7 @@ a.footer-link {
     font-size: 2rem;
     color: #292b2c;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 /* TASK LIST */
