@@ -371,6 +371,10 @@ a.step-btn-link {
     display: inline-block;
 }
 
+.choice-checkbox-label {
+    width: 80%;
+}
+
 
 /*** STEP PAGE STYLES ***/
 
