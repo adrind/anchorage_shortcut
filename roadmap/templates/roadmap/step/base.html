@@ -65,6 +65,9 @@
             marker.addListener('click', function() {
               infowindow.open(map, marker);
             });
+
+            //Required to make sure all links in a rich text field open in a new tab
+            $('.rich-text a').attr('target', '_blank');
           }
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I&callback=initMap"></script>
