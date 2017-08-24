@@ -213,7 +213,7 @@ a.footer-link {
 /*** RIGHT CONTENT ***/
 .faq-title,
 .related-resources-title {
-    border-bottom: 2px solid #4FB2F0;
+    border-bottom: 2px solid #399fd3;
     max-width: 200px;
 }
 
@@ -393,7 +393,7 @@ a.step-btn-link {
 }
 
 .contact-section {
-    border: 2px solid #4FB2F0;
+    border: 2px solid #399fd3;
     padding: 10px;
     border-radius: 5px;
 }
@@ -454,7 +454,7 @@ a.step-btn-link {
 }
 
 .twitter-typeahead .tt-input:focus {
-  border: 2px solid #0097cf;
+  border: 2px solid #399fd3;
 }
 
 .twitter-typeahead .tt-hint {
