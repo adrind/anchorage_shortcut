@@ -1,27 +1,8 @@
 {% load wagtailcore_tags %}
-<div class="card step-btn mr-3{% if step.icon %} with-icon{% endif %}">
+<div class="card step-btn mr-3">
     <a href="{{ step.url }}?ids={{ stepIds }}" class="step-btn-link">
       <div class="card-block">
-          <h5 class="text-center h5-heading mb-4">{{ step.title }}</h5>
-          {% if step.icon %}
-              <span class="{{ step.icon }} icon"></span>
-          {% endif %}
-          {{ step.short_description | richtext}}
+          <h5 class="text-center h5-heading mb-4 step-btn-heading">{{ step.title }}</h5>
       </div>
     </a>
 </div>
-
-<script>
-    $(function () {
-        $('.step-btn.with-icon').hover(function (evt) {
-            $el = $(evt.target);
-            $el.find('.rich-text').show();
-            $el.find('.icon').hide()
-        }, function (evt) {
-            $el = $(evt.target);
-            $el.find('.rich-text').hide();
-            $el.find('.icon').show()
-        })
-    })
-</script>
-

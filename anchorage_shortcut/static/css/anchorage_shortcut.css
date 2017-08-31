@@ -332,6 +332,7 @@ a.footer-link {
 .step-btn .card-block {
     border: none;
     width: 100%;
+    min-height: 5.0rem;
 }
 
 .step-btn h5 {
@@ -352,13 +353,8 @@ a.step-btn-link {
     text-align: center;
 }
 
-.step-btn.with-icon .rich-text {
-    display: none;
-}
-
-.step-btn .icon {
-    font-size: 3.6rem;
-    display: inline-block;
+.step-btn-heading {
+    line-height: 5.0rem;
 }
 
 .walk-through-form {
