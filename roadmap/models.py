@@ -423,9 +423,7 @@ class RoadmapRelatedResources(Orderable, RelatedResource):
 class Roadmap(Page):
     header = models.CharField(max_length=255)
     mission_statement = RichTextField(blank=True)
-    video = StreamField([
-        ('video', EmbedBlock())
-    ], blank=True)
+    video = models.URLField(max_length=255, blank=True)
 
     sections = StreamField([
         ('section', blocks.StructBlock([
@@ -444,7 +442,7 @@ class Roadmap(Page):
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         FieldPanel('mission_statement', classname='full'),
-        StreamFieldPanel('video'),
+        FieldPanel('video'),
         StreamFieldPanel('sections'),
         StreamFieldPanel('testimonials'),
     ]
