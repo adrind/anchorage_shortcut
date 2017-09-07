@@ -6,18 +6,22 @@
 {% load wagtailcore_tags %}
 
 {% block left-content %}
-    {% if page.has_guided_tour %}
-        {% if page.self_service_oriented_layout %}
-            {% include "roadmap/task_list/views/self_service_oriented.html" %}
-            {# If a guided section is defined and the 'self service oriented layout' boolean is True #}
-        {% else %}
-            {% include "roadmap/task_list/views/guided_tour_oriented.html" %}
-        {% endif %}
-    {% else %}
-        {# If no guided section is provided in the admin view #}
-        {% include "roadmap/task_list/views/related_sources.html" %}
-    {% endif %}
-    {{ page.is_live }}
+    <div class="row">
+        <h4 class="h4-heading"><strong>{{ page.header }}</strong></h4>
+    </div>
+    <div class="row mb-4">
+        {{ page.self_service_description|richtext }}
+    </div>
+    <div class="row">
+        <div class="col">
+            {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
+        </div>
+        <div class="col card-deck">
+            {% for step in steps %}
+                {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
 
 

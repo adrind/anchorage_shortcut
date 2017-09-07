@@ -3,22 +3,16 @@
 {# The form of choices defined for the task page #}
 {# These choices can help guide users to the right step page #}
 
-<h3 class="h3-heading mb-4">{{ page.question }}</h3>
+<h4 class="h4-heading mb-4"><strong>{{ page.question }}</strong></h4>
 
-<form method="GET" action="submit-choice" class="walk-through-form">
+<form method="GET" class="walk-through-form" data-choices="{{ selected_choices }}">
     {% for choice in page.choices %}
         {% include 'roadmap/task_list/partials/_choice_checkbox.html' with index=forloop.counter %}
     {% endfor %}
     <div class="row mt-4">
         <div class="col">
-            <a href="{{ parent_url }}" class="btn btn-base">
-                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                Back
-            </a>
-        </div>
-        <div class="col">
             <button class="btn btn-base btn-base-blue" id="btn-submit">
-                Next
+                Submit
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
             </button>
         </div>
@@ -38,9 +32,16 @@
                 selectedInputs.siblings('label').each(function (i, label) {
                    selectedText += ($(label).text() + ',')
                 });
-
                 ga('send', 'event', 'walkthroughForm', 'submit', taskListTitle, selectedText);
             });
         });
     }
+
+    $(function(){
+        var selectedChoices = String($('.walk-through-form').data('choices'));
+        
+        $.each(selectedChoices.split(','), function (i, val) {
+            $('#option'+val).attr('checked', true);
+        });
+    })
 </script>

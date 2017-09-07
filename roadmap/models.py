@@ -252,11 +252,8 @@ class TaskList(Page):
     # Directs people to the walk through or self service routes
     # Walk through path uses the choices model to filter steps to take
     def route(self, request, path_components):
-        if 'walk-through' in path_components:
-            # tell Wagtail to call self.serve() with appropriate template
-            return RouteResult(self, kwargs={'template': 'roadmap/task_list/walk_through_page.html'})
-        if 'self-service' in path_components:
-            return RouteResult(self, kwargs={'template': 'roadmap/task_list/self_service_page.html'})
+        if len(request.GET):
+            return RouteResult(self, kwargs={'template': 'roadmap/task_list/base.html'})
         else:
             return super(TaskList, self).route(request, path_components)
 
@@ -265,7 +262,7 @@ class TaskList(Page):
             template = self.template
         #Kind of hacky but intercept request if it has 'submit-choice' in the slug
         #Serve the rules for the selected choices
-        if len(request.GET) and "submit-choice" in request.path.split('/'):
+        if len(request.GET):
             #Get selected checkbox values from params in request
             selected_choices = list(request.GET.values())
 
@@ -310,10 +307,6 @@ class TaskList(Page):
                 for i, page in enumerate(pages):
                     ids.append(str(page.id))
 
-            if len(pages) == 1:
-                #If we only have one page to recommend, redirect to that page
-                return redirect(pages[0].url)
-
             for page in self.default_pages:
                 #if the user defines default pages in the admin then create a list of pages
                 #otherwise the default default_pages list is all the steps in the track
@@ -322,15 +315,24 @@ class TaskList(Page):
             if not ids:
                 ids = list(map(str, self.steps().values_list('id', flat=True)))
 
-            return render(request, 'roadmap/task_list/choices_form_result_page.html', {
+            if not pages:
+                if not default_pages:
+                    default_pages = StepPage.objects.live().descendant_of(self)
+                pages = default_pages
+
+            request.path = '/'.join(request.path.split('/')[:3])
+
+            return render(request, template, {
                 'steps': pages,
                 'page': self,
+                'selected_choices': ','.join(map(str, selected_choices)),
                 'stepIds' : ','.join(ids),
                 'default_pages': default_pages
             })
         #Otherwise just render the track page with the appropriate template
         return render(request, template, {
-            'page': self
+            'page': self,
+            'steps': self.steps().all
         })
 
 class StepPageFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
