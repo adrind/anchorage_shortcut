@@ -1,15 +1,23 @@
 {% extends "roadmap/base.html" %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
+{% load wagtailembeds_tags %}
 
 {% block left-content %}
-    <div class="row">
+    <div class="row mb-2">
+        <div class="col text-center">
+            <h1 class="h1-heading">{{ page.header }}</h1> 
+        </div>
+    </div>
+    <div class="row mb-4">
         <div class="col description">
             {{ page.mission_statement|richtext }}
         </div>
-        <div class="col">
-
-        </div>
+        {% if page.video %}
+            <div class="col">
+                {{ page.video }}
+            </div>
+        {% endif %}
     </div>
 
     {% if page.testimonials %}

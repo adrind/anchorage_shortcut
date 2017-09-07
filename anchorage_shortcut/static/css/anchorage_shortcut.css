@@ -58,6 +58,11 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     border: none;
 }
 
+/* Resets embedded video padding */
+.container-fluid .responsive-object {
+    padding-bottom: 0 !important;
+}
+
 /*** BASE.HTML ***/
 #header {
     background-color: #399fd3;

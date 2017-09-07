@@ -23,6 +23,7 @@ from wagtail.wagtailcore import hooks
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailembeds.blocks import EmbedBlock
 
 from wagtailgeowidget.edit_handlers import GeoPanel
 from django.utils.functional import cached_property
@@ -422,12 +423,16 @@ class RoadmapRelatedResources(Orderable, RelatedResource):
 class Roadmap(Page):
     header = models.CharField(max_length=255)
     mission_statement = RichTextField(blank=True)
+    video = StreamField([
+        ('video', EmbedBlock())
+    ], blank=True)
+
     sections = StreamField([
         ('section', blocks.StructBlock([
             ('title', blocks.CharBlock()),
             ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
             ('image', ImageChooserBlock(required=False))
-        ])),
+        ]))
     ])
     testimonials = StreamField([
         ('testimonial', blocks.StructBlock([
@@ -439,6 +444,7 @@ class Roadmap(Page):
     content_panels = Page.content_panels + [
         FieldPanel('header'),
         FieldPanel('mission_statement', classname='full'),
+        StreamFieldPanel('video'),
         StreamFieldPanel('sections'),
         StreamFieldPanel('testimonials'),
     ]
@@ -448,7 +454,6 @@ class Roadmap(Page):
     #Used to index
     def roadmap(self):
         return self.slug
-
 
 
 @hooks.register('insert_editor_js')
