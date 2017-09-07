@@ -3,6 +3,7 @@
 
 {% block content %}
     <div class="row nav mb-3">
+        {% if page.depth != 3 %}
         <div class="col">
             <nav class="breadcrumb">
                 {% for ancestor in page.get_ancestors %}
@@ -13,8 +14,9 @@
                 <span class="breadcrumb-item active">{{ page.title }}</span>
             </nav>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-4 offset-md-1">
-            <div id="google_translate_element"></div>
+        {% endif %}
+        <div class="col-xs-12 col-sm-4 col-md-4 offset-md-8 offset-sm-8">
+            <div id="google_translate_element" class="text-right"></div>
             <script type="text/javascript">
                 function googleTranslateElementInit() {
                   new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-102605542-1'}, 'google_translate_element');
@@ -26,59 +28,8 @@
 
     <div class="row content" data-name="{{ page.title }}">
         <!-- Left content -->
-        <div class="col-sm-12 col-md-7 mb-4">
+        <div class="col mb-4">
             {% block left-content %}{% endblock %}
-        </div>
-
-        <div class="col-sm-12 col-md-4 offset-md-1">
-            {% block right-content %}
-
-            <!-- Related resources section -->
-            <div class="row">
-                <div class="col-md-12 col-sm-6">
-                    {% if page.related_resources.count %}
-                        <h3 class="related-resources-title mt-4 mb-4 pb-2"><strong>Extra Resources</strong></h3>
-                        <div id="accordion-0" role="tablist" aria-multiselectable="true" class="mb-5">
-                            {% for resource in page.related_resources.all %}
-                                <h5 class="mb-3 mt-3 related-resource">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-{{ forloop.counter }}">
-                                      <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ resource.title }}
-                                    </a>
-                                </h5>
-                                <div id="dropdown-{{ forloop.counter }}" class="collapse" role="tabpanel">
-                                  <div class="card-block">
-                                      {{ resource.short_description |richtext }}
-                                      {% if resource.url %}
-                                        <a href="{{ resource.url }}" target="_blank">Website</a>
-                                      {% endif %}
-                                  </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="col-md-12 col-sm-6">
-                    <!-- FAQ section -->
-                    {% if page.faqs.count %}
-                        <h3 class="faq-title mt-4 mb-4 pb-2"><strong>Common Questions</strong></h3>
-                        <div id="accordion-faq" role="tablist" aria-multiselectable="true">
-                            {% for faq in page.faqs.all %}
-                                <h5 class="mb-3 faq">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#dropdown-faq-{{ forloop.counter }}" aria-expanded="true" aria-controls="dropdown-faq-{{ forloop.counter }}">
-                                      <i class="fa fa-plus mr-2" aria-hidden="true"></i>{{ faq.question }}
-                                    </a>
-                                </h5>
-                                <div id="dropdown-faq-{{ forloop.counter }}" class="collapse" role="tabpanel">
-                                  <div class="card-block">
-                                      {{ faq.answer |richtext }}
-                                  </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-            {% endblock %}
         </div>
     </div>
 {% endblock %}

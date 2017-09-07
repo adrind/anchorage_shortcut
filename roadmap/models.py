@@ -22,6 +22,7 @@ from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailcore import hooks
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from wagtailgeowidget.edit_handlers import GeoPanel
 from django.utils.functional import cached_property
@@ -420,20 +421,26 @@ class RoadmapRelatedResources(Orderable, RelatedResource):
 
 class Roadmap(Page):
     header = models.CharField(max_length=255)
-    body = RichTextField(blank=True)
+    mission_statement = RichTextField(blank=True)
     sections = StreamField([
         ('section', blocks.StructBlock([
             ('title', blocks.CharBlock()),
-            ('pages', blocks.ListBlock(blocks.PageChooserBlock()))
+            ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
+            ('image', ImageChooserBlock(required=False))
         ])),
     ])
+    testimonials = StreamField([
+        ('testimonial', blocks.StructBlock([
+            ('quote', blocks.CharBlock()),
+            ('name', blocks.CharBlock())
+        ]))
+    ], blank=True, default=[])
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
-        FieldPanel('body', classname='full'),
+        FieldPanel('mission_statement', classname='full'),
         StreamFieldPanel('sections'),
-        InlinePanel('related_resources', label='Extra resources'),
-        InlinePanel('faqs', label='Frequently asked questions'),
+        StreamFieldPanel('testimonials'),
     ]
 
     template = 'roadmap/roadmap/base.html'

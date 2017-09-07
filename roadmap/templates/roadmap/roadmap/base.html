@@ -4,14 +4,50 @@
 
 {% block left-content %}
     <div class="row">
-        <h1 class="h1-heading">{{ page.header }}</h1>
-    </div>
-    <div class="row description">
-        {{ page.body|richtext }}
+        <div class="col description">
+            {{ page.mission_statement|richtext }}
+        </div>
+        <div class="col">
+
+        </div>
     </div>
 
+    {% if page.testimonials %}
+        <div id="testimonials-carousel" class="carousel slide testimonials mb-4" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% for testimonial in page.testimonials %}
+                    {% if forloop.counter == 1 %}
+                        <div class="carousel-item active">
+                            <p class="carousel-text">{{ testimonial.value.quote }} - {{ testimonial.value.name }}</p>
+                        </div>
+                    {% else %}
+                        <div class="carousel-item">
+                            <p class="carousel-text">{{ testimonial.value.quote }} - {{ testimonial.value.name }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card-group">
     {% for section in page.sections %}
-        <div class="row mt-4">
+        <div class="card text-center">
+            <h4 class="card-title h4-heading"><strong>{{ section.value.title }}</strong></h4>
+            {% image section.value.image width-150 class="card-img-top mx-auto" alt="Card image" %}
+            <div class="card-block">
+                <ul class="list-group">
+                    {% for list in section.value.pages %}
+                        <li class="list-group-item">
+                            <a class="task-list-title" href="{{ list.url }}">
+                                {{ list.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!-- <div class="row mt-4">
             <h3 class="h4-heading blue-heading"><strong>{{ section.value.title }}</strong></h3>
         </div>
         {% for list in section.value.pages %}
@@ -25,6 +61,7 @@
                     <a href="{{ list.url }}" class="btn roadmap-btn">Start</a>
                 </div>
             </div>
-        {% endfor %}
+        {% endfor %} -->
     {% endfor %}
+    </div>
 {% endblock %}

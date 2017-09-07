@@ -50,6 +50,14 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-bottom: 1rem;
 }
 
+.card {
+    border: none;
+}
+
+.list-group-item {
+    border: none;
+}
+
 /*** BASE.HTML ***/
 #header {
     background-color: #399fd3;
@@ -142,13 +150,16 @@ a.footer-link {
 }
 
 .h3-heading {
-    font-weight: bold;
     color: #399fd3;
     font-size: 2.8rem;
 }
 
 .h4-heading {
     font-size: 2.0rem;
+}
+
+.blue-heading {
+    color: #399fd3;
 }
 
 .rich-text h4 {
@@ -257,11 +268,27 @@ a.footer-link {
     line-height: 2.4rem;
 }
 
+.testimonials {
+    background-color: #999;
+    color: white;
+    padding: 1rem 0;
+}
+
+.carousel-text {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
 .task-list-title,
 .task-list-title:hover {
     font-size: 2rem;
     color: #292b2c;
     cursor: pointer;
+    width: 100%;
+}
+
+.task-list-title:hover {
     text-decoration: underline;
 }
 
