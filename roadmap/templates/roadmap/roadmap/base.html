@@ -10,11 +10,11 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col description">
+        <div class="col col-md-4 offset-md-2 description">
             {{ page.mission_statement|richtext }}
         </div>
         {% if page.video %}
-            <div class="col text-center">
+            <div class="col col-md-4 text-center">
                 {% embed page.video max_width=300 %}
             </div>
         {% endif %}

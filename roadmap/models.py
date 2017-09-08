@@ -413,17 +413,19 @@ class RoadmapFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
 class RoadmapRelatedResources(Orderable, RelatedResource):
     page = ParentalKey('Roadmap', related_name='related_resources')
 
+class RoadmapSection(blocks.StructBlock):
+    title = blocks.CharBlock()
+    pages = blocks.ListBlock(blocks.PageChooserBlock())
+    image = ImageChooserBlock(required=False)
+
+
 class Roadmap(Page):
     header = models.CharField(max_length=255)
     mission_statement = RichTextField(blank=True)
     video = models.URLField(max_length=255, blank=True)
 
     sections = StreamField([
-        ('section', blocks.StructBlock([
-            ('title', blocks.CharBlock()),
-            ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
-            ('image', ImageChooserBlock(required=False))
-        ]))
+        ('section', RoadmapSection())
     ])
     testimonials = StreamField([
         ('testimonial', blocks.StructBlock([
