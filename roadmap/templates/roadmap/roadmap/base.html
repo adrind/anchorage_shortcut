@@ -4,12 +4,8 @@
 {% load wagtailembeds_tags %}
 
 {% block left-content %}
-    <div class="row mb-4">
-        <div class="col text-center">
-            <h1 class="h1-heading">{{ page.header }}</h1>
-        </div>
-    </div>
-    <div class="row mb-4">
+    <h1 class="h1-heading text-center roadmap-title">{{ page.header }}</h1>
+    <div class="row roadmap-statement">
         <div class="col col-md-4 offset-md-2 description">
             {{ page.mission_statement|richtext }}
         </div>
@@ -21,7 +17,7 @@
     </div>
 
     {% if page.testimonials %}
-        <div id="testimonials-carousel" class="carousel slide testimonials mb-4" data-ride="carousel">
+        <div id="testimonials-carousel" class="carousel slide testimonials" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 {% for testimonial in page.testimonials %}
                     {% if forloop.counter == 1 %}

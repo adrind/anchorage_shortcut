@@ -273,10 +273,16 @@ a.footer-link {
     line-height: 2.4rem;
 }
 
+.roadmap-title {
+    margin-bottom: 2.0rem;
+}
+
 .testimonials {
     background-color: #999;
     color: white;
     padding: 1rem 0;
+    margin-top: 2.0rem;
+    margin-bottom: 4.0rem;
 }
 
 .carousel-text {
