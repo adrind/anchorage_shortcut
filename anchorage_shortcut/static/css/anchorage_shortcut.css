@@ -378,6 +378,7 @@ a.footer-link {
 a.step-btn-link {
     text-decoration: none;
     color: white;
+    margin: auto;
 }
 
 .step-btn {
