@@ -4,10 +4,14 @@
 {# A link at the bottom will take the user to the form of choices #}
 
 <div class="row">
-    <h4 class="h4-heading"><strong>{{ page.header }}</strong></h4>
+    <div class="col">
+        <h4 class="h4-heading"><strong>{{ page.header }}</strong></h4>
+    </div>
 </div>
 <div class="row mb-4">
-    {{ page.body|richtext }}
+    <div class="col">
+        {{ page.body|richtext }}
+    </div>
 </div>
 <div class="row">
     <div class="col">

@@ -314,7 +314,7 @@ class TaskList(Page):
             request.path = '/'.join(request.path.split('/')[:3])
 
             return render(request, template, {
-                'steps': pages,
+                'steps': list(map((lambda page: page.specific), pages)),
                 'page': self,
                 'selected_choices': ','.join(map(str, selected_choices)),
                 'stepIds' : ','.join(ids),
@@ -323,7 +323,7 @@ class TaskList(Page):
         #Otherwise just render the track page with the appropriate template
         return render(request, template, {
             'page': self,
-            'steps': self.steps().all
+            'steps': self.steps()
         })
 
 class StepPageFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
