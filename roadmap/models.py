@@ -191,12 +191,7 @@ class TaskListRelatedResources(Orderable, RelatedResource):
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
     header = models.CharField(max_length=255)
-    self_service_oriented_layout = models.BooleanField(default=True)
-    short_description = models.CharField(max_length=255, blank=True)
     body = RichTextField(blank=True)
-
-    walk_through_description = RichTextField(blank=True)
-    self_service_description = RichTextField(blank=True)
 
     question = models.CharField(max_length=255, blank=True)
     choices = StreamField([
@@ -218,14 +213,10 @@ class TaskList(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('header'),
-        FieldPanel('self_service_oriented_layout'),
-        FieldPanel('short_description'),
         FieldPanel('body', classname='full'),
         InlinePanel('related_resources', label='Extra resources'),
         InlinePanel('faqs', label='Frequently Asked Questions'),
         MultiFieldPanel([
-            FieldPanel('walk_through_description', classname='full'),
-            FieldPanel('self_service_description', classname='full'),
             MultiFieldPanel([
                 FieldPanel('question'),
                 StreamFieldPanel('choices')
