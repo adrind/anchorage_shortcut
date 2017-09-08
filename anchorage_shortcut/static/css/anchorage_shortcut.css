@@ -55,7 +55,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .list-group-item {
-    border: none;
+    border: 1px solid #ccc;
 }
 
 /* Resets embedded video padding */
@@ -296,13 +296,9 @@ a.footer-link {
 .task-list-title,
 .task-list-title:hover {
     font-size: 2rem;
-    color: #292b2c;
+    color: #333;
     cursor: pointer;
     width: 100%;
-}
-
-.task-list-title:hover {
-    text-decoration: underline;
 }
 
 /* TASK LIST */
