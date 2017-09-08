@@ -395,7 +395,6 @@ class StepPage(Page):
             start = int(len(steps)/2) + 1
             return render(request, self.template, {
                 'page': self,
-                'stepIds': ','.join(ids),
                 'first_half_steps': steps[:start],
                 'second_half_steps': steps[start:],
                 'step_number': index,
