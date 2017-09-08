@@ -15,9 +15,11 @@
         {{ page.self_service_description|richtext }}
     </div>
     <div class="row">
-        <div class="col">
-            {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
-        </div>
+        {% if page.choices %}
+            <div class="col">
+                {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
+            </div>
+        {% endif %}
         <div class="col">
             <div class="card-deck">
                 {% for step in steps %}
