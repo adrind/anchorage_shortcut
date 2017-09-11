@@ -55,7 +55,8 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .list-group-item {
-    border: 1px solid #ccc;
+    border: none;
+    text-decoration: underline;
 }
 
 /* Resets embedded video padding */
