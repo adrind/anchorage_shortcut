@@ -193,6 +193,8 @@ class TaskList(Page):
     header = models.CharField(max_length=255)
     body = RichTextField(blank=True)
 
+    message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
+
     question = models.CharField(max_length=255, blank=True)
     choices = StreamField([
         ('label', blocks.CharBlock(required=True)),
@@ -318,7 +320,8 @@ class TaskList(Page):
                 'page': self,
                 'selected_choices': ','.join(map(str, selected_choices)),
                 'stepIds' : ','.join(ids),
-                'default_pages': default_pages
+                'default_pages': default_pages,
+                'showMessage': True
             })
         #Otherwise just render the track page with the appropriate template
         return render(request, template, {

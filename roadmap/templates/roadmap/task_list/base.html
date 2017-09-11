@@ -6,13 +6,8 @@
 {% load wagtailcore_tags %}
 
 {% block left-content %}
-    <div class="row">
-        <div class="col">
-            <h4 class="h4-heading"><strong>{{ page.header }}</strong></h4>
-        </div>
-    </div>
     <div class="row mb-4">
-        {{ page.self_service_description|richtext }}
+        {{ page.body|richtext }}
     </div>
     <div class="row">
         {% if page.choices %}
@@ -21,6 +16,9 @@
             </div>
         {% endif %}
         <div class="col">
+            {% if showMessage %}
+                <div class="row"><div class="col">{{ page.message }}</div></div>
+            {% endif %}
             <div class="card-deck">
                 {% for step in steps %}
                     {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
