@@ -340,6 +340,8 @@ class StepPage(Page):
     body = RichTextField(blank=True)
     next_step = models.URLField(blank=True)
 
+    checklist_instructions = RichTextField(blank=True)
+
     address = models.CharField(max_length=250, blank=True, null=True)
     location = models.CharField(max_length=250, blank=True, null=True)
 
@@ -354,8 +356,7 @@ class StepPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('short_description', classname='full'),
         FieldPanel('body', classname='full'),
-        InlinePanel('related_resources', label='Extra resources'),
-        InlinePanel('faqs', label='Frequently asked questions'),
+        FieldPanel('checklist_instructions', classname='full'),
         SnippetChooserPanel('contact'),
         MultiFieldPanel([
             FieldPanel('address'),
