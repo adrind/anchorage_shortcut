@@ -293,6 +293,15 @@ a.footer-link {
     margin-bottom: 2.0rem;
 }
 
+/* Vertically center description next to video */
+.roadmap-statement .rich-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+}
+
 .testimonials {
     background-color: #999;
     color: white;
