@@ -31,13 +31,13 @@
         {% for step in steps %}
             <tr>
               <td>{{ step.title }}</td>
-              <td>{% pageurl step %}</td>
+              <td>{{ request.META.HTTP_HOST }}{% pageurl step %}</td>
               <td>{{ step.checklist_instructions|richtext }}</td>
               <td>
                   {% if step.contact %}
-                      Name: {{ step.contact.name }}
-                      Phone: {{ step.contact.phone_number }}
-                      Email: {{ step.contact.email }}
+                      <p><strong>Name:</strong> {{ step.contact.name }}</p>
+                      <p><strong>Phone:</strong> {{ step.contact.phone_number }}</p>
+                      <p><strong>Email:</strong> {{ step.contact.email }}</p>
                   {% endif %}
               </td>
             </tr>
