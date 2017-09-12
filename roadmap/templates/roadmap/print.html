@@ -18,14 +18,32 @@
                 </div>
             </div>
         </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Name of page</th>
+              <th>URL</th>
+              <th>Things to do</th>
+              <th>Person to contact</th>
+            </tr>
+          </thead>
+        <tbody>
         {% for step in steps %}
-            <div class="row">
-                <div class="col">
-                    <h3>{{ step.title }}</h3>
-                    <p>{{ step.checklist_instructions|richtext }}</p>
-                </div>
-            </div>
-        {% endfor %}
+            <tr>
+              <td>{{ step.title }}</td>
+              <td>{% pageurl step %}</td>
+              <td>{{ step.checklist_instructions|richtext }}</td>
+              <td>
+                  {% if step.contact %}
+                      Name: {{ step.contact.name }}
+                      Phone: {{ step.contact.phone_number }}
+                      Email: {{ step.contact.email }}
+                  {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
 
