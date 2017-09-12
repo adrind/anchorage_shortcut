@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row nav mb-3">
-        {% if page.depth != 3 %}
+        {% if page.depth != 2 %}
         <div class="col">
             <nav class="breadcrumb">
                 {% for ancestor in page.get_ancestors %}
@@ -31,7 +31,7 @@
         <div class="col mb-4">
             {% block left-content %}{% endblock %}
         </div>
-        {% if page.depth != 3 %}
+        {% if page.depth != 2 %}
         <div id="checklist" class="col-md-3 col-lg-3 col-xs-12 col-sm-12">
             <h4 class="h4-heading">Checklist</h4>
             <div class="btn-group" role="group" aria-label="Basic example">

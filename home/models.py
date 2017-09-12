@@ -6,8 +6,7 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel
-
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
 
 class RoadmapSection(blocks.StructBlock):
     title = blocks.CharBlock()
