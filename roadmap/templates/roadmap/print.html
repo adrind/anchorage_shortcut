@@ -21,8 +21,8 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Name of page</th>
-              <th>URL</th>
+              <th class="short-field">Name of page</th>
+              <th class="short-field">URL</th>
               <th>Things to do</th>
               <th>Person to contact</th>
             </tr>
@@ -30,8 +30,8 @@
         <tbody>
         {% for step in steps %}
             <tr>
-              <td>{{ step.title }}</td>
-              <td>{{ request.META.HTTP_HOST }}{% pageurl step %}</td>
+              <td class="short-field">{{ step.title }}</td>
+              <td class="short-field">{{ request.META.HTTP_HOST }}{% pageurl step %}</td>
               <td>{{ step.checklist_instructions|richtext }}</td>
               <td>
                   {% if step.contact %}

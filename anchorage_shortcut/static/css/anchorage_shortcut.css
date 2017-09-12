@@ -451,6 +451,10 @@ a.step-btn-link {
     font-weight: bold;
 }
 
+.print-preview .short-field {
+    width: 15rem;
+}
+
 .contact-section {
     border: 2px solid #399fd3;
     padding: 10px;
