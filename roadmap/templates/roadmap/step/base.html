@@ -13,6 +13,10 @@
         {% endif %}
     </div>
 
+    <div class="row">
+        <button class="addToChecklist" data-id="{{ page.id }}" data-title="{{ page.title }}">Add to Checklist</button>
+    </div>
+
     {% if stepIds %}
         {% include 'roadmap/step/partials/_step_nav.html' %}
     {% endif %}

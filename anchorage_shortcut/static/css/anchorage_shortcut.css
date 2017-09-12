@@ -362,7 +362,7 @@ a.footer-link {
     color: white;
     font-size: 1.4rem;
     margin-left: 0 !important;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
     min-width: 200px;
 }
 
@@ -420,6 +420,11 @@ a.step-btn-link {
 
 .print-page a {
     color: #399fd3;
+}
+
+.print-preview h3 {
+    width: 100%;
+    font-weight: bold;
 }
 
 .contact-section {
@@ -519,6 +524,12 @@ a.step-btn-link {
 .twitter-typeahead .tt-dropdown-menu .tt-suggestion.tt-cursor a:hover {
   color: #399fd3;
     text-decoration: none;
+}
+
+/* CHECKLIST */
+
+#checklist {
+    display: none;
 }
 
 @media (max-width: 440px) {

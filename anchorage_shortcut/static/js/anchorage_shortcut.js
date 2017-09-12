@@ -42,4 +42,65 @@ $(document).ready(function() {
   $('.twitter-typeahead').on('typeahead:selected', function(event, selection) {
         document.location.pathname = selection.url;
   });
+
+  function addToCheckList(pageId, pageTitle) {
+      $('#checklist .list').append('<li data-id="'+pageId+'">'+pageTitle+'</li>')
+  }
+
+  function isAlreadyChecked(id, items) {
+      var isChecked = false;
+
+      $.each(items, function (i, page) {
+          if(page.id === id) {
+              isChecked = true;
+          }
+      });
+
+      return isChecked;
+  }
+
+  if (typeof(Storage) !== "undefined") {
+      var checkList = JSON.parse(localStorage.getItem('checklist')),
+          $checkList = $('#checklist');
+
+      if(!checkList) {
+          checkList = {
+              items: []
+          };
+      }
+
+      if(checkList.items.length > 0) {
+          $checkList.show();
+      }
+
+      $.each(checkList.items, function (i, page) {
+          addToCheckList(page.id, page.title);
+      });
+
+      $('.addToChecklist').click(function(evt){
+          var $target = $(evt.target),
+              id = $target.data('id');
+
+          if (!isAlreadyChecked(id, checkList.items)) {
+              addToCheckList(id, $target.data('title'));
+              checkList.items.push({id: id, title: $target.data('title')});
+              localStorage.setItem('checklist', JSON.stringify(checkList));
+          }
+      });
+      
+      $('.print-checklist').click(function (evt) {
+          var url = '/print?ids=';
+          var ids = [];
+          $('#checklist .list li').each(function (i, el) {
+            ids.push($(el).data('id'))
+          });
+
+          window.location.href = url + ids.join(',');
+      });
+      
+      $('.clear-checklist').click(function (evt) {
+          localStorage.clear()
+      });
+  }
+
 });
