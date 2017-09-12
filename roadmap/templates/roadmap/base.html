@@ -39,31 +39,9 @@
               <button type="button" class="btn btn-secondary clear-checklist">Clear</button>
             </div>
             <ol class="list">
-
+                <!-- filled by script -->
             </ol>
         </div>
     {% endif %}
     </div>
-{% endblock %}
-
-{% block extra_js %}
-    <script>
-        if(window.location.hostname !== '127.0.0.1' &&
-           window.location.hostname !== 'localhost') {
-
-            $(function () {
-                $('.related-resource a').click(function (evt) {
-                    var taskListTitle = $('.content').data('name'),
-                        titleText = $(evt.target).text().trim();
-                    ga('send', 'event', 'relatedResource', 'click', taskListTitle, titleText);
-                });
-
-                $('.faq a').click(function (evt) {
-                    var taskListTitle = $('.content').data('name'),
-                        titleText = $(evt.target).text().trim();
-                    ga('send', 'event', 'faq', 'click', taskListTitle, titleText);
-                });
-            });
-        }
-    </script>
 {% endblock %}

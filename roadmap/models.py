@@ -23,7 +23,6 @@ from wagtail.wagtailcore import hooks
 from wagtail.wagtailsnippets.models import register_snippet
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
 
 from wagtailgeowidget.edit_handlers import GeoPanel
 from django.utils.functional import cached_property
@@ -32,44 +31,6 @@ from wagtailgeowidget.helpers import geosgeometry_str_to_struct
 from django.utils.html import format_html_join
 from django.conf import settings
 
-ICON_CHOICES = (
-    ('icon-alaska', 'alaska'), ('icon-alcohol-free', 'alcohol-free'), ('icon-application-2', 'application-2'),
-    ('icon-application', 'application'), ('icon-bed', 'bed'), ('icon-bike', 'bike'),
-    ('icon-birth-certificate', 'birth-certificate'), ('icon-books', 'books'), ('icon-bus', 'bus'),
-    ('icon-car-help', 'car-help'), ('icon-car', 'car'), ('icon-caution', 'caution'), ('icon-children', 'children'),
-    ('icon-clothes', 'clothes'), ('icon-computer', 'computer'), ('icon-dental-help', 'dental-help'),
-    ('icon-drivers-license', 'drivers-license'), ('icon-drug-free', 'drug-free'), ('icon-education', 'education'),
-    ('icon-elderly-person', 'elderly-person'), ('icon-email-2', 'email-2'), ('icon-email', 'email'),
-    ('icon-family-help', 'family-help'), ('icon-food-help', 'food-help'),
-    ('icon-government-building', 'government-building'), ('icon-grocery-cart', 'grocery-cart'),
-    ('icon-home-energy', 'home-energy'), ('icon-home-money', 'home-money'), ('icon-home-water', 'home-water'),
-    ('icon-homeless', 'homeless'), ('icon-hospital', 'hospital'), ('icon-house-help', 'house-help'),
-    ('icon-house', 'house'), ('icon-id-card', 'id-card'), ('icon-job-center', 'job-center'),
-    ('icon-library', 'library'), ('icon-map', 'map'), ('icon-money-help', 'money-help'),
-    ('icon-mountains', 'mountains'), ('icon-parent-with-kids', 'parent-with-kids'), ('icon-passport', 'passport'),
-    ('icon-pencil', 'pencil'), ('icon-people', 'people'), ('icon-phone', 'phone'),
-    ('icon-public-assistance', 'public-assistance'), ('icon-question', 'question'), ('icon-resume', 'resume'),
-    ('icon-shared-housing', 'shared-housing'), ('icon-test', 'test'), ('icon-wheelchair', 'wheelchair'),
-    ('icon-wifi', 'wifi'), ('icon-women', 'women'))
-
-
-#A related website that provides additional assistance
-# Used in the roadmap, track, and step templates
-class RelatedResource(models.Model):
-    title = models.CharField(max_length=255)
-    url = models.URLField("External link")
-    short_description = RichTextField(blank=True)
-
-    panels = [
-        FieldRowPanel([
-            FieldPanel('title'),
-            FieldPanel('url'),
-        ]),
-        FieldPanel('short_description'),
-    ]
-
-    class Meta:
-        abstract = True
 
 # A contact that someone should reach out to
 # Used in the step templates
@@ -98,29 +59,6 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
-
-# A frequently asked question
-# Used in the roadmap, track, and step templates
-class FrequentlyAskedQuestion(models.Model):
-    question = models.CharField(max_length=255)
-    answer = RichTextField()
-
-    panels = [
-        FieldPanel('question'),
-        FieldPanel('answer'),
-    ]
-
-    def url(self):
-        return self.page.url
-
-    def roadmap(self):
-        return self.page.roadmap()
-
-    def live(self):
-        return self.page.live
-
-    class Meta:
-        abstract = True
 
 # Allows admins to create logic that directs users to specific steps
 # Used in the track templates
@@ -182,19 +120,10 @@ class GuidedSectionBlock(blocks.StreamBlock):
     class Meta:
         label='Add a section to guide users'
 
-class TaskListFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
-    page = ParentalKey('TaskList', related_name='faqs')
-
-class TaskListRelatedResources(Orderable, RelatedResource):
-    page = ParentalKey('TaskList', related_name='related_resources')
-
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
-    header = models.CharField(max_length=255)
     body = RichTextField(blank=True)
-
     message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
-
     question = models.CharField(max_length=255, blank=True)
     choices = StreamField([
         ('label', blocks.CharBlock(required=True)),
@@ -214,10 +143,7 @@ class TaskList(Page):
     ], blank=True, default=[])
 
     content_panels = Page.content_panels + [
-        FieldPanel('header'),
         FieldPanel('body', classname='full'),
-        InlinePanel('related_resources', label='Extra resources'),
-        InlinePanel('faqs', label='Frequently Asked Questions'),
         MultiFieldPanel([
             MultiFieldPanel([
                 FieldPanel('question'),
@@ -329,17 +255,9 @@ class TaskList(Page):
             'steps': self.steps()
         })
 
-class StepPageFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
-    page = ParentalKey('StepPage', related_name='faqs')
-
-class StepPageRelatedResources(Orderable, RelatedResource):
-    page = ParentalKey('StepPage', related_name='related_resources')
-
 class StepPage(Page):
     short_description = models.CharField(max_length=255)
     body = RichTextField(blank=True)
-    next_step = models.URLField(blank=True)
-
     checklist_instructions = RichTextField(blank=True)
 
     address = models.CharField(max_length=250, blank=True, null=True)
@@ -409,18 +327,10 @@ class StepPage(Page):
             'page': self
         })
 
-
-class RoadmapFrequentlyAskedQuestions(Orderable, FrequentlyAskedQuestion):
-    page = ParentalKey('Roadmap', related_name='faqs')
-
-class RoadmapRelatedResources(Orderable, RelatedResource):
-    page = ParentalKey('Roadmap', related_name='related_resources')
-
 class RoadmapSection(blocks.StructBlock):
     title = blocks.CharBlock()
     pages = blocks.ListBlock(blocks.PageChooserBlock())
     image = ImageChooserBlock(required=False)
-
 
 class Roadmap(Page):
     header = models.CharField(max_length=255)
