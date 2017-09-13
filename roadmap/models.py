@@ -121,7 +121,6 @@ class GuidedSectionBlock(blocks.StreamBlock):
 
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
-    nav_title = models.CharField(max_length=255, default='')
     body = RichTextField(blank=True)
     message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
     question = models.CharField(max_length=255, blank=True)
@@ -143,7 +142,6 @@ class TaskList(Page):
     ], blank=True, default=[])
 
     content_panels = Page.content_panels + [
-        FieldPanel('nav_title'),
         FieldPanel('body', classname='full'),
         MultiFieldPanel([
             MultiFieldPanel([
@@ -168,16 +166,6 @@ class TaskList(Page):
         # Get list of all step pages that are descendants of this page
         events = StepPage.objects.live().descendant_of(self)
         return events
-
-    def nav(self):
-        tracks = TaskList.objects.live().sibling_of(self)
-        trackObjs = list(map((lambda page: {'title':page.nav_title, 'url': page.url, 'id': page.id}), tracks))
-        steps = StepPage.objects.live().descendant_of(self)
-        stepObjs = list(map((lambda page: {'title':page.title, 'url': page.url}), steps))
-        return {
-            'tracks': trackObjs,
-            'steps' : stepObjs
-        }
 
     # Directs people to the walk through or self service routes
     # Walk through path uses the choices model to filter steps to take

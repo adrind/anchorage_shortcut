@@ -11,29 +11,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            {% for track in page.nav.tracks %}
-                {% if page.id == track.id %}
-                    <li class="nav-item active dropdown show">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ track.title }} <span class="sr-only">(current)</span>
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            {% for step in page.nav.steps %}
-                                <a class="dropdown-item" href="{{ step.url }}">{{ step.title }}</a>
-                            {% endfor %}
-                        </div>
-                    </li>
-
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ track.url }}">{{ track.title }} <span class="sr-only">(current)</span></a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0 ml-auto">
             <input class="form-control mr-sm-2" type="text" aria-label="Search for help" id="q" placeholder="Search for help" autocomplete="off" autocorrect="false" spellcheck="false" style="width: 240px;height: 40px;">
         </form>
     </div>
