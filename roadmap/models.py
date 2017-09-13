@@ -121,6 +121,7 @@ class GuidedSectionBlock(blocks.StreamBlock):
 
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
+    nav_title = models.CharField(max_length=255, default='')
     body = RichTextField(blank=True)
     message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
     question = models.CharField(max_length=255, blank=True)
@@ -142,6 +143,7 @@ class TaskList(Page):
     ], blank=True, default=[])
 
     content_panels = Page.content_panels + [
+        FieldPanel('nav_title'),
         FieldPanel('body', classname='full'),
         MultiFieldPanel([
             MultiFieldPanel([
@@ -169,7 +171,7 @@ class TaskList(Page):
 
     def nav(self):
         tracks = TaskList.objects.live().sibling_of(self)
-        trackObjs = list(map((lambda page: {'title':page.title, 'url': page.url}), tracks))
+        trackObjs = list(map((lambda page: {'title':page.nav_title, 'url': page.url}), tracks))
         steps = StepPage.objects.live().descendant_of(self)
         stepObjs = list(map((lambda page: {'title':page.title, 'url': page.url}), steps))
         return {
