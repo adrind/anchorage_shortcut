@@ -6,24 +6,24 @@
 {% load wagtailcore_tags %}
 
 {% block left-content %}
-    <div class="row mb-4">
-        {{ page.body|richtext }}
-    </div>
+    {% if page.body %}
+        <div class="row mb-4">
+            {{ page.body|richtext }}
+        </div>
+    {% endif %}
     <div class="row">
         {% if page.choices %}
             <div class="col-12 col-md-6 col-lg-6 col-xl-6">
                 {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
             </div>
         {% endif %}
-        <div class="col">
+        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
             {% if showMessage %}
                 <div class="row"><div class="col">{{ page.message }}</div></div>
             {% endif %}
-            <div class="card-deck">
-                {% for step in steps %}
-                    {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
-                {% endfor %}
-            </div>
+            {% for step in steps %}
+                {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

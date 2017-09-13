@@ -394,30 +394,25 @@ a.footer-link {
     text-decoration: underline;
 }
 
-.card.step-btn {
-    background-color: #399fd3;
-    color: white;
+.step-btn {
+    border: 1px solid #399fd3;
     font-size: 1.4rem;
-    margin-left: 0 !important;
-    margin-bottom: 1rem;
-    min-width: 200px;
-}
-
-.step-btn .card-block {
-    border: none;
-    width: 100%;
-    min-height: 5.0rem;
+    width: 150px;
+    color: #399fd3;
 }
 
 .step-btn h5 {
-    color: white;
     font-weight: bold;
     font-size: 1.8rem;
+    white-space: normal;
+}
+
+.step-btn-description {
+    white-space: normal;
 }
 
 a.step-btn-link {
     text-decoration: none;
-    color: white;
     margin: auto;
 }
 
