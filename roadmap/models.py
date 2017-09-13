@@ -255,7 +255,7 @@ class TaskList(Page):
         })
 
 class StepPage(Page):
-    short_description = models.CharField(max_length=255)
+    short_description = models.CharField(max_length=75)
     body = RichTextField(blank=True)
     checklist_instructions = RichTextField(blank=True)
 

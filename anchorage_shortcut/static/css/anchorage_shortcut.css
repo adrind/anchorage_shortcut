@@ -382,6 +382,15 @@ a.footer-link {
     font-size: 1.4rem;
     width: 150px;
     color: #399fd3;
+    height: 150px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    text-align: center;
+    white-space: normal;
+    display: inline-block;
 }
 
 .step-btn h5 {
@@ -390,20 +399,10 @@ a.footer-link {
     white-space: normal;
 }
 
-.step-btn-description {
-    white-space: normal;
-}
-
-a.step-btn-link {
-    text-decoration: none;
-    margin: auto;
-}
-
-.step-btn {
-    box-shadow: 1px 1px 1px 1px #ccc;
-    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
-    -moz-box-shadow: 1px 1px 1px 1px #ccc;
-    text-align: center;
+.step-btn:hover,
+.step-btn:focus {
+    color: white;
+    background-color: #399fd3;
 }
 
 .walk-through-form {
