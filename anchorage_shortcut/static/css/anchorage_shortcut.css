@@ -382,7 +382,7 @@ a.footer-link {
     font-size: 1.4rem;
     width: 150px;
     color: #399fd3;
-    height: 150px;
+    height: 160px;
     margin-right: 10px;
     margin-bottom: 10px;
     box-shadow: 1px 1px 1px 1px #ccc;
@@ -419,6 +419,10 @@ a.footer-link {
 
 .choice-checkbox-label {
     width: 80%;
+}
+
+.choice-checkbox-label:focus {
+    outline: auto;
 }
 
 

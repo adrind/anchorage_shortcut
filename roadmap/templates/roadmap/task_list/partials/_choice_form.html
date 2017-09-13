@@ -7,7 +7,7 @@
 
 <form method="GET" class="walk-through-form" data-choices="{{ selected_choices }}">
     {% for choice in page.choices %}
-        {% include 'roadmap/task_list/partials/_choice_checkbox.html' with index=forloop.counter %}
+        <input type="checkbox" value="{{ forloop.counter|add:-1 }}" id="option{{ forloop.counter|add:-1 }}" name="option{{ forloop.counter|add:-1 }}" class="form-control"><label for="option{{ forloop.counter|add:-1 }}" class="align-middle choice-checkbox-label">{{ choice }}</label>
     {% endfor %}
     <div class="row mt-4 mb-4">
         <div class="col">

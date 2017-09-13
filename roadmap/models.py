@@ -100,8 +100,7 @@ class TaskChoicesBlock(blocks.StreamBlock):
     question = blocks.CharBlock()
     choices = blocks.ListBlock(blocks.StructBlock([
         ('label', blocks.CharBlock(required=True)),
-    ],
-    template='roadmap/task_list/partials/_choice_checkbox.html'))
+    ]))
 
     class Meta:
         label='Add choices to guide a client to services'
