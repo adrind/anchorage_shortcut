@@ -171,7 +171,7 @@ class TaskList(Page):
 
     def nav(self):
         tracks = TaskList.objects.live().sibling_of(self)
-        trackObjs = list(map((lambda page: {'title':page.nav_title, 'url': page.url}), tracks))
+        trackObjs = list(map((lambda page: {'title':page.nav_title, 'url': page.url, 'id': page.id}), tracks))
         steps = StepPage.objects.live().descendant_of(self)
         stepObjs = list(map((lambda page: {'title':page.title, 'url': page.url}), steps))
         return {
