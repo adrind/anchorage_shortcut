@@ -18,13 +18,17 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     background-color: white;
 }
 
-.container-fluid .breadcrumb-item.active {
-    color: #333;
+.container-fluid .breadcrumb-item.active a {
+    text-decoration: none;
 }
 
-.container-fluid .breadcrumb-item {
+.container-fluid .breadcrumb-item a {
     color: #636c72;
     text-decoration: underline;
+}
+
+.container-fluid .breadcrumb-item+.breadcrumb-item::before {
+    content: ">";
 }
 
 .container-fluid .content,
