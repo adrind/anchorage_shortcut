@@ -1,0 +1,50 @@
+{% load wagtailcore_tags %}
+
+<nav class="navbar navbar-expand-lg navbar-light" id="header">
+    {% if page.nav %}
+        <a class="navbar-brand" href="/"><span class="icon-mountains"></span></a>
+    {% else %}
+        <a class="navbar-brand" href="/"><span class="icon-mountains"></span> <span class="header-text"><strong>Start Here</strong> Anchorage</span></a>
+    {% endif %}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% for track in page.nav.tracks %}
+                {% if page.title == track.title %}
+                    <li class="nav-item active dropdown show">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ track.title }} <span class="sr-only">(current)</span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {% for step in page.nav.steps %}
+                                <a class="dropdown-item" href="{{ step.url }}">{{ step.title }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ track.url }}">{{ track.title }} <span class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" aria-label="ex: resume, driver's license" id="q" placeholder="ex: resume, driver's license" autocomplete="off" autocorrect="false" spellcheck="false" style="width: 240px;height: 40px;">
+        </form>
+    </div>
+</nav>
+
+
+<script src="//cdn.jsdelivr.net/typeahead.js/0.10/typeahead.jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/hogan.js/3.0/hogan.min.js"></script>
+
+{% verbatim %}
+<script type="text/template" id="autocomplete">
+  <a href="{{ url }}">{{{ title }}}</a>
+</script>
+{% endverbatim %}

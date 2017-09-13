@@ -167,6 +167,16 @@ class TaskList(Page):
         events = StepPage.objects.live().descendant_of(self)
         return events
 
+    def nav(self):
+        tracks = TaskList.objects.live().sibling_of(self)
+        trackObjs = list(map((lambda page: {'title':page.title, 'url': page.url}), tracks))
+        steps = StepPage.objects.live().descendant_of(self)
+        stepObjs = list(map((lambda page: {'title':page.title, 'url': page.url}), steps))
+        return {
+            'tracks': trackObjs,
+            'steps' : stepObjs
+        }
+
     # Directs people to the walk through or self service routes
     # Walk through path uses the choices model to filter steps to take
     def route(self, request, path_components):
@@ -325,7 +335,6 @@ class StepPage(Page):
         return render(request, self.template, {
             'page': self
         })
-
 
 @hooks.register('insert_editor_js')
 def editor_js():

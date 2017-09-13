@@ -4,8 +4,6 @@ $(document).ready(function() {
   var client = algoliasearch('VAPPYHPR6T', '4d3aeef86379e027844484707898c797');
   var prefix = window.location.origin === 'http://localhost:8000' ? '' : 'prod_';
   var stepIndex = client.initIndex(prefix+'step_index');
-  var stepFaqIndex = client.initIndex(prefix+'step_faq_index');
-  var taskListFaqIndex = client.initIndex(prefix+'task_list_faq_index');
   var roadmapType = window.location.pathname.split('/') && window.location.pathname.split('/')[1];
 
   var registerIndex = function (index, name, data) {
@@ -34,9 +32,7 @@ $(document).ready(function() {
 
   $inputField.typeahead(
       { hint: true },
-      registerIndex(stepIndex, 'step', {url: 'url', title: 'title'}),
-      registerIndex(stepFaqIndex, 'step_faq', {url: 'url', title: 'question'}),
-      registerIndex(taskListFaqIndex, 'task_list_faq', {url: 'url', title: 'question'})
+      registerIndex(stepIndex, 'step', {url: 'url', title: 'title'})
   );
 
   $('.twitter-typeahead').on('typeahead:selected', function(event, selection) {
