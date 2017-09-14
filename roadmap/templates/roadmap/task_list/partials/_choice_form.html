@@ -7,7 +7,9 @@
 
 <form method="GET" class="walk-through-form" data-choices="{{ selected_choices }}">
     {% for choice in page.choices %}
-        <input type="checkbox" value="{{ forloop.counter|add:-1 }}" id="option{{ forloop.counter|add:-1 }}" name="option{{ forloop.counter|add:-1 }}" class="checkbox"><label for="option{{ forloop.counter|add:-1 }}" class="align-middle choice-checkbox-label">{{ choice }}</label>
+        <div class="choice">
+            <input type="checkbox" value="{{ forloop.counter|add:-1 }}" id="option{{ forloop.counter|add:-1 }}" name="option{{ forloop.counter|add:-1 }}" class="checkbox"><label for="option{{ forloop.counter|add:-1 }}" class="align-middle choice-checkbox-label">{{ choice }}</label>
+        </div>
     {% endfor %}
     <div class="row mt-4 mb-4">
         <div class="col">
