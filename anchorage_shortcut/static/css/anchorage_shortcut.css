@@ -414,14 +414,14 @@ a.footer-link {
     font-size: 1.8rem;
 }
 
-.walk-through-form .form-control {
+.walk-through-form .checkbox {
     width: 1.5rem;
     height: 1.5rem;
     margin-right: 1.5rem;
     display: inline-block;
 }
 
-.walk-through-form .form-control:focus {
+.walk-through-form .checkbox:focus {
     border: 1px solid #399fd3;
 }
 
