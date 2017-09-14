@@ -15,7 +15,7 @@ class RoadmapSection(blocks.StructBlock):
 
 class HomePage(Page):
     header = models.CharField(max_length=255, blank=True)
-    mission_statement = RichTextField(blank=True)
+    mission_statement = models.CharField(max_length=255, blank=True)
     video = models.URLField(max_length=255, blank=True)
 
     sections = StreamField([

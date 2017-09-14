@@ -4,10 +4,10 @@
 {% load wagtailembeds_tags %}
 
 {% block left-content %}
-    <h1 class="h1-heading text-center roadmap-title">{{ page.header }}</h1>
+    <h1 class="h1-heading text-center roadmap-title"><strong>{{ page.header }}</strong></h1>
     <div class="row justify-content-center roadmap-statement">
-        <div class="col col-md-4 description">
-            {{ page.mission_statement|richtext }}
+        <div class="col description mb-4 mt-4 text-center">
+            <h2 class="h2-heading">{{ page.mission_statement}}</h2>
         </div>
         {% if page.video %}
             <div class="col col-md-4 text-center">
@@ -22,11 +22,11 @@
                 {% for testimonial in page.testimonials %}
                     {% if forloop.counter == 1 %}
                         <div class="carousel-item active">
-                            <p class="carousel-text">{{ testimonial.value.quote }} - {{ testimonial.value.name }}</p>
+                            <span class="carousel-text"><h3 class="h3-heading">{{ testimonial.value.quote }}</h3> - {{ testimonial.value.name }}</span>
                         </div>
                     {% else %}
                         <div class="carousel-item">
-                            <p class="carousel-text">{{ testimonial.value.quote }} - {{ testimonial.value.name }}</p>
+                            <span class="carousel-text"><h3 class="h3-heading">{{ testimonial.value.quote }}</h3> - {{ testimonial.value.name }}</span>
                         </div>
                     {% endif %}
                 {% endfor %}

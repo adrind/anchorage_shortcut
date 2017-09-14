@@ -106,18 +106,6 @@ class TaskChoicesBlock(blocks.StreamBlock):
         label='Add choices to guide a client to services'
         template='roadmap/task_list/partials/_choice_form.html'
 
-class GuidedSectionBlock(blocks.StreamBlock):
-    walk_through_description = blocks.RichTextBlock(default='')
-    self_service_description = blocks.RichTextBlock(default='')
-    choice_list = TaskChoicesBlock(label='The options a user can select to discover what steps they should take')
-    rules = blocks.StructBlock([
-        ('name', ChoiceRulesBlock()),
-        ('pages', blocks.ListBlock(blocks.PageChooserBlock())),
-    ], label='Rules to define the logic that guides a user to the right Step page')
-
-    class Meta:
-        label='Add a section to guide users'
-
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
     body = RichTextField(blank=True)
