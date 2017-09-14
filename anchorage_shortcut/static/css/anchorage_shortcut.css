@@ -171,6 +171,7 @@ a.footer-link {
     background-color: #399fd3;
     border-color: #399fd3;
     font-size: 1.6rem;
+    cursor: pointer;
 }
 
 .btn-base-blue {
