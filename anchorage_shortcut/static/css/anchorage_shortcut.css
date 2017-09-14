@@ -62,6 +62,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     width: auto; /* used to reset homepage */
 }
 
+.card {
+    border: none; /* used to reset homepage card border */
+}
+
 /* Resets embedded video padding */
 .container-fluid .responsive-object {
     padding-bottom: 0 !important;
