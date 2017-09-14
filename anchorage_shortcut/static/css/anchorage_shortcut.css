@@ -101,6 +101,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     font-size: 3.2rem;
 }
 
+#header .navbar-brand:focus {
+    border: 1px solid white;
+}
+
 #footer {
     margin-top: 2rem;
     background-color: #666;
@@ -416,6 +420,11 @@ a.footer-link {
     margin-right: 1.5rem;
     display: inline-block;
 }
+
+.walk-through-form .form-control:focus {
+    border: 1px solid #399fd3;
+}
+
 
 .choice-checkbox-label {
     width: 80%;
