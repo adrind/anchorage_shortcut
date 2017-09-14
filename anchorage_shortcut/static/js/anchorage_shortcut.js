@@ -56,7 +56,7 @@ $(document).ready(function() {
   }
 
   if (typeof(Storage) !== "undefined") {
-      var checkList = JSON.parse(localStorage.getItem('checklist')),
+      var checkList = JSON.parse(sessionStorage.getItem('checklist')),
           $checkList = $('#checklist');
 
       if(!checkList) {
@@ -81,7 +81,7 @@ $(document).ready(function() {
           if (!isAlreadyChecked(id, checkList.items)) {
               addToCheckList(id, $target.data('title'));
               checkList.items.push({id: id, title: $target.data('title')});
-              localStorage.setItem('checklist', JSON.stringify(checkList));
+              sessionStorage.setItem('checklist', JSON.stringify(checkList));
           }
       }).hover(function (evt) {
           var $target = $(evt.target);
@@ -101,7 +101,7 @@ $(document).ready(function() {
       });
       
       $('.clear-checklist').click(function (evt) {
-          localStorage.clear();
+          sessionStorage.clear();
           $('#checklist').hide();
           $('#checklist .list').remove('li');
       });
