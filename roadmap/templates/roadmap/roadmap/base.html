@@ -11,7 +11,7 @@
         </div>
         {% if page.video %}
             <div class="col col-md-4 text-center">
-                {% embed page.video max_width=300 %}
+                {% embed page.video max_width=400 %}
             </div>
         {% endif %}
     </div>
@@ -22,11 +22,11 @@
                 {% for testimonial in page.testimonials %}
                     {% if forloop.counter == 1 %}
                         <div class="carousel-item active">
-                            <span class="carousel-text"><h3 class="h3-heading">{{ testimonial.value.quote }}</h3> - {{ testimonial.value.name }}</span>
+                            <span class="carousel-text"><h4 class="h4-heading">{{ testimonial.value.quote }}</h4> - {{ testimonial.value.name }}</span>
                         </div>
                     {% else %}
                         <div class="carousel-item">
-                            <span class="carousel-text"><h3 class="h3-heading">{{ testimonial.value.quote }}</h3> - {{ testimonial.value.name }}</span>
+                            <span class="carousel-text"><h4 class="h4-heading">{{ testimonial.value.quote }}</h4> - {{ testimonial.value.name }}</span>
                         </div>
                     {% endif %}
                 {% endfor %}
