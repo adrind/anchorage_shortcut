@@ -4,15 +4,16 @@
 {% block content %}
     <div class="row nav mb-3">
         {% if page.depth != 2 %}
-            <ol class="breadcrumb">
-            {% for ancestor in page.get_ancestors %}
-                {% if ancestor.title != 'Root' %}
-                    <li class="breadcrumb-item"><a href="{{ ancestor.url }}">{{ ancestor.title }}</a></li>
-                {% endif %}
-            {% endfor %}
-            <li class="breadcrumb-item active"><a href="{{ page.url }}">{{ page.title }}</a></li>
-            </ol>
-
+            <div class="col">
+                <ol class="breadcrumb">
+                {% for ancestor in page.get_ancestors %}
+                    {% if ancestor.title != 'Root' %}
+                        <li class="breadcrumb-item"><a href="{{ ancestor.url }}">{{ ancestor.title }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                <li class="breadcrumb-item active"><a href="{{ page.url }}">{{ page.title }}</a></li>
+                </ol>
+            </div>
             <div class="col">
                 <div id="google_translate_element" class="text-right"></div>
                 <script type="text/javascript">

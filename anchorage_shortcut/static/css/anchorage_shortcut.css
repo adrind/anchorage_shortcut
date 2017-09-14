@@ -4,11 +4,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 /*** GLOBAL STYLES AND RESETS ***/
 
-.card-block {
-    border: none;
-    min-height: 11.0rem;
-}
-
 .container-fluid.roadmap {
     font-size: 1.6rem;
     padding: 0;
@@ -58,10 +53,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-bottom: 1rem;
 }
 
-.card {
-    border: none;
-}
-
 .list-group-item {
     border: none;
     text-decoration: underline;
@@ -87,7 +78,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     -webkit-box-shadow: 1px 1px 1px 1px #ccc;
     -moz-box-shadow: 1px 1px 1px 1px #ccc;
 }
-
 
 #header .icon-mountains,
 #header .header-text {
@@ -122,17 +112,6 @@ a.footer-link {
     text-decoration: underline;
 }
 
-.header-title .icon-mountains {
-    font-size: 5.8rem;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.header-title .header-text {
-    display: inline-block;
-    vertical-align: middle;
-}
-
 /*** end of base.html styles ***/
 
 /* HEADING STYLES */
@@ -162,20 +141,6 @@ a.footer-link {
 
 .h4-heading {
     font-size: 2.0rem;
-}
-
-.blue-heading {
-    color: #399fd3;
-}
-
-.rich-text h4 {
-    font-size: 2.0rem;
-    margin-bottom: 2.0rem;
-    margin-top: -1.5rem;
-}
-
-.rich-text .responsive-object {
-    padding-bottom: 0 !important;
 }
 
 .h5-heading {
@@ -214,21 +179,6 @@ a.footer-link {
     border-color: #999;
 }
 
-.btn-selfservice,
-.btn-selfservice:hover {
-    background-color: #69579C;
-    border-color: #69579C;
-    box-shadow: 3px 3px 4px 2px #ccc;
-    color: #fff;
-    font-size: 1.6rem;
-    font-weight: bold;
-    margin-right: 1rem;
-}
-
-.btn-base-sm {
-    font-size: 1.2rem;
-}
-
 .add-to-check-list {
     margin: auto 0;
     color: #636c72;
@@ -242,52 +192,8 @@ a.footer-link {
 
 /*** end of button styles ***/
 
-/*** RIGHT CONTENT ***/
-.faq-title,
-.related-resources-title {
-    border-bottom: 2px solid #399fd3;
-    max-width: 200px;
-}
-
-.related-resource a,
-.faq a {
-    font-size: 16px;
-    color: #000;
-    font-weight: normal;
-}
-
-/* Might be able to get rid of this soon */
-.back-link {
-    font-style: italic;
-    text-decoration: underline;
-    color: #399fd3;
-}
-
 
 /*** ROAD MAP ***/
-
-/* Used as the start button on roadmap */
-.roadmap-btn {
-    width: 80%;
-    height: 2.4rem;
-    border: 1px solid #399fd3;
-    padding: 0;
-    line-height: 2.4rem;
-    background-color: white;
-    color: #333;
-    font-size: 1.6rem;
-}
-
-.roadmap-btn:hover {
-    border: 1px solid #399fd3;
-    background-color: #399fd3;
-    color: white;
-}
-
-.roadmap-task {
-    border-bottom: 1px solid #ccc;
-    line-height: 2.4rem;
-}
 
 .roadmap-title {
     margin-bottom: 2.0rem;
@@ -327,59 +233,6 @@ a.footer-link {
 }
 
 /* TASK LIST */
-
-.task-list-section {
-    background-color: #399fd3;
-    color: white;
-    margin-right: 1rem;
-    -webkit-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
-    -moz-box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
-    box-shadow: 4px 4px 5px 0px rgba(204,204,204,1);
-    margin-top: 1rem;
-}
-
-/* Overrides rich text h3 style */
-.task-list-section h3 {
-    text-align: center;
-    font-weight: bold;
-}
-
-.task-list-section .task-list-btn {
-    background-color: #00a175;
-    color: white;
-    text-align: center;
-    font-weight: 600;
-    width: 80%;
-    position: absolute;
-    bottom: 15px;
-    left: 10%;
-    font-size: 1.4rem;
-    -webkit-box-shadow: 1px 1px 2px 0px #333;
-    -moz-box-shadow: 1px 1px 2px 0px #333;
-    box-shadow: 1px 1px 2px 0px #333;
-}
-
-.task-list-section .task-list-btn:hover {
-    background-color: #fedd44;
-    color: black;
-    text-align: center;
-}
-
-.task-list-section .task-list-btn:focus {
-    background-color: #fedd44;
-    color: black;
-    text-align: center;
-}
-
-.task-list-section .rich-text {
-    padding-bottom: 4rem;
-}
-
-.task-page-link {
-    font-size: 1.8rem;
-    color: #399fd3;
-    text-decoration: underline;
-}
 
 .step-btn {
     border: 1px solid #399fd3;
@@ -425,7 +278,6 @@ a.footer-link {
     border: 1px solid #399fd3;
 }
 
-
 .choice-checkbox-label {
     width: 80%;
 }
@@ -433,7 +285,6 @@ a.footer-link {
 .choice-checkbox-label:focus {
     outline: auto;
 }
-
 
 /*** STEP PAGE STYLES ***/
 
@@ -466,17 +317,8 @@ a.footer-link {
 
 /* WALK THROUGH */
 
-.choice-result {
-    border-bottom: 1px solid #ccc;
-}
-
 .table td {
     border-top: none;
-}
-
-.choice-td a {
-    color: black;
-    text-decoration: underline;
 }
 
 @media (min-width: 768px) {
@@ -573,9 +415,8 @@ a.footer-link {
     padding-left: 1.5rem;
 }
 
-@media (max-width: 440px) {
-    /* Needed a small title for small mobile phones (iphone 5 etc) */
-    .header-title {
-        font-size: 28px;
+@media (max-width: 586px) {
+    #header {
+        height: 150px;
     }
 }
