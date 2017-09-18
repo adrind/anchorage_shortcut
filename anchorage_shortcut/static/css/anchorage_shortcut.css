@@ -56,6 +56,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .list-group-item {
     border: 1px solid #ccc;
     text-decoration: underline;
+    margin-left: 1.0rem;
 }
 
 .card-img-top {
@@ -64,7 +65,17 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 .card {
     border: none; /* used to reset homepage card border */
+    margin-left: 1.0rem;
 }
+
+.card:first-child {
+    margin-left: 0;
+}
+
+.card-block {
+    margin-top: 1.0rem;
+}
+
 
 /* Resets embedded video padding */
 .container-fluid .responsive-object {
