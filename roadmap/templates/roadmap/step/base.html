@@ -13,12 +13,13 @@
         <div class="col">
             {{ page.body|richtext }}
         </div>
+
         {% if page.address or page.contact %}
             <div class="col">
-                {% if page.address %}
+                {% if page.contact %}
                     {% include 'roadmap/partials/contact.html' with contact=page.contact %}
                 {% endif %}
-                {% if page.contact %}
+                {% if page.address %}
                     <div id="map" data-lat="{{page.lat}}" data-lng="{{page.lng}}" data-address="{{page.address}}" style="width:350px;height:350px;"></div>
                 {% endif %}
             </div>
