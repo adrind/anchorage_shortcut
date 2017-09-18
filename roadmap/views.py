@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from .models import StepPage
-# Create your views here.
 
 def print(request):
     pages = request.GET['ids']
