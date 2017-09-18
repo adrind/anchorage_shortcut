@@ -1,39 +1,31 @@
 {% extends "roadmap/base.html" %}
 
 {% load wagtailcore_tags %}
-{% load wagtailimages_tags %}
 
 {% block left-content %}
     <div class="row">
-        {% if page.next_step %}
-            <a href="{{ page.get_parent.url }}">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                Next Step
-            </a>
-        {% endif %}
-    </div>
-
-    {% if stepIds %}
-        {% include 'roadmap/step/partials/_step_nav.html' %}
-    {% endif %}
-
-    <div class="row">
-        {% if step_number %}
-            <h3 class="h3-heading">{{ step_number }}. {{ page.title }}</h3>
-        {% else %}
-            <i class="fa fa-plus-square add-to-check-list mr-2" aria-hidden="true" data-id="{{ page.id }}" data-title="{{ page.title }}"></i><h1 class="h1-blue-heading mb-0">{{ page.title }}</h1>
-        {% endif %}
+        <div class="col">
+            <i class="fa fa-plus-square add-to-check-list mr-2" aria-hidden="true" data-id="{{ page.id }}" data-title="{{ page.title }}"></i><h1 class="h1-blue-heading mb-0 step-header">{{ page.title }}</h1>
+        </div>
     </div>
 
     <div class="row step-body">
-        {{ page.body|richtext }}
+        <div class="col">
+            {{ page.body|richtext }}
+        </div>
+        <div class="col">
+        {% if page.address or page.contact %}
+            {% if page.address %}
+                {% include 'roadmap/partials/contact.html' with contact=page.contact %}
+            {% endif %}
+            {% if page.contact %}
+                <div id="map" data-lat="{{page.lat}}" data-lng="{{page.lng}}" data-address="{{page.address}}" style="width:350px;height:350px;"></div>
+            {% endif %}
+        {% endif %}
+        </div>
     </div>
 
     {% if page.address %}
-        <div class="row">
-            <div id="map" data-lat="{{page.lat}}" data-lng="{{page.lng}}" data-address="{{page.address}}" style="width:500px;height:500px;"></div>
-        </div>
-
         <script>
           function initMap() {
             var mapDiv = document.getElementById('map');
@@ -71,49 +63,5 @@
           }
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-_hKQV1UOV4Wsqj8D3SjDUg417An4w4I&callback=initMap"></script>
-    {% endif %}
-{% endblock %}
-
-{% block right-content %}
-    <div class="print-page">
-        <a href="javascript:window.print()">
-            <i class="fa fa-print" aria-hidden="true"></i>
-            Print Page
-        </a>
-    </div>
-    {{ block.super }}
-    {% if page.contact %}
-        <section class="contact-section mt-4">
-            <div class="row no-gutters mt-4">
-                <div class="col mb-2">
-                    <strong>Other questions?</strong> Talk to someone now:
-                </div>
-            </div>
-            <div class="row mb-4">
-                <div class="col col-md-4">
-                    {% image page.contact.image width-100 class="img-thumbnail" %}
-                </div>
-                <div class="col col-md-8">
-                    <p>{{ page.contact.name }}</p>
-                    {% if page.contact.location %}
-                        at {{ page.contact.location }}
-                    {% endif %}
-                </div>
-            </div>
-            {% if page.contact.email %}
-                <div class="row">
-                    <div class="col">
-                        <i class="fa fa-envelope-o mr-2" aria-hidden="true"></i> <a href="mailto:{{ page.contact.email }}">{{ page.contact.email }}</a>
-                    </div>
-                </div>
-            {% endif %}
-            {% if page.contact.phone_number %}
-                <div class="row">
-                    <div class="col">
-                        <i class="fa fa-phone mr-2" aria-hidden="true"></i> {{ page.contact.phone_number }}
-                    </div>
-                </div>
-            {% endif %}
-        </section>
     {% endif %}
 {% endblock %}

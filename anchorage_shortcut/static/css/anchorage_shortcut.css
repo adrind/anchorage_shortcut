@@ -54,7 +54,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .list-group-item {
-    border: none;
+    border: 1px solid #ccc;
     text-decoration: underline;
 }
 
@@ -299,6 +299,10 @@ a.footer-link {
     border-bottom: 1px solid #ccc;
 }
 
+.step-header {
+    display: inline-block;
+}
+
 .print-page {
     font-size: 2.4rem;
 }
@@ -320,6 +324,7 @@ a.footer-link {
     border: 2px solid #399fd3;
     padding: 10px;
     border-radius: 5px;
+    width: 350px;
 }
 
 /* WALK THROUGH */
