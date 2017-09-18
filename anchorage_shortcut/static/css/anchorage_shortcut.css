@@ -79,6 +79,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card {
     border: none;
     margin-left: 1.0rem;
+    min-width: 180px;
 }
 
 .card:first-child {
