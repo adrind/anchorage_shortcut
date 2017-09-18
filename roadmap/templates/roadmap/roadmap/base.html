@@ -42,11 +42,12 @@
             <div class="card-block">
                 <ul class="list-group">
                     {% for list in section.value.pages %}
-                        <li class="list-group-item">
-                            <a class="task-list-title" href="{{ list.url }}">
-                                {{ list.title }}
-                            </a>
-                        </li>
+                        <a class="task-list-title" href="{{ list.url }}">
+                            <li class="list-group-item">
+
+                                    {{ list.title }}
+                            </li>
+                        </a>
                     {% endfor %}
                 </ul>
             </div>

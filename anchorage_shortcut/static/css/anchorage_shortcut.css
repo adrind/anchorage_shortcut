@@ -54,17 +54,30 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .list-group-item {
-    border: 1px solid #ccc;
-    text-decoration: underline;
-    margin-left: 1.0rem;
+    padding: 0.5rem;
+    border: 1px solid #399fd3;
+    box-shadow: 1px 1px 1px 1px #ccc;
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
+    -moz-box-shadow: 1px 1px 1px 1px #ccc;
+    border-radius: 3px;
+    width: 220px;
+    margin: 0 auto;
 }
+
+.list-group-item:hover,
+.list-group-item:hover a {
+    background-color: #399fd3;
+    cursor: pointer;
+    color: white;
+}
+
 
 .card-img-top {
     width: auto; /* used to reset homepage */
 }
 
 .card {
-    border: none; /* used to reset homepage card border */
+    border: none;
     margin-left: 1.0rem;
 }
 
@@ -253,7 +266,8 @@ a.footer-link {
     color: #333;
     cursor: pointer;
     width: 100%;
-    text-decoration: underline;
+    margin-bottom: 15px;
+    text-decoration: none;
 }
 
 /* TASK LIST */
