@@ -82,6 +82,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     padding-bottom: 0 !important;
 }
 
+.centered-text,
+.centered-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
 /*** BASE.HTML ***/
 #header {
     height: 6.0rem;
@@ -196,7 +202,7 @@ a.footer-link {
 
 .add-to-check-list {
     margin: auto 0;
-    color: #636c72;
+    color: #00a175;
     font-size: 2.4rem !important;
 }
 
@@ -332,10 +338,15 @@ a.footer-link {
 }
 
 .contact-section {
-    border: 2px solid #399fd3;
+    border: 2px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     width: 350px;
+}
+
+.contact-email,
+.contact-email:hover {
+    color: #399fd3;
 }
 
 /* WALK THROUGH */
@@ -424,8 +435,9 @@ a.footer-link {
 
 /* CHECKLIST */
 
-#checklist {
+#checklist .save-to-checklist {
     display: none;
+    font-style: italic;
 }
 
 #checklist h4 {
@@ -436,6 +448,11 @@ a.footer-link {
 
 #checklist .list {
     padding-left: 1.5rem;
+}
+
+#checklist .checklist-header {
+    color: #00a175;
+    font-weight: bold;
 }
 
 @media (max-width: 586px) {

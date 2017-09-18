@@ -57,7 +57,8 @@ $(document).ready(function() {
 
   if (typeof(Storage) !== "undefined") {
       var checkList = JSON.parse(sessionStorage.getItem('checklist')),
-          $checkList = $('#checklist');
+          $checkList = $('#checklist .list'),
+          $saveToChecklist = $('#checklist .save-to-checklist');
 
       if(!checkList) {
           checkList = {
@@ -65,8 +66,10 @@ $(document).ready(function() {
           };
       }
 
-      if(checkList.items.length > 0) {
-          $checkList.show();
+      if(checkList.items.length === 0) {
+          $saveToChecklist.show();
+      } else {
+        $checkList.show();
       }
 
       $.each(checkList.items, function (i, page) {
@@ -78,6 +81,7 @@ $(document).ready(function() {
               id = $target.data('id');
 
           $checkList.show();
+          $saveToChecklist.hide();
           if (!isAlreadyChecked(id, checkList.items)) {
               addToCheckList(id, $target.data('title'));
               checkList.items.push({id: id, title: $target.data('title')});
@@ -102,8 +106,9 @@ $(document).ready(function() {
       
       $('.clear-checklist').click(function (evt) {
           sessionStorage.clear();
-          $('#checklist').hide();
-          $('#checklist .list').remove('li');
+          $checkList.remove('li');
+          $checkList.hide();
+          $saveToChecklist.show();
       });
   }
 
