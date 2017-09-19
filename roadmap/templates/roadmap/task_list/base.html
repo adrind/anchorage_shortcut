@@ -1,9 +1,7 @@
 {% extends "roadmap/base.html" %}
+{% load wagtailcore_tags %}
 
 {# Core page for the task list #}
-{# There are three views a user can see depending on the content provided in the admin #}
-
-{% load wagtailcore_tags %}
 
 {% block left-content %}
     {% if page.body %}
@@ -13,18 +11,26 @@
     {% endif %}
     <div class="row">
         {% if page.choices %}
-            <div class="col-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="col-12 col-md-9 col-lg-9 col-xl-9">
                 {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
+                <div class="row mt-4 mb-4">
+                    <div class="col">
+                        {% if showMessage %}
+                            {{ page.message }}
+                        {% else %}
+                            <h4 class="h4-heading"><strong>Or choose from below:</strong></h4>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    {% for step in steps %}
+                        <div class="col">
+                            {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         {% endif %}
-        <div class="col">
-            {% if showMessage %}
-                <div class="row"><div class="col">{{ page.message }}</div></div>
-            {% endif %}
-            {% for step in steps %}
-                {% include 'roadmap/step/partials/_step_btn.html' with step=step %}
-            {% endfor %}
-        </div>
         {% include 'roadmap/partials/checklist.html' %}
     </div>
 {% endblock %}

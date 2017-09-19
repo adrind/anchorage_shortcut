@@ -273,34 +273,16 @@ a.footer-link {
 
 /* TASK LIST */
 
-.step-btn {
-    border: 1px solid #399fd3;
-    font-size: 1.4rem;
-    width: 150px;
+.task-list-link {
+    text-decoration: underline;
     color: #399fd3;
-    height: 160px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    box-shadow: 1px 1px 1px 1px #ccc;
-    -webkit-box-shadow: 1px 1px 1px 1px #ccc;
-    -moz-box-shadow: 1px 1px 1px 1px #ccc;
-    text-align: center;
-    white-space: normal;
-    display: inline-block;
-}
-
-.step-btn h5 {
+    font-size: 2rem;
     font-weight: bold;
-    font-size: 1.8rem;
-    white-space: normal;
 }
 
-.step-btn:hover,
-.step-btn:focus {
-    color: white;
-    background-color: #399fd3;
+.task-list-description {
+    margin-bottom: 2.0rem;
 }
-
 .walk-through-form {
     width: 100%;
     font-size: 1.8rem;
@@ -350,6 +332,18 @@ a.footer-link {
 
 .print-preview .short-field {
     width: 15rem;
+}
+
+.print-checklist {
+    background-color: #399fd3;
+    border-color: #399fd3;
+    text-transform: uppercase;
+}
+
+.clear-checklist {
+    border-color: #399fd3;
+    color: #399fd3;
+    text-transform: uppercase;
 }
 
 .contact-section {
@@ -469,7 +463,6 @@ a.footer-link {
 #checklist .checklist-header {
     color: #00a175;
     font-weight: bold;
-    text-decoration: underline;
 }
 
 #checklist .checklist-btns.show {
