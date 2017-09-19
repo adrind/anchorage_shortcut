@@ -5,13 +5,14 @@
 
 {% block left-content %}
     <div class="row">
-        {% if page.choices %}
             <div class="col-12 col-md-9 col-lg-9 col-xl-9">
-                {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
+                {% if page.choices %}
+                    {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
+                {% endif %}
                 <div class="row task-list-links mt-4 mb-4">
                     <div class="col">
                         {% if showMessage %}
-                            {{ page.message }}
+                            <h4 class="h4-heading"><strong> {{ page.message }}</strong></h4>
                         {% else %}
                             <h4 class="h4-heading"><strong>Or choose from below:</strong></h4>
                         {% endif %}
@@ -25,7 +26,6 @@
                     {% endfor %}
                 </div>
             </div>
-        {% endif %}
         {% include 'roadmap/partials/checklist.html' %}
     </div>
 {% endblock %}
