@@ -62,6 +62,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     border-radius: 3px;
     width: 220px;
     margin: 0 auto;
+    font-size: 2.4rem;
 }
 
 .list-group-item:hover,
@@ -79,6 +80,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card {
     border: none;
     margin-left: 1.0rem;
+    margin-top: 2.0rem;
     min-width: 250px;
 }
 
@@ -178,7 +180,7 @@ a.footer-link {
 }
 
 .h5-heading {
-    font-weight: 600;
+    font-size: 1.8rem;
 }
 /*** end of heading styles ***/
 
@@ -243,6 +245,19 @@ a.footer-link {
     width: 100%;
     text-align: center;
     font-size: 3.2rem !important;
+}
+
+.roadmap-statement {
+    border-bottom: 1px solid #636c72;
+}
+
+.roadmap-statement h2 {
+    border-bottom: 1px solid #636c72;
+    padding-bottom: 2.0rem;
+}
+
+.roadmap-statement h5 {
+    padding: 1.0rem 0;
 }
 
 .testimonials {

@@ -6,8 +6,13 @@
 {% block left-content %}
     <h1 class="h1-heading text-center roadmap-title"><strong>{{ page.header }}</strong></h1>
     <div class="row justify-content-center roadmap-statement">
-        <div class="col description mb-4 mt-4 text-center">
+        <div class="col description mb-4">
             <h2 class="h2-heading">{{ page.mission_statement}}</h2>
+            {% if page.testimonials %}
+                {% for testimonial in page.testimonials %}
+                    <h5 class="h5-heading">{{ testimonial.value.quote }} - {{ testimonial.value.name }}</h5>
+                {% endfor %}
+            {% endif %}
         </div>
         {% if page.video %}
             <div class="col text-center">
@@ -15,24 +20,6 @@
             </div>
         {% endif %}
     </div>
-
-    {% if page.testimonials %}
-        <div id="testimonials-carousel" class="carousel slide testimonials" data-ride="carousel">
-            <div class="carousel-inner" role="listbox">
-                {% for testimonial in page.testimonials %}
-                    {% if forloop.counter == 1 %}
-                        <div class="carousel-item active">
-                            <span class="carousel-text"><h4 class="h4-heading">{{ testimonial.value.quote }}</h4> - {{ testimonial.value.name }}</span>
-                        </div>
-                    {% else %}
-                        <div class="carousel-item">
-                            <span class="carousel-text"><h4 class="h4-heading">{{ testimonial.value.quote }}</h4> - {{ testimonial.value.name }}</span>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
 
     <div class="card-group">
     {% for section in page.sections %}
