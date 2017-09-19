@@ -4,16 +4,11 @@
 {# Core page for the task list #}
 
 {% block left-content %}
-    {% if page.body %}
-        <div class="row mb-4">
-            {{ page.body|richtext }}
-        </div>
-    {% endif %}
     <div class="row">
         {% if page.choices %}
             <div class="col-12 col-md-9 col-lg-9 col-xl-9">
                 {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
-                <div class="row mt-4 mb-4">
+                <div class="row task-list-links mt-4 mb-4">
                     <div class="col">
                         {% if showMessage %}
                             {{ page.message }}
