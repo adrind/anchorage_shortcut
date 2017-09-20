@@ -4,18 +4,13 @@
 {% load wagtailembeds_tags %}
 
 {% block left-content %}
-    <div class="row justify-content-center roadmap-statement">
-        <div class="col col-lg-10 description mb-4">
+    <div class="row justify-content-center align-items-center roadmap-statement">
+        <div class="col description">
             <h2 class="h2-heading text-center">{{ page.mission_statement}}</h2>
             {% if page.video %}
                 <div class="text-center">
-                {% embed page.video max_width=600 %}
+                    {% embed page.video max_width=500 %}
                 </div>
-            {% endif %}
-            {% if page.testimonials %}
-                {% for testimonial in page.testimonials %}
-                    <h5 class="h5-heading">{{ testimonial.value.quote }} - {{ testimonial.value.name }}</h5>
-                {% endfor %}
             {% endif %}
         </div>
     </div>
