@@ -15,6 +15,7 @@
         </div>
 
         {% if page.address or page.contact %}
+            {% include 'roadmap/partials/checklist.html' %}
             <div class="col">
                 {% if page.contact %}
                     {% include 'roadmap/partials/contact.html' with contact=page.contact %}
@@ -24,7 +25,6 @@
                 {% endif %}
             </div>
         {% endif %}
-        {% include 'roadmap/partials/checklist.html' %}
     </div>
 
     {% if page.address %}

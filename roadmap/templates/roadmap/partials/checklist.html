@@ -1,16 +1,14 @@
 {% if page.depth != 2 %}
-    <div id="checklist" class="col{{ class }} col-md-3 col-lg-3 col-xl-3">
-        <h4 class="h4-heading checklist-header centered-text">Checklist</h4>
-        <div class="btn-group checklist-btns" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-secondary print-checklist">Print</button>
-          <button type="button" class="btn btn-outline-secondary clear-checklist">Clear</button>
-        </div>
-        {% if page.depth == 4 %}
-            <!-- Then we know it's a step page -->
-            <p class="save-to-checklist"><i class="fa fa-plus-square add-to-check-list centered-icon mr-2" aria-hidden="true" data-id="{{ page.id }}" data-title="{{ page.title }}"></i><span class="centered-text">Save this page</span></p>
-        {% endif %}
-        <ol class="list">
-            <!-- filled by script -->
-        </ol>
+    <h4 class="h4-heading checklist-header centered-text">Checklist</h4>
+    <div class="btn-group checklist-btns" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary print-checklist">Print</button>
+      <button type="button" class="btn btn-outline-secondary clear-checklist">Clear</button>
     </div>
+    {% if page.depth == 4 %}
+        <!-- Then we know it's a step page -->
+        <p class="save-to-checklist"><i class="fa fa-plus-square add-to-check-list centered-icon mr-2" aria-hidden="true" data-id="{{ page.id }}" data-title="{{ page.title }}"></i><span class="centered-text">Save this page</span></p>
+    {% endif %}
+    <ol class="list">
+        <!-- filled by script -->
+    </ol>
 {% endif %}
