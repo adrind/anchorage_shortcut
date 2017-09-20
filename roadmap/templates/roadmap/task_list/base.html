@@ -11,11 +11,17 @@
                 {% endif %}
                 <div class="row task-list-links mt-4 mb-4">
                     <div class="col">
-                        {% if showMessage %}
-                            <h4 class="h4-heading"><strong> {{ page.message }}</strong></h4>
-                        {% else %}
-                            <h4 class="h4-heading"><strong>Or choose from below:</strong></h4>
-                        {% endif %}
+                        <h4 class="h4-heading"><strong>
+                            {% if showMessage %}
+                                {{ page.message }}
+                            {% else %}
+                                {% if page.choices %}
+                                    Or choose from below:
+                                {% else %}
+                                    Choose from below:
+                                {% endif %}
+                            {% endif %}
+                        </strong></h4>
                     </div>
                 </div>
                 <div class="row">
