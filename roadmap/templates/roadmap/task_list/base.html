@@ -5,7 +5,7 @@
 
 {% block left-content %}
     <div class="row">
-            <div class="col-12 col-md-9 col-lg-9 col-xl-9">
+            <div class="col">
                 {% if page.choices %}
                     {% include 'roadmap/task_list/partials/_choice_form.html' with parent_url=page.url %}
                 {% endif %}
@@ -32,6 +32,6 @@
                     {% endfor %}
                 </div>
             </div>
-        {% include 'roadmap/partials/checklist.html' %}
+        {% include 'roadmap/partials/checklist.html' with class=' track-list' %}
     </div>
 {% endblock %}

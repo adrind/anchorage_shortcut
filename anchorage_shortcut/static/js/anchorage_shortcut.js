@@ -57,6 +57,7 @@ $(document).ready(function() {
 
   if (typeof(Storage) !== "undefined") {
       var checkList = JSON.parse(sessionStorage.getItem('checklist')),
+          $checkListDiv = $('#checklist'),
           $checkList = $('#checklist .list'),
           $saveToChecklist = $('#checklist .save-to-checklist'),
           $checkListButtons = $('#checklist .checklist-btns');
@@ -67,13 +68,15 @@ $(document).ready(function() {
           };
       }
 
-      if(checkList.items.length === 0) {
-          $saveToChecklist.show();
-      } else {
+      if(checkList.items.length > 0) {
+          $checkListDiv.show();
           $checkList.show();
           $checkListButtons.addClass('show');
+      } else if(!$checkListDiv.hasClass('track-list')) {
+          $checkListDiv.show();
+          $saveToChecklist.show();
       }
-
+      
       $.each(checkList.items, function (i, page) {
           addToCheckList(page.id, page.title);
       });
