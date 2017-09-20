@@ -76,7 +76,7 @@ $(document).ready(function() {
           $checkListDiv.show();
           $saveToChecklist.show();
       }
-      
+
       $.each(checkList.items, function (i, page) {
           addToCheckList(page.id, page.title);
       });

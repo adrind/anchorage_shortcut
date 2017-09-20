@@ -244,17 +244,14 @@ a.footer-link {
     font-size: 3.2rem !important;
 }
 
-.roadmap-statement {
-    border-bottom: 1px solid #636c72;
-}
-
 .roadmap-statement h2 {
-    border-bottom: 1px solid #636c72;
     padding-bottom: 2.0rem;
 }
 
 .roadmap-statement h5 {
     padding: 1.0rem 0;
+    margin: auto;
+    width: 70%;
 }
 
 .testimonials {
