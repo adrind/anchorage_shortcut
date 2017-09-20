@@ -26,6 +26,12 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     content: ">";
 }
 
+.container-fluid a,
+.container-fluid a:hover,
+.container-fluid a:visited {
+    color: #399fd3;
+}
+
 .main-nav {
     padding-left: 1.5rem;
 }
@@ -362,10 +368,13 @@ a.footer-link {
     text-transform: uppercase;
 }
 
+#checklist {
+    margin-bottom: 4.5rem;
+}
+
 .contact-section {
-    border: 2px solid #ccc;
+    border-top: 1px solid #ccc;
     padding: 10px;
-    border-radius: 5px;
     width: 350px;
 }
 
