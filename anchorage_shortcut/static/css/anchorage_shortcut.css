@@ -27,9 +27,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .container-fluid a,
-.container-fluid a:hover,
 .container-fluid a:visited {
     color: #399fd3;
+    text-decoration: underline;
 }
 
 .main-nav {
