@@ -37,8 +37,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 /* Vertically aligns the div in the row */
-#google_translate_element {
+#google-translate-element {
     padding: 0.75rem 1rem;
+    text-align: right;
 }
 
 /* Required to prevent images added in the admin panel from breaking out of the col */
@@ -471,5 +472,11 @@ a.footer-link {
     #header .navbar {
         margin: 0 auto;
 
+    }
+}
+
+@media (max-width: 768px) {
+    #google-translate-element {
+        text-align: left;
     }
 }
