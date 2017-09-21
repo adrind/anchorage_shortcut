@@ -15,7 +15,8 @@
                 </ol>
             </div>
         {% endif %}
-        <div class="col-12 col-md-6 col-lg-6 col-xl-6">
+
+        <div class="col-12{% if page.depth != 2 %} col-md-6 col-lg-6 col-xl-6{% endif %}">
             <div id="google-translate-element"></div>
             <script type="text/javascript">
                 function googleTranslateElementInit() {
