@@ -169,12 +169,6 @@ a.footer-link {
     font-size: 4.8rem;
 }
 
-.h1-blue-heading {
-    font-size: 3.6rem;
-    font-weight: 600;
-    color: #399fd3;
-}
-
 .h2-heading {
     font-size: 3.2rem;
 }
@@ -234,15 +228,10 @@ a.footer-link {
     color: #999;
 }
 
-
 /*** end of button styles ***/
 
 
 /*** ROAD MAP ***/
-
-.roadmap-title {
-    margin-bottom: 2.0rem;
-}
 
 /* Vertically center description next to video */
 .roadmap-statement .rich-text {
@@ -257,28 +246,6 @@ a.footer-link {
 
 .roadmap-statement h2 {
     padding-bottom: 2.0rem;
-}
-
-.roadmap-statement h5 {
-    padding: 1.0rem 0;
-    margin: auto;
-    width: 70%;
-}
-
-.testimonials {
-    background-color: #399fd3;
-    color: white;
-    padding: 1rem 0;
-    margin-top: 2.0rem;
-    margin-bottom: 4.0rem;
-}
-
-.carousel-text {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding-left: 10%;
-    padding-right: 10%;
 }
 
 .task-list-title,
@@ -336,10 +303,6 @@ a.footer-link {
 
 /*** STEP PAGE STYLES ***/
 
-.step-nav {
-    border-bottom: 1px solid #ccc;
-}
-
 .step-header {
     display: inline-block;
 }
@@ -373,10 +336,6 @@ a.footer-link {
     text-transform: uppercase;
 }
 
-#checklist {
-    margin-bottom: 4.5rem;
-}
-
 .contact-section {
     border-top: 1px solid #ccc;
     padding: 10px;
@@ -388,25 +347,8 @@ a.footer-link {
     color: #399fd3;
 }
 
-/* WALK THROUGH */
-
 .table td {
     border-top: none;
-}
-
-@media (min-width: 768px) {
-    .container-fluid {
-        padding-left: 3.5rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .container-fluid {
-        padding-left: 1.8rem;
-    }
-    .task-list-section .task-list-btn {
-        font-size: 1.2rem;
-    }
 }
 
 /* TWITTER TYPEAHEAD */
@@ -476,6 +418,7 @@ a.footer-link {
 
 #checklist {
     display: none;
+    margin-bottom: 4.5rem;
 }
 
 #checklist .save-to-checklist,
@@ -504,8 +447,29 @@ a.footer-link {
     display: inline-flex;
 }
 
+/* EMBEDDED VIDEO */
+.video-300 {
+    display: none;
+}
+
+@media (max-width: 400px) {
+    .video-300 {
+        display: block;
+    }
+
+    .video-500 {
+        display: none;
+    }
+}
+
 @media (max-width: 586px) {
     #header {
         height: 150px;
+    }
+
+    #header .navbar-brand,
+    #header .navbar {
+        margin: 0 auto;
+
     }
 }

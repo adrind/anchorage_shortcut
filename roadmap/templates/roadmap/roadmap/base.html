@@ -8,8 +8,11 @@
         <div class="col description">
             <h2 class="h2-heading text-center">{{ page.mission_statement}}</h2>
             {% if page.video %}
-                <div class="text-center">
+                <div class="text-center video-500">
                     {% embed page.video max_width=500 %}
+                </div>
+                <div class="text-center video-300">
+                    {% embed page.video max_width=300 %}
                 </div>
             {% endif %}
         </div>
