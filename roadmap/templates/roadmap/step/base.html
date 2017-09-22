@@ -13,20 +13,20 @@
         <div class="col">
             {{ page.body|richtext }}
         </div>
+        <div class="col col-md-4 col-lg-4 col-xl-4">
+            <div id="checklist">
+                {% include 'roadmap/partials/checklist.html' %}
+            </div>
 
-        {% if page.address or page.contact %}
-            <div class="col col-md-4 col-lg-4 col-xl-4">
-                <div id="checklist">
-                    {% include 'roadmap/partials/checklist.html' %}
-                </div>
+            {% if page.address or page.contact %}
                 {% if page.contact %}
                     {% include 'roadmap/partials/contact.html' with contact=page.contact %}
                 {% endif %}
                 {% if page.address %}
                     <div id="map" data-lat="{{page.lat}}" data-lng="{{page.lng}}" data-address="{{page.address}}" style="width:350px;height:350px;"></div>
                 {% endif %}
-            </div>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 
     {% if page.address %}
