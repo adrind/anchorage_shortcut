@@ -78,7 +78,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card-img-top {
     margin-top: 2.0rem;
     margin-bottom: 2.0rem;
-    width: 75px; 
+    width: 75px;
 }
 
 .card {
@@ -223,6 +223,7 @@ a.footer-link {
     margin: auto 0;
     color: #00a175;
     font-size: 2.4rem !important;
+    cursor: pointer;
 }
 
 .add-to-check-list:hover {
@@ -425,7 +426,7 @@ a.footer-link {
 #checklist .save-to-checklist,
 #checklist .checklist-btns {
     display: none;
-    font-style: italic;
+    cursor: pointer;
 }
 
 #checklist h4 {
