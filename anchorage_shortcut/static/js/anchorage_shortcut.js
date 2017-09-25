@@ -12,7 +12,7 @@ $(document).ready(function() {
     var registerIndex = function (index, name, data) {
         return {
             source: function (query, cb) {
-                index.search({query: query, filters: 'roadmap:'+roadmapType + ' AND live:true'}, function (err, content) {
+                index.search({query: query, filters: 'live:true'}, function (err, content) {
                     if (err) {
                         cb(err);
                         return;
