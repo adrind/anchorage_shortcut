@@ -78,7 +78,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card-img-top {
     margin-top: 2.0rem;
     margin-bottom: 2.0rem;
-    width: auto; /* used to reset homepage */
+    width: 75px; 
 }
 
 .card {
