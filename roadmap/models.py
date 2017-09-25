@@ -143,9 +143,6 @@ class TaskList(Page):
 
     template = 'roadmap/task_list/base.html'
 
-    def roadmap(self):
-        return self.get_parent().slug
-
     def has_guided_tour(self):
         return len(self.choices) > 0 and len(self.rules) > 0
 
@@ -269,10 +266,6 @@ class StepPage(Page):
     ]
 
     template = 'roadmap/step/base.html'
-
-    #used to index for search
-    def roadmap(self):
-        return self.get_parent().get_parent().slug
 
     @cached_property
     def point(self):
