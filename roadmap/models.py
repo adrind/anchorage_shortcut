@@ -3,18 +3,16 @@ from __future__ import unicode_literals
 
 import re
 
-from modelcluster.fields import ParentalKey
-
 from django import forms
 from django.db import models
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, StreamFieldPanel, InlinePanel, MultiFieldPanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailforms.models import AbstractForm, AbstractFormField
 from wagtail.wagtailcore.url_routing import RouteResult
@@ -80,7 +78,7 @@ class ChoiceRulesBlock(blocks.CharBlock):
             choices = value.split(',')
             choicesHtml = ''
             for choice in choices:
-                choicesHtml = choicesHtml + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'" style="margin:0;margin-right:.5rem;margin-top:.5rem;">One choice</button>'
+                choicesHtml = choicesHtml + '<button class="selected-choice button bicolor icon icon-cross" data-id="'+choice+'" style="margin:0;margin-right:.5rem;margin-top:.5rem;">Deleted choice</button>'
             out = """<div class="new-choice-button-group"></div><h4><strong>When someone selects:</strong></h4> <div class="selected-choice-container">{}</div><h4><strong>Direct them to these pages:</strong></h4>""".format(choicesHtml)
         else:
             value = 'NEW'
@@ -143,13 +141,17 @@ class TaskList(Page):
 
     template = 'roadmap/task_list/base.html'
 
-    def has_guided_tour(self):
-        return len(self.choices) > 0 and len(self.rules) > 0
-
     def steps(self):
         # Get list of all step pages that are descendants of this page
         events = StepPage.objects.live().descendant_of(self)
         return events
+
+    def website_icon(self):
+        return self.get_parent().homepage.website_icon
+    def header_title(self):
+        return self.get_parent().homepage.title
+    def footer(self):
+        return self.get_parent().homepage.footer
 
     # Directs people to the walk through or self service routes
     # Walk through path uses the choices model to filter steps to take
@@ -305,6 +307,13 @@ class StepPage(Page):
         return render(request, self.template, {
             'page': self
         })
+    def website_icon(self):
+        return self.get_parent().tasklist.website_icon()
+    def header_title(self):
+        return self.get_parent().tasklist.header_title()
+    def footer(self):
+        return self.get_parent().tasklist.footer()
+
 
 @hooks.register('insert_editor_js')
 def editor_js():

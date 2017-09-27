@@ -1,18 +1,14 @@
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 <nav class="navbar navbar-light justify-content-between" id="header">
-    {% if page.nav %}
-        <a class="navbar-brand" href="/"><span class="icon-mountains"></span></a>
-    {% else %}
-        <a class="navbar-brand" href="/"><span class="icon-mountains"></span> <span class="header-text"><strong>Start Here</strong> Anchorage</span></a>
-    {% endif %}
+    <a class="navbar-brand" href="/">{% image page.website_icon width-32 class="mx-auto" alt="Homepage icon" %}<span class="header-text">{{ page.header_title }}</span></a>
     <div class="navbar">
         <form class="form-inline ml-auto">
             <input class="form-control mr-sm-2" type="text" aria-label="Search for help" id="q" placeholder="Search for help" autocomplete="off" autocorrect="false" spellcheck="false" style="width: 240px;height: 40px;">
         </form>
     </div>
 </nav>
-
 
 <script src="//cdn.jsdelivr.net/typeahead.js/0.10/typeahead.jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/hogan.js/3.0/hogan.min.js"></script>

@@ -153,7 +153,8 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     margin-bottom: 0;
 }
 
-a.footer-link {
+#footer a,
+#footer a:visited {
     color: #fff;
     text-decoration: underline;
 }

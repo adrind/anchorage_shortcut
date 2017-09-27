@@ -5,8 +5,9 @@ from django.db import models
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore.fields import StreamField, RichTextField
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, RichTextFieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 class RoadmapSection(blocks.StructBlock):
     title = blocks.CharBlock()
@@ -14,6 +15,16 @@ class RoadmapSection(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
 
 class HomePage(Page):
+    website_icon = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    footer = RichTextField(blank=True)
+
     header = models.CharField(max_length=255, blank=True)
     mission_statement = models.CharField(max_length=255, blank=True)
     video = models.URLField(max_length=255, blank=True)
@@ -22,24 +33,16 @@ class HomePage(Page):
         ('section', RoadmapSection())
     ], blank=True, default=[])
 
-    testimonials = StreamField([
-        ('testimonial', blocks.StructBlock([
-            ('quote', blocks.CharBlock()),
-            ('name', blocks.CharBlock())
-        ]))
-    ], blank=True, default=[])
-
     content_panels = Page.content_panels + [
+        ImageChooserPanel('website_icon'),
+        RichTextFieldPanel('footer'),
         FieldPanel('header'),
         FieldPanel('mission_statement', classname='full'),
         FieldPanel('video'),
         StreamFieldPanel('sections'),
-        StreamFieldPanel('testimonials'),
     ]
 
     template = 'roadmap/roadmap/base.html'
 
-    # Used to index
-    def roadmap(self):
-        return self.slug
-
+    def header_title(self):
+        return self.title
