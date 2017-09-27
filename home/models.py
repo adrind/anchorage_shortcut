@@ -8,6 +8,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, RichTextFieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailimages.models import Image
 
 class RoadmapSection(blocks.StructBlock):
     title = blocks.CharBlock()
@@ -46,3 +47,5 @@ class HomePage(Page):
 
     def header_title(self):
         return self.title
+    def favicon(self):
+        return Image.objects.get(file='original_images/favicon.ico.png')

@@ -152,6 +152,8 @@ class TaskList(Page):
         return self.get_parent().homepage.title
     def footer(self):
         return self.get_parent().homepage.footer
+    def favicon(self):
+        return self.get_parent().homepage.favicon()
 
     # Directs people to the walk through or self service routes
     # Walk through path uses the choices model to filter steps to take
@@ -313,7 +315,8 @@ class StepPage(Page):
         return self.get_parent().tasklist.header_title()
     def footer(self):
         return self.get_parent().tasklist.footer()
-
+    def favicon(self):
+        return self.get_parent().tasklist.favicon()
 
 @hooks.register('insert_editor_js')
 def editor_js():

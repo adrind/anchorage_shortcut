@@ -3,12 +3,14 @@ from __future__ import absolute_import, unicode_literals
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.views.decorators.cache import cache_control
 
 from search import views as search_views
 from roadmap import views as roadmap_views
 from wagtail.wagtailadmin import urls as wagtailadmin_urls
 from wagtail.wagtailcore import urls as wagtail_urls
 from wagtail.wagtaildocs import urls as wagtaildocs_urls
+from wagtail.utils.urlpatterns import decorate_urlpatterns
 
 urlpatterns = [
     url(r'^django-admin/', include(admin.site.urls)),
@@ -28,7 +30,6 @@ urlpatterns = [
     # of your site, rather than the site root:
     #    url(r'^pages/', include(wagtail_urls)),
 ]
-
 
 if settings.DEBUG:
     from django.conf.urls.static import static
