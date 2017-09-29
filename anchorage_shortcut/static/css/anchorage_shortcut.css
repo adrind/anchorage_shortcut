@@ -44,11 +44,11 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 
 /* Required to prevent images added in the admin panel from breaking out of the col */
 .step-body .rich-text {
-    width: 100%;
+    max-width: 100%;
 }
 
 .step-body .rich-text img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .w-100 {
