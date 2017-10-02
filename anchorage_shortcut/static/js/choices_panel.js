@@ -59,10 +59,52 @@ function choiceSelectedCallback(evt) {
     return false;
 };
 
+function choiceMovedUp(evt) {
+    var $choice = $(evt.target).parents('.sequence-member');
+    var oldIndex = $choice.attr('id').split('-')[1];
+    var newIndex = String(Number(oldIndex) - 1);
+
+    choiceMoved($choice, newIndex, oldIndex);
+};
+
+function choiceMovedDown(evt) {
+    var $choice = $(evt.target).parents('.sequence-member');
+    var oldIndex = $choice.attr('id').split('-')[1];
+    var newIndex = String(Number(oldIndex) + 1);
+
+    choiceMoved($choice, newIndex, oldIndex);
+};
+
+function choiceMoved($choice, newIndex, oldIndex) {
+    $('.selected-choice-input').each(function (i, selectedChoiceInput) {
+       var selectedChoiceValue = selectedChoiceInput.value;
+       var splitValueArr = selectedChoiceValue && selectedChoiceValue.split(',');
+       var tempArray = [];
+
+       if(splitValueArr.indexOf(oldIndex) !== -1) {
+           var i = splitValueArr.indexOf(oldIndex);
+           tempArray.push({index: i, value: newIndex});
+       }
+
+       if(splitValueArr.indexOf(newIndex) !== -1) {
+           var i = splitValueArr.indexOf(newIndex);
+           tempArray.push({index: i, value: oldIndex})
+       }
+
+       if(tempArray.length) {
+           for (var i in tempArray) {
+               splitValueArr[tempArray[i].index] = tempArray[i].value;
+           }
+       }
+
+       selectedChoiceInput.value = splitValueArr.join(',');
+    });
+}
+
 function choiceDeleted(evt) {
     var $choice = $(evt.target).parents('.sequence-member');
     var index = $choice.attr('id').split('-')[1];
-    
+
     $('.selected-choice-input').each(function (i, selectedChoiceInput) {
        var selectedChoiceValue = selectedChoiceInput.value;
        var splitValueArr = selectedChoiceValue && selectedChoiceValue.split(',');
@@ -88,6 +130,17 @@ function choiceDeleted(evt) {
     })
 }
 
+$(function(){
+    //Only want to run this code once
+    var $deleteChoiceBtns = $('#choices-list button[title="Delete"]');
+    var $moveUpBtns = $('#choices-list button[title="Move up"]');
+    var $moveDownBtns = $('#choices-list button[title="Move down"]');
+
+    $deleteChoiceBtns.click(choiceDeleted);
+    $moveUpBtns.click(choiceMovedUp);
+    $moveDownBtns.click(choiceMovedDown);
+});
+
 /*
  * The method that gets called each time an admin panel is created.
  * @param {string} prefix - the id of the admin panel
@@ -98,15 +151,10 @@ function initializeChoices(prefix) {
     var $selectedChoiceBtns = $(PREFIX_ID + ' .selected-choice-container').find('button');
     var selectedChoices = [];
     var availableChoices = {};
-    var $deleteChoiceBtns = $('#choices-list button[title="Delete"]');
 
     //Mark what choices are selected for this fule
     $selectedChoiceBtns.each(function (i, choice) {
         selectedChoices.push($(choice).data('id'));
-    });
-
-    $deleteChoiceBtns.each(function (i, deleteBtn) {
-       $(deleteBtn).click(choiceDeleted);
     });
 
     //Create a button for each choice from the list of available choices
