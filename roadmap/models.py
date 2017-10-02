@@ -73,7 +73,6 @@ class ChoiceRulesBlock(blocks.CharBlock):
         return super(ChoiceRulesBlock, self).clean(value)
 
     def render_form(self, value, prefix='', errors=None):
-        out = ''
         if value:
             choices = value.split(',')
             choicesHtml = ''

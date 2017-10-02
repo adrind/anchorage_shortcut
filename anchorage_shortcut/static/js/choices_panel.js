@@ -69,7 +69,9 @@ function initializeChoices(prefix) {
     var $selectedChoiceBtns = $(PREFIX_ID + ' .selected-choice-container').find('button');
     var selectedChoices = [];
     var availableChoices = {};
+    var oldChoices = [];
 
+    //Mark what choices are selected for this fule
     $selectedChoiceBtns.each(function (i, choice) {
         selectedChoices.push($(choice).data('id'));
     });
@@ -77,35 +79,60 @@ function initializeChoices(prefix) {
     //Create a button for each choice from the list of available choices
     //If that choice has been selected, don't add it as an option to select
     $(CHOICE_LIST_NAME).find('input').each(function (i, choiceInput) {
-       var $choiceInput = $(choiceInput);
-       availableChoices[count] = $choiceInput.val();
-       if(selectedChoices.indexOf(count) == -1) {
-           var $container = $(PREFIX_ID + ' .new-choice-button-group');
-           addButtonHtml($container, count, $choiceInput.val(), 'plus');
-       }
-       count++;
+        var $choiceInput = $(choiceInput);
+        availableChoices[count] = $choiceInput.val();
+        if(selectedChoices.indexOf(count) === -1) {
+            //This means that the choice is NOT selected so we add a new button to the choice
+            //container to allow a person to select this as a choice
+            var $container = $(PREFIX_ID + ' .new-choice-button-group');
+            addButtonHtml($container, count, $choiceInput.val(), 'plus');
+        }
+        count++;
     });
 
     $(PREFIX_ID + ' .choice-btn').each(function (i, btn) {
-       $(btn).click(choiceSelectedCallback);
+        //Add a callback to the new choice buttons so when a user clicks to add
+        //it to the rule logic we make note
+        $(btn).click(choiceSelectedCallback);
     });
 
     $(PREFIX_ID + ' .selected-choice').each(function (i, btn) {
-       var $btn = $(btn);
-       var id = $btn.data('id');
-       $btn.text(availableChoices[id]);
+        var $btn = $(btn);
+        var id = $btn.data('id');
+        var buttonLabel = availableChoices[id];
 
-       $btn.click(choiceRemovedCallback)
+        if(buttonLabel) {
+            $btn.text(availableChoices[id]);
+            $btn.click(choiceRemovedCallback)
+        } else {
+            //This means that the choice was recently removed from the form
+            //We must remove this button and record that the choice was removed
+            $btn.remove();
+            oldChoices.push(id);
+        }
     });
 
     $(PREFIX_ID + ' .selected-choice-input').each(function (i, input) {
-      var $input = $(input);
-      var $container = $input.closest('.choice-list-container');
-      var label = $container.siblings('label').attr('for');
-      var index = label.split('-')[1];
-      var inputName = INPUT_NAME.replace('NUM', index);
-      $input.attr('name', inputName);
-      $input.attr('id', inputName);
-      $container.attr('name', inputName);
+        var $input = $(input);
+        var $container = $input.closest('.choice-list-container');
+        var label = $container.siblings('label').attr('for');
+        var index = label.split('-')[1];
+        var inputName = INPUT_NAME.replace('NUM', index);
+
+        if (oldChoices.length) {
+            var inputVals = $input.val() && $input.val().split(',');
+            var i;
+            //Need to clean up old choices that were removed
+            for(var oldChoice in oldChoices) {
+                i = inputVals.indexOf(String(oldChoices[oldChoice]));
+                inputVals.splice(i, 1);
+            }
+
+            $input.val(inputVals.join(','));
+        }
+
+        $input.attr('name', inputName);
+        $input.attr('id', inputName);
+        $container.attr('name', inputName);
     });
 }

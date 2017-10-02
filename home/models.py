@@ -16,6 +16,8 @@ class RoadmapSection(blocks.StructBlock):
     image = ImageChooserBlock(required=False)
 
 class HomePage(Page):
+    header = models.CharField(max_length=255, blank=True)
+
     website_icon = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -26,7 +28,6 @@ class HomePage(Page):
 
     footer = RichTextField(blank=True)
 
-    header = models.CharField(max_length=255, blank=True)
     mission_statement = models.CharField(max_length=255, blank=True)
     video = models.URLField(max_length=255, blank=True)
 
