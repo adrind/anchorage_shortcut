@@ -32,10 +32,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     text-decoration: underline;
 }
 
-.main-nav {
-    padding-left: 1.5rem;
-}
-
 /* Vertically aligns the div in the row */
 #google-translate-element {
     padding: 0.75rem 1rem;
@@ -43,16 +39,9 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 /* Required to prevent images added in the admin panel from breaking out of the col */
-.step-body .rich-text {
-    max-width: 100%;
-}
-
+.step-body .rich-text,
 .step-body .rich-text img {
     max-width: 100%;
-}
-
-.w-100 {
-    margin-bottom: 1rem;
 }
 
 .list-group-item {
@@ -62,7 +51,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     -webkit-box-shadow: 1px 1px 1px 1px #ccc;
     -moz-box-shadow: 1px 1px 1px 1px #ccc;
     border-radius: 3px;
-    width: 260px;
+    width: 26.0rem;
     margin: 0 auto;
     font-size: 2.4rem;
 }
@@ -78,14 +67,14 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card-img-top {
     margin-top: 2.0rem;
     margin-bottom: 2.0rem;
-    width: 75px;
+    width: 7.5rem;
 }
 
 .card {
     border: none;
     margin-left: 1.0rem;
     margin-top: 2.0rem;
-    min-width: 280px;
+    min-width: 28.0rem;
 }
 
 .card:first-child {
@@ -99,7 +88,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card-title {
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    padding: 10px;
+    padding: 1.0rem;
 }
 
 /* Resets embedded video padding */
@@ -125,7 +114,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     -moz-box-shadow: 1px 1px 1px 1px #ccc;
 }
 
-#header .icon-mountains,
 #header .header-text {
     font-size: 2.4rem;
     display: inline-block;
@@ -133,10 +121,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: white;
 }
 
-#header .icon-mountains {
-    font-size: 3.2rem;
-}
-
+/* a11y helper to show its clickable */
 #header .navbar-brand:focus {
     border: 1px solid white;
 }
@@ -162,10 +147,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 /*** end of base.html styles ***/
 
 /* HEADING STYLES */
-
-.blue-heading {
-    color: #399fd3;
-}
 
 .h1-heading,
 .rich-text h1 {
@@ -262,7 +243,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: #333;
     cursor: pointer;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     text-decoration: none;
 }
 
@@ -323,13 +304,14 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     color: #399fd3;
 }
 
-.print-preview h3 {
+.print-preview h2 {
     width: 100%;
     font-weight: bold;
 }
 
 .print-preview .short-field {
-    width: 15rem;
+    max-width: 6rem;
+    word-wrap: break-word;
 }
 
 .print-checklist {
@@ -461,6 +443,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 @media (max-width: 400px) {
+    /* Resize the video for smaller sizes */
     .video-300 {
         display: block;
     }
