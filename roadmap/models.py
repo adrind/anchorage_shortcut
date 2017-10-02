@@ -244,7 +244,7 @@ class TaskList(Page):
 
 class StepPage(Page):
     short_description = models.CharField(max_length=75)
-    body = RichTextField(blank=True)
+    page_body = RichTextField(blank=True)
     checklist_instructions = RichTextField(blank=True)
 
     address = models.CharField(max_length=250, blank=True, null=True)
@@ -260,7 +260,7 @@ class StepPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('short_description', classname='full'),
-        FieldPanel('body', classname='full'),
+        FieldPanel('page_body', classname='full'),
         FieldPanel('checklist_instructions', classname='full'),
         SnippetChooserPanel('contact'),
         MultiFieldPanel([
