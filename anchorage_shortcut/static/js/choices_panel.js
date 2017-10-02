@@ -9,7 +9,7 @@ var INPUT_NAME = 'rules-NUM-value-name',
  *  @param {string} icon - plus | cross
  */
 function addButtonHtml($parent, dataId, val, icon) {
-    var html = '<button class="button bicolor choice-btn icon icon-'+icon+'" data-id="'+ dataId +'" style="margin:0;margin-right:.5rem;margin-top:.5rem;">'+ val +'</button>';
+    var html = '<button class="button bicolor choice-btn icon icon-'+icon+'" data-id="'+ dataId +'" style="margin:0;margin-right:.5rem;margin-top:.5rem;white-space: normal;max-width: 250px;">'+ val +'</button>';
     $parent.append(html);
     return $('button[data-id="'+dataId+'"]');
 };
@@ -59,6 +59,35 @@ function choiceSelectedCallback(evt) {
     return false;
 };
 
+function choiceDeleted(evt) {
+    var $choice = $(evt.target).parents('.sequence-member');
+    var index = $choice.attr('id').split('-')[1];
+    
+    $('.selected-choice-input').each(function (i, selectedChoiceInput) {
+       var selectedChoiceValue = selectedChoiceInput.value;
+       var splitValueArr = selectedChoiceValue && selectedChoiceValue.split(',');
+
+       if(splitValueArr.indexOf(index) !== -1) {
+           var i = splitValueArr.indexOf(index);
+           splitValueArr.splice(i, 1);
+       }
+
+       selectedChoiceInput.value = splitValueArr.join(',');
+    });
+
+    $('.selected-choice').each(function (i, selectedChoiceBtn) {
+       if(selectedChoiceBtn.dataset['id'] === index) {
+           $(selectedChoiceBtn).remove();
+       }
+    });
+
+    $('.choice-btn').each(function (i, choiceBtn) {
+        if(choiceBtn.dataset['id'] === index) {
+           $(choiceBtn).remove();
+       }
+    })
+}
+
 /*
  * The method that gets called each time an admin panel is created.
  * @param {string} prefix - the id of the admin panel
@@ -69,11 +98,15 @@ function initializeChoices(prefix) {
     var $selectedChoiceBtns = $(PREFIX_ID + ' .selected-choice-container').find('button');
     var selectedChoices = [];
     var availableChoices = {};
-    var oldChoices = [];
+    var $deleteChoiceBtns = $('#choices-list button[title="Delete"]');
 
     //Mark what choices are selected for this fule
     $selectedChoiceBtns.each(function (i, choice) {
         selectedChoices.push($(choice).data('id'));
+    });
+
+    $deleteChoiceBtns.each(function (i, deleteBtn) {
+       $(deleteBtn).click(choiceDeleted);
     });
 
     //Create a button for each choice from the list of available choices
@@ -104,11 +137,6 @@ function initializeChoices(prefix) {
         if(buttonLabel) {
             $btn.text(availableChoices[id]);
             $btn.click(choiceRemovedCallback)
-        } else {
-            //This means that the choice was recently removed from the form
-            //We must remove this button and record that the choice was removed
-            $btn.remove();
-            oldChoices.push(id);
         }
     });
 
@@ -118,18 +146,6 @@ function initializeChoices(prefix) {
         var label = $container.siblings('label').attr('for');
         var index = label.split('-')[1];
         var inputName = INPUT_NAME.replace('NUM', index);
-
-        if (oldChoices.length) {
-            var inputVals = $input.val() && $input.val().split(',');
-            var i;
-            //Need to clean up old choices that were removed
-            for(var oldChoice in oldChoices) {
-                i = inputVals.indexOf(String(oldChoices[oldChoice]));
-                inputVals.splice(i, 1);
-            }
-
-            $input.val(inputVals.join(','));
-        }
 
         $input.attr('name', inputName);
         $input.attr('id', inputName);
