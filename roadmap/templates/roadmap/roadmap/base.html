@@ -22,7 +22,7 @@
     {% for section in page.sections %}
         <div class="card text-center">
             <h4 class="card-title h4-heading mb-2"><strong>{{ section.value.title }}</strong></h4>
-            {% image section.value.image width-75 class="card-img-top mx-auto" alt="Card image" %}
+            {% image section.value.image width-64 class="card-img-top mx-auto" alt="Card image" %}
             <div class="card-block">
                 <ul class="list-group">
                     {% for list in section.value.pages %}

@@ -67,7 +67,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .card-img-top {
     margin-top: 2.0rem;
     margin-bottom: 2.0rem;
-    width: 7.5rem;
+    width: auto;
 }
 
 .card {
@@ -216,8 +216,6 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 .add-to-check-list:hover {
     color: #999;
 }
-
-/*** end of button styles ***/
 
 
 /*** ROAD MAP ***/
