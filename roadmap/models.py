@@ -105,8 +105,8 @@ class TaskChoicesBlock(blocks.StreamBlock):
 
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
-    body = RichTextField(blank=True)
-    message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
+    page_body = RichTextField(blank=True)
+    form_submission_message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
     question = models.CharField(max_length=255, blank=True)
     choices = StreamField([
         ('label', blocks.CharBlock(required=True)),
@@ -126,16 +126,17 @@ class TaskList(Page):
     ], blank=True, default=[])
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname='full'),
+        FieldPanel('page_body', classname='full'),
         MultiFieldPanel([
             MultiFieldPanel([
                 FieldPanel('question'),
+                FieldPanel('form_submission_message'),
                 StreamFieldPanel('choices')
             ]),
             FieldPanel('has_strict_rules'),
             StreamFieldPanel('rules'),
             StreamFieldPanel('default_pages'),
-        ], heading="Guided path for this task", classname="collapsible")
+        ], heading="Options form for the page to help narrow down choices", classname="collapsible")
     ]
 
     template = 'roadmap/task_list/base.html'
@@ -145,12 +146,12 @@ class TaskList(Page):
         events = StepPage.objects.live().descendant_of(self)
         return events
 
-    def website_icon(self):
-        return self.get_parent().homepage.website_icon
-    def header_title(self):
-        return self.get_parent().homepage.title
-    def footer(self):
-        return self.get_parent().homepage.footer
+    def website_header_icon(self):
+        return self.get_parent().homepage.website_header_icon
+    def website_header_text(self):
+        return self.get_parent().homepage.website_header_text
+    def website_footer(self):
+        return self.get_parent().homepage.website_footer
     def favicon(self):
         return self.get_parent().homepage.favicon()
 
@@ -308,12 +309,12 @@ class StepPage(Page):
         return render(request, self.template, {
             'page': self
         })
-    def website_icon(self):
-        return self.get_parent().tasklist.website_icon()
-    def header_title(self):
-        return self.get_parent().tasklist.header_title()
-    def footer(self):
-        return self.get_parent().tasklist.footer()
+    def website_header_icon(self):
+        return self.get_parent().tasklist.website_header_icon()
+    def website_header_text(self):
+        return self.get_parent().tasklist.website_header_text()
+    def website_footer(self):
+        return self.get_parent().tasklist.website_footer()
     def favicon(self):
         return self.get_parent().tasklist.favicon()
 
