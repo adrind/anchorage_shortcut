@@ -4,6 +4,13 @@
 {# Core page for the task list #}
 
 {% block left-content %}
+    {% if page.body %}
+        <div class="row">
+            <div class="col">
+                {{ page.body | richtext }}
+            </div>
+        </div>
+    {% endif %}
     <div class="row">
             <div class="col">
                 {% if page.choices %}

@@ -132,6 +132,9 @@ function choiceDeleted(evt) {
 
 $(function(){
     //Only want to run this code once
+    //Attaches listeners on the delete + move buttons for the choice rules
+    //This ensures that the rules defined from the index of these choices get updated when
+    //the index of the choice changes (or is deleted)
     var $deleteChoiceBtns = $('#choices-list button[title="Delete"]');
     var $moveUpBtns = $('#choices-list button[title="Move up"]');
     var $moveDownBtns = $('#choices-list button[title="Move down"]');
