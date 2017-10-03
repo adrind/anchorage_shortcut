@@ -32,7 +32,10 @@
               <td class="short-field">{{ step.title }}</td>
               <td>
                   Go to <span class="print-page-url">{{ request.META.HTTP_HOST }}{% pageurl step %}</span> for full set of instructions
-                  {{ step.checklist_instructions|richtext }}
+                  {% if step.checklist_instructions %}
+                      <h5 class="h5-heading mt-2"><strong>Other Notes:</strong></h5>
+                    {{ step.checklist_instructions|richtext }}
+                  {% endif %}
               </td>
               <td>
                   {% if step.contact %}
