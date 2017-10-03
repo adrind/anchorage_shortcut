@@ -34,8 +34,8 @@ from django.conf import settings
 # Used in the step templates
 @register_snippet
 class Contact(models.Model):
-    name = models.CharField(max_length=255)
-    location = models.CharField(max_length=255, blank=True)
+    name = models.CharField(max_length=255, help_text="The name of someone to contact. Ex: Sharon Smith")
+    location = models.CharField(max_length=255, blank=True, help_text="An address for where this person works")
     email = models.EmailField(max_length=255, blank=True)
     phone_number = models.CharField(max_length=16, blank=True) # validators should be a list
     image = models.ForeignKey(
@@ -106,14 +106,14 @@ class TaskChoicesBlock(blocks.StreamBlock):
 
 # A Task List -- contains a series of steps that a user can do to accomplish a specific goal
 class TaskList(Page):
-    page_body = RichTextField(blank=True)
-    form_submission_message = models.CharField(max_length=255, default="Based on your choices we suggest looking at the following:")
-    question = models.CharField(max_length=255, blank=True)
+    page_body = RichTextField(blank=True, help_text="The main content of the page, above the list of steps and form")
+    form_submission_message = models.CharField(max_length=255, help_text="The text that is shown to the user after they make a form submissiom", default="Based on your choices we suggest looking at the following:")
+    question = models.CharField(max_length=255, blank=True, help_text="The question for the form on the page (optional)")
     choices = StreamField([
         ('label', blocks.CharBlock(required=True)),
     ], blank=True, null=True)
 
-    has_strict_rules = models.BooleanField(default=False)
+    has_strict_rules = models.BooleanField(default=False, help_text="If the rule definitions are strict it will ONLY display results that match the exact answers (instead of the union of the answers)")
 
     rules = StreamField([
         ('rule', blocks.StructBlock([
@@ -122,9 +122,9 @@ class TaskList(Page):
             ('override', blocks.BooleanBlock(default=False, required=False))
         ]))], default=[], blank=True)
 
-    default_pages = StreamField([
+    default_steps = StreamField([
         ('page', blocks.PageChooserBlock())
-    ], blank=True, default=[])
+    ], blank=True, default=[], help_text="The steps to show if someone submits a form with answers that are not covered by the rules")
 
     content_panels = Page.content_panels + [
         FieldPanel('page_body', classname='full'),
@@ -136,7 +136,7 @@ class TaskList(Page):
             ]),
             FieldPanel('has_strict_rules'),
             StreamFieldPanel('rules'),
-            StreamFieldPanel('default_pages'),
+            StreamFieldPanel('default_steps'),
         ], heading="Options form for the page to help narrow down choices", classname="collapsible")
     ]
 
@@ -205,7 +205,7 @@ class TaskList(Page):
                 for i, page in enumerate(pages):
                     ids.append(str(page.id))
 
-            for page in self.default_pages:
+            for page in self.default_steps:
                 #if the user defines default pages in the admin then create a list of pages
                 #otherwise the default default_pages list is all the steps in the track
                 default_pages.append(Page.objects.get(id=page.value.id))
