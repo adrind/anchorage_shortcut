@@ -8,14 +8,17 @@
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col col-md-4">
-                {% image contact.image width-100 class="img-thumbnail" %}
-            </div>
+            {% if contact.image %}
+                <div class="col col-md-4">
+                    {% image contact.image width-100 class="img-thumbnail" %}
+                </div>
+            {% endif %}
             <div class="col col-md-8">
-                <p>{{ contact.name }}</p>
-                {% if contact.location %}
-                    at {{ contact.location }}
-                {% endif %}
+                <p>{{ contact.name }}
+                    {% if contact.location %}
+                        at {{ contact.location }}
+                    {% endif %}
+                </p>
             </div>
         </div>
         {% if contact.email %}
