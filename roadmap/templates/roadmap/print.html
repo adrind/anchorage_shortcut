@@ -18,11 +18,10 @@
                 </div>
             </div>
         </div>
-        <table class="table table-striped">
+        <table class="table table-striped table-responsive">
           <thead>
             <tr>
               <th class="short-field">Name of page</th>
-              <th class="short-field">URL</th>
               <th>Things to do</th>
               <th>Person to contact</th>
             </tr>
@@ -31,13 +30,22 @@
         {% for step in steps %}
             <tr>
               <td class="short-field">{{ step.title }}</td>
-              <td class="short-field">{{ request.META.HTTP_HOST }}{% pageurl step %}</td>
-              <td>{{ step.checklist_instructions|richtext }}</td>
+              <td>
+                  Go to <span class="print-page-url">{{ request.META.HTTP_HOST }}{% pageurl step %}</span> for full set of instructions
+                  {{ step.checklist_instructions|richtext }}
+              </td>
               <td>
                   {% if step.contact %}
                       <p><strong>Name:</strong> {{ step.contact.name }}</p>
-                      <p><strong>Phone:</strong> {{ step.contact.phone_number }}</p>
-                      <p><strong>Email:</strong> {{ step.contact.email }}</p>
+                      {% if step.contact.location %}
+                          <p><strong>Location:</strong> {{ step.contact.location }}</p>
+                      {% endif %}
+                      {% if step.contact.phone_number %}
+                        <p><strong>Phone:</strong> {{ step.contact.phone_number }}</p>
+                      {% endif %}
+                      {% if step.contact.email %}
+                        <p><strong>Email:</strong> {{ step.contact.email }}</p>
+                      {% endif %}
                   {% endif %}
               </td>
             </tr>

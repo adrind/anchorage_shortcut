@@ -308,7 +308,7 @@ body { font-family: 'Source Sans Pro', sans-serif; }
 }
 
 .print-preview .short-field {
-    max-width: 6rem;
+    max-width: 10rem;
     word-wrap: break-word;
 }
 
@@ -316,6 +316,10 @@ body { font-family: 'Source Sans Pro', sans-serif; }
     background-color: #399fd3;
     border-color: #399fd3;
     text-transform: uppercase;
+}
+
+.print-page-url {
+    text-decoration: underline;
 }
 
 .clear-checklist {
