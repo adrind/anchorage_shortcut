@@ -29,6 +29,7 @@ from django.utils.html import format_html_join
 from django.conf import settings
 
 
+
 # A contact that someone should reach out to
 # Used in the step templates
 @register_snippet
@@ -145,15 +146,6 @@ class TaskList(Page):
         # Get list of all step pages that are descendants of this page
         events = StepPage.objects.live().descendant_of(self)
         return events
-
-    def website_header_icon(self):
-        return self.get_parent().homepage.website_header_icon
-    def website_header_text(self):
-        return self.get_parent().homepage.website_header_text
-    def website_footer(self):
-        return self.get_parent().homepage.website_footer
-    def favicon(self):
-        return self.get_parent().homepage.favicon()
 
     # Directs people to the walk through or self service routes
     # Walk through path uses the choices model to filter steps to take
@@ -309,14 +301,6 @@ class StepPage(Page):
         return render(request, self.template, {
             'page': self
         })
-    def website_header_icon(self):
-        return self.get_parent().tasklist.website_header_icon()
-    def website_header_text(self):
-        return self.get_parent().tasklist.website_header_text()
-    def website_footer(self):
-        return self.get_parent().tasklist.website_footer()
-    def favicon(self):
-        return self.get_parent().tasklist.favicon()
 
 @hooks.register('insert_editor_js')
 def editor_js():
