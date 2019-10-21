@@ -9,7 +9,7 @@ cffi==1.10.0
 chardet==3.0.4
 cryptography==1.9
 dj-database-url==0.4.2
-Django==1.11.4
+Django==1.11.23
 django-modelcluster==3.1
 django-storages==1.6.3
 django-taggit==0.22.1
